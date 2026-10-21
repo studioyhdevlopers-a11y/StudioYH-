@@ -63,14 +63,14 @@
     <div id="updateModal" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-4 hidden">
         <div class="bg-slate-900 border border-slate-800 rounded-3xl p-6 md:p-8 max-w-md w-full shadow-2xl animate-scale-up relative">
             <div class="flex items-center justify-between mb-4">
-                <span class="text-xs font-bold text-indigo-400 bg-indigo-500/10 border border-indigo-500/20 px-3 py-1 rounded-full">Update v1.0.0.4</span>
+                <span class="text-xs font-bold text-indigo-400 bg-indigo-500/10 border border-indigo-500/20 px-3 py-1 rounded-full">Update v1.0.0.3</span>
                 <span class="text-xs text-slate-400">New Release</span>
             </div>
             <h3 class="text-xl font-extrabold text-white mb-2">What's New in YH Studio</h3>
             <p class="text-sm text-slate-300 mb-6 leading-relaxed">
-                • Added official <span class="text-indigo-300 font-semibold">Discord Server</span> button in the menu.<br>
-                • Faster loading speed & improved animations.<br>
-                • Enhanced mobile responsiveness.
+                • Removed Testing status from models.<br>
+                • Added official <span class="text-indigo-300 font-semibold">Discord Server</span> button.<br>
+                • Faster loading speed & improved animations.
             </p>
             <button onclick="closeUpdateModal()" class="w-full py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold rounded-2xl transition shadow-lg shadow-indigo-500/20">
                 Confirm
@@ -91,14 +91,14 @@
                 <!-- FAQ 1: Testing Status -->
                 <div class="bg-slate-950 border border-slate-800 rounded-2xl p-4 transition">
                     <button onclick="toggleFaq('faq1')" class="w-full text-left font-semibold text-slate-200 text-sm flex justify-between items-center">
-                        <span>What should I do if my model is still in Testing?</span>
+                        <span>What should I do if my model is pending?</span>
                         <span class="text-indigo-400 text-lg">+</span>
                     </button>
                     <div id="faq1" class="hidden mt-3 pt-3 border-t border-slate-800 text-xs text-slate-300 space-y-3">
                         <p>First, please wait 3-5 hours. If it's still pending after that time, you can send a message to the YH Studio support team using the form below.</p>
                         
                         <form action="https://formspree.io/f/mjygqarv" method="POST" class="space-y-2 mt-2">
-                            <input type="hidden" name="supportType" value="Testing Status Inquiry">
+                            <input type="hidden" name="supportType" value="Model Status Inquiry">
                             <input type="text" name="modelName" placeholder="Model Name" required class="w-full px-3 py-2 bg-slate-900 border border-slate-700 rounded-xl text-xs">
                             <input type="text" name="modelLink" placeholder="Model Link" required class="w-full px-3 py-2 bg-slate-900 border border-slate-700 rounded-xl text-xs">
                             <input type="email" name="userEmail" placeholder="Your Email" required class="w-full px-3 py-2 bg-slate-900 border border-slate-700 rounded-xl text-xs">
@@ -192,9 +192,9 @@
                     </div>
                     <div>
                         <h2 class="text-xl font-bold text-white flex items-center justify-center md:justify-start gap-2">
-                            Welcome to YH Studio! <span class="text-xs bg-indigo-500 text-white px-2 py-0.5 rounded-full font-normal">New Testing Drops</span>
+                            Welcome to YH Studio! <span class="text-xs bg-indigo-500 text-white px-2 py-0.5 rounded-full font-normal">Latest Library Updates</span>
                         </h2>
-                        <p class="text-sm text-slate-300 mt-1">Check out our latest additions in testing: <span class="text-indigo-300 font-semibold">1 + Speed escape</span> & <span class="text-cyan-300 font-semibold">Admin Panel x</span>.</p>
+                        <p class="text-sm text-slate-300 mt-1">Explore our wide collection of secure Roblox Studio models, maps, and admin scripts.</p>
                     </div>
                 </div>
                 <div class="text-xs text-slate-400 bg-slate-800/80 px-4 py-2 rounded-xl border border-slate-700">
@@ -260,10 +260,7 @@
                     <div class="p-5 flex flex-col flex-grow justify-between gap-4">
                         <div class="flex items-center justify-between">
                             <h3 class="font-bold text-lg text-slate-100">1 + Speed escape</h3>
-                            <div class="flex items-center gap-1.5">
-                                <span class="text-xs bg-amber-500/10 text-amber-400 px-2.5 py-1 rounded-full border border-amber-500/20">Testing</span>
-                                <span class="text-xs bg-cyan-500/10 text-cyan-400 px-2.5 py-1 rounded-full border border-cyan-500/20">Map</span>
-                            </div>
+                            <span class="text-xs bg-cyan-500/10 text-cyan-400 px-2.5 py-1 rounded-full border border-cyan-500/20">Map</span>
                         </div>
                         <div class="bg-slate-950 border border-slate-800 rounded-xl p-3 flex items-center justify-between gap-2">
                             <pre class="text-indigo-300 font-mono text-sm overflow-x-auto"><code id="codeSpeedEscape">120904209099683</code></pre>
@@ -278,10 +275,7 @@
                     <div class="p-5 flex flex-col flex-grow justify-between gap-4">
                         <div class="flex items-center justify-between">
                             <h3 class="font-bold text-lg text-slate-100">Admin Panel x</h3>
-                            <div class="flex items-center gap-1.5">
-                                <span class="text-xs bg-amber-500/10 text-amber-400 px-2.5 py-1 rounded-full border border-amber-500/20">Testing</span>
-                                <span class="text-xs bg-purple-500/10 text-purple-400 px-2.5 py-1 rounded-full border border-purple-500/20">Admin</span>
-                            </div>
+                            <span class="text-xs bg-purple-500/10 text-purple-400 px-2.5 py-1 rounded-full border border-purple-500/20">Admin</span>
                         </div>
                         <div class="bg-slate-950 border border-slate-800 rounded-xl p-3 flex items-center justify-between gap-2">
                             <pre class="text-indigo-300 font-mono text-sm overflow-x-auto"><code id="codeAdminPanelX">121964879063530</code></pre>
@@ -296,10 +290,7 @@
                     <div class="p-5 flex flex-col flex-grow justify-between gap-4">
                         <div class="flex items-center justify-between">
                             <h3 class="font-bold text-lg text-slate-100">1+ monkey escape</h3>
-                            <div class="flex items-center gap-1.5">
-                                <span class="text-xs bg-amber-500/10 text-amber-400 px-2.5 py-1 rounded-full border border-amber-500/20">Testing</span>
-                                <span class="text-xs bg-cyan-500/10 text-cyan-400 px-2.5 py-1 rounded-full border border-cyan-500/20">Map</span>
-                            </div>
+                            <span class="text-xs bg-cyan-500/10 text-cyan-400 px-2.5 py-1 rounded-full border border-cyan-500/20">Map</span>
                         </div>
                         <div class="bg-slate-950 border border-slate-800 rounded-xl p-3 flex items-center justify-between gap-2">
                             <pre class="text-indigo-300 font-mono text-sm overflow-x-auto"><code id="codeMonkeyEscape">78976241017720</code></pre>
