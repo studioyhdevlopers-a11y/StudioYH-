@@ -45,6 +45,7 @@
             <button class="cat-btn active px-4 py-2 rounded-xl text-sm font-medium bg-indigo-600 text-white transition hover:bg-indigo-700 shadow-sm" onclick="filterCategory('all')">All</button>
             <button class="cat-btn px-4 py-2 rounded-xl text-sm font-medium bg-slate-800 text-slate-300 transition hover:bg-slate-700 hover:text-white" onclick="filterCategory('admin-panel')">Admin Panel</button>
             <button class="cat-btn px-4 py-2 rounded-xl text-sm font-medium bg-slate-800 text-slate-300 transition hover:bg-slate-700 hover:text-white" onclick="filterCategory('scripts')">Scripts</button>
+            <button class="cat-btn px-4 py-2 rounded-xl text-sm font-medium bg-slate-800 text-slate-300 transition hover:bg-slate-700 hover:text-white" onclick="filterCategory('maps')">Maps</button>
             <button class="cat-btn px-4 py-2 rounded-xl text-sm font-medium bg-emerald-600 text-white transition hover:bg-emerald-700 shadow-sm" onclick="filterCategory('add-model')">➕ Post Your Model</button>
         </nav>
     </header>
@@ -60,7 +61,7 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div class="space-y-1">
                         <label class="text-sm font-medium text-slate-300">Model Name:</label>
-                        <input type="text" name="modelName" placeholder="e.g. AdminPanel +" required
+                        <input type="text" name="modelName" placeholder="e.g. Studs" required
                             class="w-full px-4 py-2 bg-slate-800 border border-slate-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm">
                     </div>
 
@@ -70,6 +71,7 @@
                             class="w-full px-4 py-2 bg-slate-800 border border-slate-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm">
                             <option value="Admin Panel">Admin Panel</option>
                             <option value="Scripts">Scripts</option>
+                            <option value="Maps">Maps</option>
                         </select>
                     </div>
                 </div>
@@ -90,7 +92,7 @@
 
                 <div class="space-y-1">
                     <label class="text-sm font-medium text-slate-300">Asset ID / Code:</label>
-                    <input type="text" name="modelCode" placeholder="e.g. 85268855286147" required
+                    <input type="text" name="modelCode" placeholder="e.g. 128071741625902" required
                         class="w-full px-4 py-2 bg-slate-800 border border-slate-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm">
                 </div>
 
@@ -102,17 +104,37 @@
 
         <!-- Models Grid -->
         <div id="modelsGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            <!-- Default Model Card -->
-            <div class="bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden shadow-lg hover:border-slate-700 transition flex flex-col">
-                <img src="admin_panel.png" alt="AdminPanel +" class="w-full h-48 object-cover">
+            
+            <!-- Admin Panel Card -->
+            <div class="model-card bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden shadow-lg hover:border-slate-700 transition flex flex-col" data-category="admin-panel">
+                <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=600&auto=format&fit=crop" alt="AdminPanel +" class="w-full h-48 object-cover">
                 <div class="p-5 flex flex-col flex-grow justify-between gap-4">
-                    <h3 class="font-bold text-lg text-slate-100">AdminPanel +</h3>
+                    <div class="flex items-center justify-between">
+                        <h3 class="font-bold text-lg text-slate-100">AdminPanel +</h3>
+                        <span class="text-xs bg-indigo-500/10 text-indigo-400 px-2.5 py-1 rounded-full border border-indigo-500/20">Admin Panel</span>
+                    </div>
                     <div class="bg-slate-950 border border-slate-800 rounded-xl p-3 flex items-center justify-between gap-2">
                         <pre class="text-indigo-300 font-mono text-sm overflow-x-auto"><code id="code1">85268855286147</code></pre>
                         <button class="px-3 py-1.5 bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-semibold rounded-lg transition shrink-0" onclick="copyCode('code1', this)">Copy</button>
                     </div>
                 </div>
             </div>
+
+            <!-- Maps Card (Studs) -->
+            <div class="model-card bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden shadow-lg hover:border-slate-700 transition flex flex-col" data-category="maps">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/4/49/A_black_image.jpg" alt="Studs" class="w-full h-48 object-cover">
+                <div class="p-5 flex flex-col flex-grow justify-between gap-4">
+                    <div class="flex items-center justify-between">
+                        <h3 class="font-bold text-lg text-slate-100">Studs</h3>
+                        <span class="text-xs bg-cyan-500/10 text-cyan-400 px-2.5 py-1 rounded-full border border-cyan-500/20">Maps</span>
+                    </div>
+                    <div class="bg-slate-950 border border-slate-800 rounded-xl p-3 flex items-center justify-between gap-2">
+                        <pre class="text-indigo-300 font-mono text-sm overflow-x-auto"><code id="code2">128071741625902</code></pre>
+                        <button class="px-3 py-1.5 bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-semibold rounded-lg transition shrink-0" onclick="copyCode('code2', this)">Copy</button>
+                    </div>
+                </div>
+            </div>
+
         </div>
 
     </main>
