@@ -3,54 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>YH Studio - Maintenance Mode</title>
-    
-    <!-- ==========================================
-         🛠️ Maintenance Mode Control Panel
-         Set to TRUE to lock the site and show maintenance.
-         Set to FALSE to make the site work normally.
-         ========================================== -->
-    <script>
-        const MAINTENANCE_MODE = true; 
-
-        if (MAINTENANCE_MODE) {
-            document.write(`
-                <!DOCTYPE html>
-                <html lang="en" class="dark">
-                <head>
-                    <meta charset="UTF-8">
-                    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                    <title>YH Studio - Under Maintenance</title>
-                    <script src="https://cdn.tailwindcss.com"><\/script>
-                </head>
-                <body class="bg-slate-950 text-slate-100 min-h-screen flex items-center justify-center p-4 font-sans selection:bg-indigo-500 selection:text-white">
-                    <div class="bg-slate-900 border border-slate-800 rounded-3xl p-8 max-w-md w-full text-center shadow-2xl relative overflow-hidden">
-                        <div class="absolute -top-10 -right-10 w-32 h-32 bg-indigo-500/10 rounded-full blur-2xl pointer-events-none"></div>
-                        <div class="inline-flex items-center justify-center w-16 h-16 bg-amber-500/10 border border-amber-500/20 rounded-2xl text-amber-400 text-2xl mb-6 shadow-inner">
-                            🛠️
-                        </div>
-                        <h1 class="text-2xl font-black text-white mb-3">YH Studio is Under Maintenance</h1>
-                        <p class="text-sm text-slate-400 leading-relaxed mb-6">
-                            We are currently performing critical system updates and performance improvements. The site will be back online shortly. Thank you for your patience!
-                        </p>
-                        <div class="py-3 px-4 bg-slate-950 border border-slate-800 rounded-2xl text-xs font-semibold text-indigo-400 tracking-wide uppercase">
-                            Status: Maintenance Mode Active
-                        </div>
-                    </div>
-                </body>
-                </html>
-            `);
-            try {
-                window.stop();
-            } catch(e) {
-                document.execCommand('Stop');
-            }
-        }
-    </script>
-
+    <title>YH Studio - Scripts & Models Library</title>
     <!-- Tailwind CSS CDN for Modern Styling -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
+        // ==========================================
+        // 🛠️ Maintenance Mode Control Panel
+        // Set to TRUE to lock the site and show maintenance box.
+        // Set to FALSE to make the site work normally.
+        // ==========================================
+        const MAINTENANCE_MODE = true; 
+
+        if (MAINTENANCE_MODE) {
+            window.addEventListener('DOMContentLoaded', () => {
+                document.body.innerHTML = `
+                    <div class="bg-slate-950 text-slate-100 min-h-screen flex items-center justify-center p-4 font-sans selection:bg-indigo-500 selection:text-white w-full">
+                        <div class="bg-slate-900 border border-slate-800 rounded-3xl p-8 max-w-md w-full text-center shadow-2xl relative overflow-hidden">
+                            <div class="absolute -top-10 -right-10 w-32 h-32 bg-indigo-500/10 rounded-full blur-2xl pointer-events-none"></div>
+                            <div class="inline-flex items-center justify-center w-16 h-16 bg-amber-500/10 border border-amber-500/20 rounded-2xl text-amber-400 text-2xl mb-6 shadow-inner">
+                                🛠️
+                            </div>
+                            <h1 class="text-2xl font-black text-white mb-3">YH Studio is Under Maintenance</h1>
+                            <p class="text-sm text-slate-400 leading-relaxed mb-6">
+                                We are currently performing updates and fixing some issues or adding new features. The site will be back online shortly. Thank you for your patience!
+                            </p>
+                            <div class="py-3 px-4 bg-slate-950 border border-slate-800 rounded-2xl text-xs font-semibold text-indigo-400 tracking-wide uppercase">
+                                Status: Maintenance Mode Active
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
         tailwind.config = {
             darkMode: 'class',
             theme: {
