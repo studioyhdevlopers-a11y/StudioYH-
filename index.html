@@ -68,7 +68,7 @@
             </div>
             <h3 class="text-xl font-extrabold text-white mb-2">What's New in YH Studio</h3>
             <p class="text-sm text-slate-300 mb-6 leading-relaxed">
-                • Added new escape & admin models in <span class="text-amber-300 font-semibold">Testing</span> status.<br>
+                • Updated image for <span class="text-indigo-300 font-semibold">1 + Speed escape</span> model.<br>
                 • Faster loading speed & improved animations.<br>
                 • Enhanced mobile responsiveness.
             </p>
@@ -180,7 +180,7 @@
             <div class="bg-gradient-to-r from-indigo-900/40 via-slate-900 to-slate-900 border border-indigo-500/30 rounded-2xl p-5 md:p-6 mb-8 flex flex-col md:flex-row items-center justify-between gap-6 shadow-2xl animate-fade-in">
                 <div class="flex items-center gap-4 text-center md:text-left flex-col md:flex-row">
                     <div class="flex -space-x-3 overflow-hidden p-1">
-                        <img class="inline-block h-14 w-14 rounded-2xl object-cover ring-2 ring-indigo-500/50 shadow-lg transform hover:scale-110 transition duration-300" src="https://i.ibb.co/Xrjd3TDD/IMG-0094.jpg" alt="1 + Speed escape">
+                        <img class="inline-block h-14 w-14 rounded-2xl object-cover ring-2 ring-indigo-500/50 shadow-lg transform hover:scale-110 transition duration-300" src="https://i.ibb.co/MkJKyy6w/IMG-0093.jpg" alt="1 + Speed escape">
                         <img class="inline-block h-14 w-14 rounded-2xl object-cover ring-2 ring-cyan-500/50 shadow-lg transform hover:scale-110 transition duration-300" src="https://i.ibb.co/NH0n8j4/IMG-0094.jpg" alt="Admin Panel x">
                     </div>
                     <div>
@@ -249,7 +249,7 @@
                 
                 <!-- 1 + Speed escape -->
                 <div class="model-card bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden shadow-lg hover:border-slate-700 transition flex flex-col" data-category="maps">
-                    <img src="https://i.ibb.co/Xrjd3TDD/IMG-0094.jpg" alt="1 + Speed escape" class="w-full h-48 object-cover">
+                    <img src="https://i.ibb.co/MkJKyy6w/IMG-0093.jpg" alt="1 + Speed escape" class="w-full h-48 object-cover">
                     <div class="p-5 flex flex-col flex-grow justify-between gap-4">
                         <div class="flex items-center justify-between">
                             <h3 class="font-bold text-lg text-slate-100">1 + Speed escape</h3>
@@ -449,7 +449,6 @@
 
     <!-- Fast JavaScript Logic -->
     <script>
-        // Fast Splash Screen Logic
         window.addEventListener('load', () => {
             const loaderContainer = document.getElementById('loaderContainer');
             const successCheck = document.getElementById('successCheck');
@@ -458,14 +457,12 @@
             const mainContent = document.getElementById('mainContent');
             const updateModal = document.getElementById('updateModal');
 
-            // Quick checkmark show (after 400ms)
             setTimeout(() => {
                 if (loaderContainer) loaderContainer.style.display = 'none';
                 if (successCheck) successCheck.classList.remove('hidden');
                 if (splashText) splashText.textContent = "Welcome to YH Studio!";
             }, 400);
 
-            // Fast fade out splash (after 900ms total)
             setTimeout(() => {
                 if (splashScreen) {
                     splashScreen.style.opacity = '0';
@@ -473,7 +470,6 @@
                         splashScreen.style.display = 'none';
                         if (mainContent) mainContent.style.opacity = '1';
                         
-                        // Show v1.0.0.3 modal if not seen before
                         if (!localStorage.getItem('yh_update_v1.0.0.3')) {
                             updateModal.classList.remove('hidden');
                         }
@@ -502,7 +498,6 @@
             }
         }
 
-        // Copy Code Function
         function copyCode(elementId, btn) {
             const codeElement = document.getElementById(elementId);
             if (!codeElement) return;
@@ -519,7 +514,6 @@
             });
         }
 
-        // Filter Categories Function
         function filterCategory(category) {
             const buttons = document.querySelectorAll('.cat-btn');
             buttons.forEach(btn => {
@@ -557,7 +551,6 @@
             });
         }
 
-        // Search Bar Function
         function searchScripts() {
             const searchInput = document.getElementById('searchInput');
             if (!searchInput) return;
