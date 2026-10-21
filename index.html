@@ -64,9 +64,8 @@
             </div>
             <h3 class="text-xl font-extrabold text-white mb-2">What's New in YH Studio</h3>
             <p class="text-sm text-slate-300 mb-6 leading-relaxed">
-                • Added <span class="text-red-400 font-semibold">Break a Lucky Block v2</span> (Testing ⏳)<br>
-                • Added <span class="text-cyan-300 font-semibold">Anime Sky</span><br>
-                • Reorganized Admin models into the main Admin panel.<br>
+                • Updated <span class="text-cyan-300 font-semibold">Break a Lucky Block v2</span> (Active)<br>
+                • Standardized Category designs.<br>
                 • Added Help section.
             </p>
             <button onclick="closeUpdateModal()" class="w-full py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold rounded-2xl transition shadow-lg shadow-indigo-500/20">
@@ -106,14 +105,14 @@
                 </div>
             </div>
 
-            <!-- Category Menu -->
+            <!-- Standardized Category Menu -->
             <nav class="max-w-6xl mx-auto flex flex-wrap items-center justify-center md:justify-start gap-2 mt-6">
-                <button class="cat-btn active px-4 py-2 rounded-xl text-sm font-medium bg-indigo-600 text-white transition hover:bg-indigo-700 shadow-sm" onclick="filterCategory('all')">All</button>
-                <button class="cat-btn px-4 py-2 rounded-xl text-sm font-medium bg-slate-800 text-slate-300 transition hover:bg-slate-700 hover:text-white" onclick="filterCategory('admin')">Admin</button>
-                <button class="cat-btn px-4 py-2 rounded-xl text-sm font-medium bg-slate-800 text-slate-300 transition hover:bg-slate-700 hover:text-white" onclick="filterCategory('scripts')">Scripts</button>
-                <button class="cat-btn px-4 py-2 rounded-xl text-sm font-medium bg-slate-800 text-slate-300 transition hover:bg-slate-700 hover:text-white" onclick="filterCategory('maps')">Maps</button>
-                <button class="cat-btn px-4 py-2 rounded-xl text-sm font-medium bg-cyan-600 text-white transition hover:bg-cyan-700 shadow-sm" onclick="openHelpModal()">❓ Help</button>
-                <button class="cat-btn px-4 py-2 rounded-xl text-sm font-medium bg-emerald-600 text-white transition hover:bg-emerald-700 shadow-sm" onclick="filterCategory('add-model')">➕ Post Your Model</button>
+                <button class="cat-btn active px-4 py-2 rounded-xl text-sm font-semibold bg-indigo-600 text-white transition hover:bg-indigo-700 shadow-sm" onclick="filterCategory('all')">All</button>
+                <button class="cat-btn px-4 py-2 rounded-xl text-sm font-semibold bg-slate-800/80 border border-slate-700/50 text-slate-300 transition hover:bg-slate-700 hover:text-white" onclick="filterCategory('admin')">Admin</button>
+                <button class="cat-btn px-4 py-2 rounded-xl text-sm font-semibold bg-slate-800/80 border border-slate-700/50 text-slate-300 transition hover:bg-slate-700 hover:text-white" onclick="filterCategory('scripts')">Scripts</button>
+                <button class="cat-btn px-4 py-2 rounded-xl text-sm font-semibold bg-slate-800/80 border border-slate-700/50 text-slate-300 transition hover:bg-slate-700 hover:text-white" onclick="filterCategory('maps')">Map</button>
+                <button class="cat-btn px-4 py-2 rounded-xl text-sm font-semibold bg-slate-800/80 border border-slate-700/50 text-cyan-400 transition hover:bg-slate-700 hover:text-cyan-300" onclick="openHelpModal()">❓ Help</button>
+                <button class="cat-btn px-4 py-2 rounded-xl text-sm font-semibold bg-emerald-600 text-white transition hover:bg-emerald-700 shadow-sm ml-auto" onclick="filterCategory('add-model')">➕ Post Your Model</button>
             </nav>
         </header>
 
@@ -124,14 +123,14 @@
             <div class="bg-gradient-to-r from-indigo-900/40 via-slate-900 to-slate-900 border border-indigo-500/30 rounded-2xl p-5 md:p-6 mb-8 flex flex-col md:flex-row items-center justify-between gap-6 shadow-2xl animate-fade-in">
                 <div class="flex items-center gap-4 text-center md:text-left flex-col md:flex-row">
                     <div class="flex -space-x-3 overflow-hidden p-1">
-                        <img class="inline-block h-14 w-14 rounded-2xl object-cover ring-2 ring-red-500/50 shadow-lg transform hover:scale-110 transition duration-300" src="https://i.ibb.co/YFR2Fvts/IMG-0090.jpg" alt="Break a Lucky Block v2">
+                        <img class="inline-block h-14 w-14 rounded-2xl object-cover ring-2 ring-indigo-500/50 shadow-lg transform hover:scale-110 transition duration-300" src="https://i.ibb.co/YFR2Fvts/IMG-0090.jpg" alt="Break a Lucky Block v2">
                         <img class="inline-block h-14 w-14 rounded-2xl object-cover ring-2 ring-cyan-500/50 shadow-lg transform hover:scale-110 transition duration-300" src="https://i.ibb.co/BV3tFyx8/IMG-0091.jpg" alt="Anime Sky">
                     </div>
                     <div>
                         <h2 class="text-xl font-bold text-white flex items-center justify-center md:justify-start gap-2">
                             Welcome to YH Studio! <span class="text-xs bg-indigo-500 text-white px-2 py-0.5 rounded-full font-normal">New Drops</span>
                         </h2>
-                        <p class="text-sm text-slate-300 mt-1">Check out our latest additions: <span class="text-red-400 font-semibold">Break a Lucky Block v2</span> & <span class="text-cyan-300 font-semibold">Anime Sky</span>.</p>
+                        <p class="text-sm text-slate-300 mt-1">Check out our latest additions: <span class="text-indigo-300 font-semibold">Break a Lucky Block v2</span> & <span class="text-cyan-300 font-semibold">Anime Sky</span>.</p>
                     </div>
                 </div>
                 <div class="text-xs text-slate-400 bg-slate-800/80 px-4 py-2 rounded-xl border border-slate-700">
@@ -157,7 +156,7 @@
                                 class="w-full px-4 py-2 bg-slate-800 border border-slate-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm">
                                 <option value="Admin">Admin</option>
                                 <option value="Scripts">Scripts</option>
-                                <option value="Maps">Maps</option>
+                                <option value="Maps">Map</option>
                             </select>
                         </div>
                     </div>
@@ -191,17 +190,17 @@
             <!-- Models Grid -->
             <div id="modelsGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 
-                <!-- Break a Lucky Block v2 (Testing Status) -->
+                <!-- Break a Lucky Block v2 (Active with real code) -->
                 <div class="model-card bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden shadow-lg hover:border-slate-700 transition flex flex-col" data-category="maps">
                     <img src="https://i.ibb.co/YFR2Fvts/IMG-0090.jpg" alt="Break a Lucky Block v2" class="w-full h-48 object-cover">
                     <div class="p-5 flex flex-col flex-grow justify-between gap-4">
                         <div class="flex items-center justify-between">
                             <h3 class="font-bold text-lg text-slate-100">Break a Lucky Block v2</h3>
-                            <span class="text-xs bg-red-500/10 text-red-400 px-2.5 py-1 rounded-full border border-red-500/20">Testing ⏳</span>
+                            <span class="text-xs bg-cyan-500/10 text-cyan-400 px-2.5 py-1 rounded-full border border-cyan-500/20">Map</span>
                         </div>
                         <div class="bg-slate-950 border border-slate-800 rounded-xl p-3 flex items-center justify-between gap-2">
-                            <pre class="text-red-400 font-mono text-sm overflow-x-auto"><code id="codeLuckyBlock">****</code></pre>
-                            <button class="px-3 py-1.5 bg-slate-700 text-slate-400 text-xs font-semibold rounded-lg cursor-not-allowed shrink-0" disabled>Testing</button>
+                            <pre class="text-indigo-300 font-mono text-sm overflow-x-auto"><code id="codeLuckyBlock">137090812881039</code></pre>
+                            <button class="px-3 py-1.5 bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-semibold rounded-lg transition shrink-0" onclick="copyCode('codeLuckyBlock', this)">Copy</button>
                         </div>
                     </div>
                 </div>
@@ -212,7 +211,7 @@
                     <div class="p-5 flex flex-col flex-grow justify-between gap-4">
                         <div class="flex items-center justify-between">
                             <h3 class="font-bold text-lg text-slate-100">Anime Sky</h3>
-                            <span class="text-xs bg-cyan-500/10 text-cyan-400 px-2.5 py-1 rounded-full border border-cyan-500/20">Maps</span>
+                            <span class="text-xs bg-cyan-500/10 text-cyan-400 px-2.5 py-1 rounded-full border border-cyan-500/20">Map</span>
                         </div>
                         <div class="bg-slate-950 border border-slate-800 rounded-xl p-3 flex items-center justify-between gap-2">
                             <pre class="text-indigo-300 font-mono text-sm overflow-x-auto"><code id="codeAnimeSky">13107361022</code></pre>
@@ -227,7 +226,7 @@
                     <div class="p-5 flex flex-col flex-grow justify-between gap-4">
                         <div class="flex items-center justify-between">
                             <h3 class="font-bold text-lg text-slate-100">Old Stud block</h3>
-                            <span class="text-xs bg-cyan-500/10 text-cyan-400 px-2.5 py-1 rounded-full border border-cyan-500/20">Maps</span>
+                            <span class="text-xs bg-cyan-500/10 text-cyan-400 px-2.5 py-1 rounded-full border border-cyan-500/20">Map</span>
                         </div>
                         <div class="bg-slate-950 border border-slate-800 rounded-xl p-3 flex items-center justify-between gap-2">
                             <pre class="text-indigo-300 font-mono text-sm overflow-x-auto"><code id="codeOldStud">11257095071</code></pre>
@@ -287,7 +286,7 @@
                     <div class="p-5 flex flex-col flex-grow justify-between gap-4">
                         <div class="flex items-center justify-between">
                             <h3 class="font-bold text-lg text-slate-100">Studs</h3>
-                            <span class="text-xs bg-cyan-500/10 text-cyan-400 px-2.5 py-1 rounded-full border border-cyan-500/20">Maps</span>
+                            <span class="text-xs bg-cyan-500/10 text-cyan-400 px-2.5 py-1 rounded-full border border-cyan-500/20">Map</span>
                         </div>
                         <div class="bg-slate-950 border border-slate-800 rounded-xl p-3 flex items-center justify-between gap-2">
                             <pre class="text-indigo-300 font-mono text-sm overflow-x-auto"><code id="code2">128071741625902</code></pre>
@@ -302,7 +301,7 @@
                     <div class="p-5 flex flex-col flex-grow justify-between gap-4">
                         <div class="flex items-center justify-between">
                             <h3 class="font-bold text-lg text-slate-100">Steal an egg</h3>
-                            <span class="text-xs bg-cyan-500/10 text-cyan-400 px-2.5 py-1 rounded-full border border-cyan-500/20">Maps</span>
+                            <span class="text-xs bg-cyan-500/10 text-cyan-400 px-2.5 py-1 rounded-full border border-cyan-500/20">Map</span>
                         </div>
                         <div class="bg-slate-950 border border-slate-800 rounded-xl p-3 flex items-center justify-between gap-2">
                             <pre class="text-indigo-300 font-mono text-sm overflow-x-auto"><code id="code3">106206596734864</code></pre>
@@ -392,14 +391,14 @@
             const buttons = document.querySelectorAll('.cat-btn');
             buttons.forEach(btn => {
                 btn.classList.remove('bg-indigo-600', 'text-white', 'active');
-                if (!btn.classList.contains('bg-emerald-600') && !btn.classList.contains('bg-cyan-600')) {
-                    btn.classList.add('bg-slate-800', 'text-slate-300');
+                if (!btn.classList.contains('bg-emerald-600') && !btn.classList.contains('bg-cyan-400')) {
+                    btn.classList.add('bg-slate-800/80', 'border', 'border-slate-700/50', 'text-slate-300');
                 }
             });
 
             // Highlight clicked button
-            if (event && event.target && !event.target.classList.contains('bg-emerald-600') && !event.target.classList.contains('bg-cyan-600')) {
-                event.target.classList.remove('bg-slate-800', 'text-slate-300');
+            if (event && event.target && !event.target.classList.contains('bg-emerald-600') && !event.target.classList.contains('bg-cyan-400')) {
+                event.target.classList.remove('bg-slate-800/80', 'border', 'border-slate-700/50', 'text-slate-300');
                 event.target.classList.add('bg-indigo-600', 'text-white', 'active');
             }
 
