@@ -63,12 +63,12 @@
     <div id="updateModal" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-4 hidden">
         <div class="bg-slate-900 border border-slate-800 rounded-3xl p-6 md:p-8 max-w-md w-full shadow-2xl animate-scale-up relative">
             <div class="flex items-center justify-between mb-4">
-                <span class="text-xs font-bold text-indigo-400 bg-indigo-500/10 border border-indigo-500/20 px-3 py-1 rounded-full">Update v1.0.0.3</span>
+                <span class="text-xs font-bold text-indigo-400 bg-indigo-500/10 border border-indigo-500/20 px-3 py-1 rounded-full">Update v1.0.0.4</span>
                 <span class="text-xs text-slate-400">New Release</span>
             </div>
             <h3 class="text-xl font-extrabold text-white mb-2">What's New in YH Studio</h3>
             <p class="text-sm text-slate-300 mb-6 leading-relaxed">
-                • Updated image for <span class="text-indigo-300 font-semibold">1 + Speed escape</span> model.<br>
+                • Added official <span class="text-indigo-300 font-semibold">Discord Server</span> button in the menu.<br>
                 • Faster loading speed & improved animations.<br>
                 • Enhanced mobile responsiveness.
             </p>
@@ -163,12 +163,19 @@
                 </div>
             </div>
 
+            <!-- Standardized Category Menu with Discord Button Added -->
             <nav class="max-w-6xl mx-auto flex flex-wrap items-center justify-center md:justify-start gap-2 mt-6">
                 <button class="cat-btn active px-4 py-2 rounded-xl text-sm font-semibold bg-indigo-600 text-white transition hover:bg-indigo-700 shadow-sm" onclick="filterCategory('all')">All</button>
                 <button class="cat-btn px-4 py-2 rounded-xl text-sm font-semibold bg-slate-800/80 border border-slate-700/50 text-slate-300 transition hover:bg-slate-700 hover:text-white" onclick="filterCategory('admin')">Admin</button>
                 <button class="cat-btn px-4 py-2 rounded-xl text-sm font-semibold bg-slate-800/80 border border-slate-700/50 text-slate-300 transition hover:bg-slate-700 hover:text-white" onclick="filterCategory('scripts')">Scripts</button>
                 <button class="cat-btn px-4 py-2 rounded-xl text-sm font-semibold bg-slate-800/80 border border-slate-700/50 text-slate-300 transition hover:bg-slate-700 hover:text-white" onclick="filterCategory('maps')">Map</button>
                 <button class="cat-btn px-4 py-2 rounded-xl text-sm font-semibold bg-slate-800/80 border border-slate-700/50 text-cyan-400 transition hover:bg-slate-700 hover:text-cyan-300" onclick="openHelpModal()">❓ Help</button>
+                
+                <!-- Discord Button -->
+                <a href="https://discord.gg/z8WXEQzv4" target="_blank" class="px-4 py-2 rounded-xl text-sm font-semibold bg-slate-800/80 border border-slate-700/50 text-indigo-400 transition hover:bg-indigo-600 hover:text-white flex items-center gap-1.5 shadow-sm">
+                    💬 Discord
+                </a>
+
                 <button class="cat-btn px-4 py-2 rounded-xl text-sm font-semibold bg-emerald-600 text-white transition hover:bg-emerald-700 shadow-sm ml-auto" onclick="filterCategory('add-model')">➕ Post Your Model</button>
             </nav>
         </header>
