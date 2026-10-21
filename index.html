@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YH Dev - Scripts & Models Library</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header class="ui-corner">
+        <h1>YH Dev</h1>
+        <p>The ultimate library for secure Roblox Studio models & scripts</p>
+        
+        <!-- Search Box -->
+        <div class="search-box">
+            <input type="text" id="searchInput" onkeyup="searchScripts()" placeholder="Search for a model or code..." class="ui-corner">
+        </div>
+
+        <!-- Category Menu -->
+        <nav class="category-menu">
+            <button class="cat-btn active ui-corner" onclick="filterCategory('all')">All</button>
+            <button class="cat-btn ui-corner" onclick="filterCategory('admin-panel')">Admin Panel</button>
+            <button class="cat-btn ui-corner" onclick="filterCategory('scripts')">Scripts</button>
+            <button class="cat-btn ui-corner" onclick="filterCategory('add-model')">➕ Post Your Model</button>
+        </nav>
+    </header>
+
+    <main class="container">
+
+        <!-- Post Your Model Form Section -->
+        <section id="add-model-section" class="form-section ui-corner" style="display: none;">
+            <h2>➕ Post a New Model</h2>
+            <form action="https://formspree.io/f/mjygqarv" method="POST">
+                
+                <div class="input-group">
+                    <label>Model Name:</label>
+                    <input type="text" name="modelName" class="ui-corner" placeholder="e.g. AdminPanel +" required>
+                </div>
+
+                <div class="input-group">
+                    <label>Category:</label>
+                    <select name="modelCategory" class="ui-corner" required>
+                        <option value="Admin Panel">Admin Panel</option>
+                        <option value="Scripts">Scripts</option>
+                    </select>
+                </div>
+
+                <div class="input-group">
+                    <label>Your Email (to notify you when approved):</label>
+                    <input type="email" name="userEmail" class="ui-corner" placeholder="example@gmail.com" required>
+                </div>
+
+                <div class="input-group">
+                    <label>Image URL:</label>
+                    <input type="url" name="modelImage" class="ui-corner" placeholder="Paste image link here..." required>
+                </div>
+
+                <div class="input-group">
+                    <label>Asset ID / Code:</label>
+                    <input type="text" name="modelCode" class="ui-corner" placeholder="e.g. 85268855286147" required>
+                </div>
+
+                <button type="submit" class="submit-btn ui-corner">Send Request to Admin 🚀</button>
+            </form>
+        </section>
+
+        <!-- Models Grid -->
+        <div id="modelsGrid" class="models-grid">
+            <!-- Default Model Card -->
+            <div class="code-card ui-corner">
+                <img src="admin_panel.png" alt="AdminPanel +" class="card-image ui-corner">
+                <h3>AdminPanel +</h3>
+                <div class="code-box ui-corner">
+                    <pre><code id="code1">85268855286147</code></pre>
+                    <button class="copy-btn ui-corner" onclick="copyCode('code1', this)">Copy</button>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <footer>
+        <p>© 2026 <strong>YH Dev</strong>. All rights reserved | Contact: <span>studioyhdevlopers@gmail.com</span></p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
