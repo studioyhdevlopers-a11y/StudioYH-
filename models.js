@@ -1,4 +1,5 @@
 const myModels = [
+    { name: "Modern House", category: "maps", id: "17383957280", image: "https://i.ibb.co/4nCgjgNz/IMG-0092.jpg" },
     { name: "Break a Lucky Block v2", category: "maps", id: "137090812881039", image: "https://i.ibb.co/YFR2Fvts/IMG-0090.jpg" },
     { name: "Anime Sky", category: "maps", id: "13107361022", image: "https://i.ibb.co/BV3tFyx8/IMG-0091.jpg" },
     { name: "Old Stud block", category: "maps", id: "11257095071", image: "https://i.ibb.co/PZ5cT1vD/IMG-0085.jpg" },
