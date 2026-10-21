@@ -3,36 +3,54 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>YH Studio - Scripts & Models Library</title>
-    <!-- Tailwind CSS CDN for Modern Styling -->
-    <script src="https://cdn.tailwindcss.com"></script>
+    <title>YH Studio - Maintenance Mode</title>
+    
+    <!-- ==========================================
+         🛠️ Maintenance Mode Control Panel
+         Set to TRUE to lock the site and show maintenance.
+         Set to FALSE to make the site work normally.
+         ========================================== -->
     <script>
-        // ==========================================
-        // 🛠️ Maintenance Mode System
-        // Change to true to activate maintenance mode and close the site for everyone
-        // Change to false to make the site work normally
-        // ==========================================
         const MAINTENANCE_MODE = true; 
 
         if (MAINTENANCE_MODE) {
-            window.addEventListener('DOMContentLoaded', () => {
-                document.body.innerHTML = `
-                    <div style="background-color: #0f172a; color: #f8fafc; font-family: sans-serif; height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 20px;">
-                        <div style="background: #1e293b; border: 1px solid #334155; padding: 40px; border-radius: 24px; max-width: 450px; width: 100%; box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.5);">
-                            <span style="font-size: 40px;">🛠️</span>
-                            <h1 style="font-size: 24px; font-weight: bold; margin-top: 15px; margin-bottom: 10px; color: #ffffff;">YH Studio is Under Maintenance</h1>
-                            <p style="font-size: 14px; color: #94a3b8; line-height: 1.6; margin-bottom: 20px;">
-                                We are currently performing some updates and fixes. The site will be back online shortly. Thank you for your patience!
-                            </p>
-                            <div style="font-size: 12px; background: #0f172a; padding: 10px; border-radius: 12px; color: #6366f1; border: 1px solid #1e293b;">
-                                Status: Maintenance Mode Active
-                            </div>
+            document.write(`
+                <!DOCTYPE html>
+                <html lang="en" class="dark">
+                <head>
+                    <meta charset="UTF-8">
+                    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                    <title>YH Studio - Under Maintenance</title>
+                    <script src="https://cdn.tailwindcss.com"><\/script>
+                </head>
+                <body class="bg-slate-950 text-slate-100 min-h-screen flex items-center justify-center p-4 font-sans selection:bg-indigo-500 selection:text-white">
+                    <div class="bg-slate-900 border border-slate-800 rounded-3xl p-8 max-w-md w-full text-center shadow-2xl relative overflow-hidden">
+                        <div class="absolute -top-10 -right-10 w-32 h-32 bg-indigo-500/10 rounded-full blur-2xl pointer-events-none"></div>
+                        <div class="inline-flex items-center justify-center w-16 h-16 bg-amber-500/10 border border-amber-500/20 rounded-2xl text-amber-400 text-2xl mb-6 shadow-inner">
+                            🛠️
+                        </div>
+                        <h1 class="text-2xl font-black text-white mb-3">YH Studio is Under Maintenance</h1>
+                        <p class="text-sm text-slate-400 leading-relaxed mb-6">
+                            We are currently performing critical system updates and performance improvements. The site will be back online shortly. Thank you for your patience!
+                        </p>
+                        <div class="py-3 px-4 bg-slate-950 border border-slate-800 rounded-2xl text-xs font-semibold text-indigo-400 tracking-wide uppercase">
+                            Status: Maintenance Mode Active
                         </div>
                     </div>
-                `;
-            });
+                </body>
+                </html>
+            `);
+            try {
+                window.stop();
+            } catch(e) {
+                document.execCommand('Stop');
+            }
         }
+    </script>
 
+    <!-- Tailwind CSS CDN for Modern Styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
         tailwind.config = {
             darkMode: 'class',
             theme: {
