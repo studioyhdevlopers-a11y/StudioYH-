@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>YH Studio - Scripts & Models Library</title>
+    <title>YH Dev - Scripts & Models Library</title>
     <!-- Tailwind CSS CDN for Modern Styling -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -40,7 +40,7 @@
 </head>
 <body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col font-sans selection:bg-indigo-500 selection:text-white overflow-x-hidden">
 
-    <!-- Splash Screen (Apple Style Intro Animation) -->
+    <!-- Splash Screen (Apple Style Intro Animation: Loader -> Checkmark) -->
     <div id="splashScreen" class="fixed inset-0 z-50 bg-slate-950 flex flex-col items-center justify-center transition-opacity duration-700">
         <!-- Loader Circle -->
         <div id="loaderContainer" class="relative flex items-center justify-center">
@@ -52,7 +52,7 @@
                 <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path>
             </svg>
         </div>
-        <p id="splashText" class="text-slate-400 text-sm mt-6 tracking-wide font-medium">Loading YH Studio...</p>
+        <p id="splashText" class="text-slate-400 text-sm mt-6 tracking-wide font-medium">Loading YH Dev...</p>
     </div>
 
     <!-- Main Site Wrapper (Hidden until intro finishes) -->
@@ -91,7 +91,7 @@
             <!-- Welcome Apple-Style Notification Banner -->
             <div class="bg-gradient-to-r from-indigo-900/40 via-slate-900 to-slate-900 border border-indigo-500/30 rounded-2xl p-5 md:p-6 mb-8 flex flex-col md:flex-row items-center justify-between gap-6 shadow-2xl animate-fade-in">
                 <div class="flex items-center gap-4 text-center md:text-left flex-col md:flex-row">
-                    <!-- Floating mini images animation (Apple style items preview) -->
+                    <!-- Floating mini images animation for Studs and Steal an egg -->
                     <div class="flex -space-x-3 overflow-hidden p-1">
                         <img class="inline-block h-14 w-14 rounded-2xl object-cover ring-2 ring-indigo-500/50 shadow-lg transform hover:scale-110 transition duration-300" src="https://upload.wikimedia.org/wikipedia/commons/4/49/A_black_image.jpg" alt="Studs">
                         <img class="inline-block h-14 w-14 rounded-2xl object-cover ring-2 ring-cyan-500/50 shadow-lg transform hover:scale-110 transition duration-300" src="https://images.unsplash.com/photo-1579373903781-fd5c0c30c4cd?q=80&w=300&auto=format&fit=crop" alt="Steal an egg">
@@ -100,7 +100,7 @@
                         <h2 class="text-xl font-bold text-white flex items-center justify-center md:justify-start gap-2">
                             Welcome to YH Dev! <span class="text-xs bg-indigo-500 text-white px-2 py-0.5 rounded-full font-normal">New Drops</span>
                         </h2>
-                        <p class="text-sm text-slate-300 mt-1"> Welcome To YH Studio! Check out our latest additions: <span class="text-indigo-300 font-semibold">Studs</span> & <span class="text-cyan-300 font-semibold">Steal an egg</span>.</p>
+                        <p class="text-sm text-slate-300 mt-1">نورت موقعنا! Check out our latest additions: <span class="text-indigo-300 font-semibold">Studs</span> & <span class="text-cyan-300 font-semibold">Steal an egg</span>.</p>
                     </div>
                 </div>
                 <div class="text-xs text-slate-400 bg-slate-800/80 px-4 py-2 rounded-xl border border-slate-700">
@@ -190,7 +190,7 @@
                     </div>
                 </div>
 
-                <!-- Steal an egg Card (Maps / Extra) -->
+                <!-- Steal an egg Card (Maps) -->
                 <div class="model-card bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden shadow-lg hover:border-slate-700 transition flex flex-col" data-category="maps">
                     <img src="https://images.unsplash.com/photo-1579373903781-fd5c0c30c4cd?q=80&w=600&auto=format&fit=crop" alt="Steal an egg" class="w-full h-48 object-cover">
                     <div class="p-5 flex flex-col flex-grow justify-between gap-4">
@@ -199,7 +199,7 @@
                             <span class="text-xs bg-cyan-500/10 text-cyan-400 px-2.5 py-1 rounded-full border border-cyan-500/20">Maps</span>
                         </div>
                         <div class="bg-slate-950 border border-slate-800 rounded-xl p-3 flex items-center justify-between gap-2">
-                            <pre class="text-indigo-300 font-mono text-sm overflow-x-auto"><code id="code3">106206596734864</code></pre>
+                            <pre class="text-indigo-300 font-mono text-sm overflow-x-auto"><code id="code3">99281648291043</code></pre>
                             <button class="px-3 py-1.5 bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-semibold rounded-lg transition shrink-0" onclick="copyCode('code3', this)">Copy</button>
                         </div>
                     </div>
@@ -216,7 +216,7 @@
 
     </div>
 
-    <!-- JavaScript for Intro & Filtering Actions -->
+    <!-- JavaScript integrated inside HTML -->
     <script>
         // Splash Screen Apple-style Animation Logic
         window.addEventListener('load', () => {
@@ -228,55 +228,67 @@
 
             // After 1.1 second, hide loader and show success checkmark
             setTimeout(() => {
-                loaderContainer.style.display = 'none';
-                successCheck.classList.remove('hidden');
-                splashText.textContent = "Welcome to YH Dev!";
+                if (loaderContainer) loaderContainer.style.display = 'none';
+                if (successCheck) successCheck.classList.remove('hidden');
+                if (splashText) splashText.textContent = "Welcome to YH Dev!";
             }, 1100);
 
             // After 2 seconds, fade out the entire splash screen and show the website
             setTimeout(() => {
-                splashScreen.style.opacity = '0';
-                setTimeout(() => {
-                    splashScreen.style.display = 'none';
-                    mainContent.style.opacity = '1';
-                }, 700);
+                if (splashScreen) {
+                    splashScreen.style.opacity = '0';
+                    setTimeout(() => {
+                        splashScreen.style.display = 'none';
+                        if (mainContent) mainContent.style.opacity = '1';
+                    }, 700);
+                }
             }, 2200);
         });
 
         // Copy Code Function
         function copyCode(elementId, btn) {
-            const codeText = document.getElementById(elementId).innerText;
-            navigator.clipboard.writeText(codeText);
-            const originalText = btn.innerText;
-            btn.innerText = 'Copied!';
-            btn.classList.add('bg-emerald-600');
-            setTimeout(() => {
-                btn.innerText = originalText;
-                btn.classList.remove('bg-emerald-600');
-            }, 2000);
+            const codeElement = document.getElementById(elementId);
+            if (!codeElement) return;
+            
+            const codeText = codeElement.innerText;
+            navigator.clipboard.writeText(codeText).then(() => {
+                const originalText = btn.innerText;
+                btn.innerText = 'Copied!';
+                btn.classList.add('bg-emerald-600');
+                setTimeout(() => {
+                    btn.innerText = originalText;
+                    btn.classList.remove('bg-emerald-600');
+                }, 2000);
+            });
         }
 
         // Filter Categories Function
         function filterCategory(category) {
             const buttons = document.querySelectorAll('.cat-btn');
-            buttons.forEach(btn => btn.classList.remove('bg-indigo-600', 'text-white', 'active'));
-            buttons.forEach(btn => btn.classList.add('bg-slate-800', 'text-slate-300'));
+            buttons.forEach(btn => {
+                btn.classList.remove('bg-indigo-600', 'text-white', 'active');
+                if (!btn.classList.contains('bg-emerald-600')) {
+                    btn.classList.add('bg-slate-800', 'text-slate-300');
+                }
+            });
 
             // Highlight clicked button
-            event.target.classList.remove('bg-slate-800', 'text-slate-300');
-            event.target.classList.add('bg-indigo-600', 'text-white', 'active');
+            if (event && event.target) {
+                event.target.classList.remove('bg-slate-800', 'text-slate-300');
+                event.target.classList.add('bg-indigo-600', 'text-white', 'active');
+            }
 
             const addModelSection = document.getElementById('add-model-section');
             const modelsGrid = document.getElementById('modelsGrid');
 
             if (category === 'add-model') {
-                addModelSection.style.display = 'block';
-                modelsGrid.style.display = 'none';
-                addModelSection.scrollIntoView({ behavior: 'smooth' });
+                if (addModelSection) addModelSection.style.display = 'block';
+                if (modelsGrid) modelsGrid.style.display = 'none';
+                if (addModelSection) addModelSection.scrollIntoView({ behavior: 'smooth' });
                 return;
             } else {
-                addModelSection.style.display = 'none';
-                modelsGrid.style.display = 'grid';
+                if (addModelSection) addModelSection.style.display = 'none';
+                if (modelsGrid) modelsGrid.style.display = 'grid';
             }
 
             const cards = document.querySelectorAll('.model-card');
@@ -291,7 +303,10 @@
 
         // Search Bar Function
         function searchScripts() {
-            const input = document.getElementById('searchInput').value.toLowerCase();
+            const searchInput = document.getElementById('searchInput');
+            if (!searchInput) return;
+            
+            const input = searchInput.value.toLowerCase();
             const cards = document.querySelectorAll('.model-card');
             
             cards.forEach(card => {
