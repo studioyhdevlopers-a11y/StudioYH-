@@ -92,16 +92,16 @@
             <!-- Welcome Apple-Style Notification Banner -->
             <div class="bg-gradient-to-r from-indigo-900/40 via-slate-900 to-slate-900 border border-indigo-500/30 rounded-2xl p-5 md:p-6 mb-8 flex flex-col md:flex-row items-center justify-between gap-6 shadow-2xl animate-fade-in">
                 <div class="flex items-center gap-4 text-center md:text-left flex-col md:flex-row">
-                    <!-- Floating mini images animation -->
+                    <!-- Floating mini images animation for the new additions -->
                     <div class="flex -space-x-3 overflow-hidden p-1">
-                        <img class="inline-block h-14 w-14 rounded-2xl object-cover ring-2 ring-purple-500/50 shadow-lg transform hover:scale-110 transition duration-300" src="https://i.ibb.co/FqzT302f/IMG-0083.jpg" alt="HD Admin 2">
-                        <img class="inline-block h-14 w-14 rounded-2xl object-cover ring-2 ring-purple-500/50 shadow-lg transform hover:scale-110 transition duration-300" src="https://i.ibb.co/FL1Xb4rz/IMG-0084.jpg" alt="khol's admin">
+                        <img class="inline-block h-14 w-14 rounded-2xl object-cover ring-2 ring-red-500/50 shadow-lg transform hover:scale-110 transition duration-300" src="https://i.ibb.co/YFR2Fvts/IMG-0090.jpg" alt="Break a Lucky Block v2">
+                        <img class="inline-block h-14 w-14 rounded-2xl object-cover ring-2 ring-cyan-500/50 shadow-lg transform hover:scale-110 transition duration-300" src="https://i.ibb.co/BV3tFyx8/IMG-0091.jpg" alt="Anime Sky">
                     </div>
                     <div>
                         <h2 class="text-xl font-bold text-white flex items-center justify-center md:justify-start gap-2">
                             Welcome to YH Studio! <span class="text-xs bg-indigo-500 text-white px-2 py-0.5 rounded-full font-normal">New Drops</span>
                         </h2>
-                        <p class="text-sm text-slate-300 mt-1">Check out our latest admin additions: <span class="text-purple-300 font-semibold">HD Admin 2</span> & <span class="text-purple-300 font-semibold">khol’s admin</span>.</p>
+                        <p class="text-sm text-slate-300 mt-1">Check out our latest additions: <span class="text-red-400 font-semibold">Break a Lucky Block v2</span> & <span class="text-cyan-300 font-semibold">Anime Sky</span>.</p>
                     </div>
                 </div>
                 <div class="text-xs text-slate-400 bg-slate-800/80 px-4 py-2 rounded-xl border border-slate-700">
@@ -117,7 +117,7 @@
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div class="space-y-1">
                             <label class="text-sm font-medium text-slate-300">Model Name:</label>
-                            <input type="text" name="modelName" placeholder="e.g. Old Stud block" required
+                            <input type="text" name="modelName" placeholder="e.g. Anime Sky" required
                                 class="w-full px-4 py-2 bg-slate-800 border border-slate-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm">
                         </div>
 
@@ -149,7 +149,7 @@
 
                     <div class="space-y-1">
                         <label class="text-sm font-medium text-slate-300">Asset ID / Code:</label>
-                        <input type="text" name="modelCode" placeholder="e.g. 11257095071" required
+                        <input type="text" name="modelCode" placeholder="e.g. 13107361022" required
                             class="w-full px-4 py-2 bg-slate-800 border border-slate-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm">
                     </div>
 
@@ -162,16 +162,52 @@
             <!-- Models Grid -->
             <div id="modelsGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 
-                <!-- Old Stud block Card -->
+                <!-- Break a Lucky Block v2 (New) -->
                 <div class="model-card bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden shadow-lg hover:border-slate-700 transition flex flex-col" data-category="maps">
-                    <img src="https://i.ibb.co/PZ5cT1vD/IMG-0085.jpg" alt="Old Stud block" class="w-full h-48 object-cover">
+                    <div class="relative">
+                        <img src="https://i.ibb.co/YFR2Fvts/IMG-0090.jpg" alt="Break a Lucky Block v2" class="w-full h-48 object-cover">
+                        <span class="absolute top-3 right-3 bg-red-500/80 backdrop-blur-md text-white text-xs px-2.5 py-1 rounded-full font-bold border border-red-400/30 shadow-md">Testing ⏳</span>
+                    </div>
+                    <div class="p-5 flex flex-col flex-grow justify-between gap-4">
+                        <div class="flex items-center justify-between">
+                            <h3 class="font-bold text-lg text-slate-100">Break a Lucky Block v2</h3>
+                            <span class="text-xs bg-cyan-500/10 text-cyan-400 px-2.5 py-1 rounded-full border border-cyan-500/20">Maps</span>
+                        </div>
+                        <div class="bg-slate-950 border border-slate-800 rounded-xl p-3 flex items-center justify-between gap-2">
+                            <pre class="text-indigo-300 font-mono text-sm overflow-x-auto"><code id="codeLuckyBlock">137090812881039</code></pre>
+                            <button class="px-3 py-1.5 bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-semibold rounded-lg transition shrink-0" onclick="copyCode('codeLuckyBlock', this)">Copy</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Anime Sky (New) -->
+                <div class="model-card bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden shadow-lg hover:border-slate-700 transition flex flex-col" data-category="maps">
+                    <div class="relative">
+                        <img src="https://i.ibb.co/BV3tFyx8/IMG-0091.jpg" alt="Anime Sky" class="w-full h-48 object-cover">
+                        <span class="absolute top-3 right-3 bg-emerald-500/80 backdrop-blur-md text-white text-xs px-2.5 py-1 rounded-full font-bold border border-emerald-400/30 shadow-md">✓ Verified</span>
+                    </div>
+                    <div class="p-5 flex flex-col flex-grow justify-between gap-4">
+                        <div class="flex items-center justify-between">
+                            <h3 class="font-bold text-lg text-slate-100">Anime Sky</h3>
+                            <span class="text-xs bg-cyan-500/10 text-cyan-400 px-2.5 py-1 rounded-full border border-cyan-500/20">Maps</span>
+                        </div>
+                        <div class="bg-slate-950 border border-slate-800 rounded-xl p-3 flex items-center justify-between gap-2">
+                            <pre class="text-indigo-300 font-mono text-sm overflow-x-auto"><code id="codeAnimeSky">13107361022</code></pre>
+                            <button class="px-3 py-1.5 bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-semibold rounded-lg transition shrink-0" onclick="copyCode('codeAnimeSky', this)">Copy</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Old Stud block Card (Maps) -->
+                <div class="model-card bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden shadow-lg hover:border-slate-700 transition flex flex-col" data-category="maps">
+                    <div class="relative">
+                        <img src="https://i.ibb.co/PZ5cT1vD/IMG-0085.jpg" alt="Old Stud block" class="w-full h-48 object-cover">
+                        <span class="absolute top-3 right-3 bg-emerald-500/80 backdrop-blur-md text-white text-xs px-2.5 py-1 rounded-full font-bold border border-emerald-400/30 shadow-md">✓ Verified</span>
+                    </div>
                     <div class="p-5 flex flex-col flex-grow justify-between gap-4">
                         <div class="flex items-center justify-between">
                             <h3 class="font-bold text-lg text-slate-100">Old Stud block</h3>
-                            <div class="flex items-center gap-1.5">
-                                <span class="text-xs bg-cyan-500/10 text-cyan-400 px-2.5 py-1 rounded-full border border-cyan-500/20">Maps</span>
-                                <span class="text-xs bg-emerald-500/10 text-emerald-400 px-2 py-1 rounded-full border border-emerald-500/20 flex items-center gap-1">Verified ✅</span>
-                            </div>
+                            <span class="text-xs bg-cyan-500/10 text-cyan-400 px-2.5 py-1 rounded-full border border-cyan-500/20">Maps</span>
                         </div>
                         <div class="bg-slate-950 border border-slate-800 rounded-xl p-3 flex items-center justify-between gap-2">
                             <pre class="text-indigo-300 font-mono text-sm overflow-x-auto"><code id="codeOldStud">11257095071</code></pre>
@@ -182,14 +218,14 @@
 
                 <!-- HD Admin 2 -->
                 <div class="model-card bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden shadow-lg hover:border-slate-700 transition flex flex-col" data-category="admin">
-                    <img src="https://i.ibb.co/FqzT302f/IMG-0083.jpg" alt="HD Admin 2" class="w-full h-48 object-cover">
+                    <div class="relative">
+                        <img src="https://i.ibb.co/FqzT302f/IMG-0083.jpg" alt="HD Admin 2" class="w-full h-48 object-cover">
+                        <span class="absolute top-3 right-3 bg-emerald-500/80 backdrop-blur-md text-white text-xs px-2.5 py-1 rounded-full font-bold border border-emerald-400/30 shadow-md">✓ Verified</span>
+                    </div>
                     <div class="p-5 flex flex-col flex-grow justify-between gap-4">
                         <div class="flex items-center justify-between">
                             <h3 class="font-bold text-lg text-slate-100">HD Admin 2</h3>
-                            <div class="flex items-center gap-1.5">
-                                <span class="text-xs bg-purple-500/10 text-purple-400 px-2.5 py-1 rounded-full border border-purple-500/20">Admin</span>
-                                <span class="text-xs bg-emerald-500/10 text-emerald-400 px-2 py-1 rounded-full border border-emerald-500/20 flex items-center gap-1">Verified ✅</span>
-                            </div>
+                            <span class="text-xs bg-purple-500/10 text-purple-400 px-2.5 py-1 rounded-full border border-purple-500/20">Admin</span>
                         </div>
                         <div class="bg-slate-950 border border-slate-800 rounded-xl p-3 flex items-center justify-between gap-2">
                             <pre class="text-indigo-300 font-mono text-sm overflow-x-auto"><code id="codeHD2">857927023</code></pre>
@@ -200,14 +236,14 @@
 
                 <!-- khol’s admin -->
                 <div class="model-card bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden shadow-lg hover:border-slate-700 transition flex flex-col" data-category="admin">
-                    <img src="https://i.ibb.co/FL1Xb4rz/IMG-0084.jpg" alt="khol’s admin" class="w-full h-48 object-cover">
+                    <div class="relative">
+                        <img src="https://i.ibb.co/FL1Xb4rz/IMG-0084.jpg" alt="khol’s admin" class="w-full h-48 object-cover">
+                        <span class="absolute top-3 right-3 bg-emerald-500/80 backdrop-blur-md text-white text-xs px-2.5 py-1 rounded-full border border-emerald-400/30 shadow-md">✓ Verified</span>
+                    </div>
                     <div class="p-5 flex flex-col flex-grow justify-between gap-4">
                         <div class="flex items-center justify-between">
                             <h3 class="font-bold text-lg text-slate-100">khol’s admin</h3>
-                            <div class="flex items-center gap-1.5">
-                                <span class="text-xs bg-purple-500/10 text-purple-400 px-2.5 py-1 rounded-full border border-purple-500/20">Admin</span>
-                                <span class="text-xs bg-emerald-500/10 text-emerald-400 px-2 py-1 rounded-full border border-emerald-500/20 flex items-center gap-1">Verified ✅</span>
-                            </div>
+                            <span class="text-xs bg-purple-500/10 text-purple-400 px-2.5 py-1 rounded-full border border-purple-500/20">Admin</span>
                         </div>
                         <div class="bg-slate-950 border border-slate-800 rounded-xl p-3 flex items-center justify-between gap-2">
                             <pre class="text-indigo-300 font-mono text-sm overflow-x-auto"><code id="codeKhols">172732271</code></pre>
@@ -218,14 +254,14 @@
 
                 <!-- Admin Panel Card -->
                 <div class="model-card bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden shadow-lg hover:border-slate-700 transition flex flex-col" data-category="admin-panel">
-                    <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=600&auto=format&fit=crop" alt="AdminPanel +" class="w-full h-48 object-cover">
+                    <div class="relative">
+                        <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=600&auto=format&fit=crop" alt="AdminPanel +" class="w-full h-48 object-cover">
+                        <span class="absolute top-3 right-3 bg-emerald-500/80 backdrop-blur-md text-white text-xs px-2.5 py-1 rounded-full font-bold border border-emerald-400/30 shadow-md">✓ Verified</span>
+                    </div>
                     <div class="p-5 flex flex-col flex-grow justify-between gap-4">
                         <div class="flex items-center justify-between">
                             <h3 class="font-bold text-lg text-slate-100">AdminPanel +</h3>
-                            <div class="flex items-center gap-1.5">
-                                <span class="text-xs bg-indigo-500/10 text-indigo-400 px-2.5 py-1 rounded-full border border-indigo-500/20">Admin Panel</span>
-                                <span class="text-xs bg-emerald-500/10 text-emerald-400 px-2 py-1 rounded-full border border-emerald-500/20 flex items-center gap-1">Verified ✅</span>
-                            </div>
+                            <span class="text-xs bg-indigo-500/10 text-indigo-400 px-2.5 py-1 rounded-full border border-indigo-500/20">Admin Panel</span>
                         </div>
                         <div class="bg-slate-950 border border-slate-800 rounded-xl p-3 flex items-center justify-between gap-2">
                             <pre class="text-indigo-300 font-mono text-sm overflow-x-auto"><code id="code1">85268855286147</code></pre>
@@ -234,16 +270,16 @@
                     </div>
                 </div>
 
-                <!-- Studs Card -->
+                <!-- Studs Card (Maps) -->
                 <div class="model-card bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden shadow-lg hover:border-slate-700 transition flex flex-col" data-category="maps">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/4/49/A_black_image.jpg" alt="Studs" class="w-full h-48 object-cover">
+                    <div class="relative">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/4/49/A_black_image.jpg" alt="Studs" class="w-full h-48 object-cover">
+                        <span class="absolute top-3 right-3 bg-emerald-500/80 backdrop-blur-md text-white text-xs px-2.5 py-1 rounded-full font-bold border border-emerald-400/30 shadow-md">✓ Verified</span>
+                    </div>
                     <div class="p-5 flex flex-col flex-grow justify-between gap-4">
                         <div class="flex items-center justify-between">
                             <h3 class="font-bold text-lg text-slate-100">Studs</h3>
-                            <div class="flex items-center gap-1.5">
-                                <span class="text-xs bg-cyan-500/10 text-cyan-400 px-2.5 py-1 rounded-full border border-cyan-500/20">Maps</span>
-                                <span class="text-xs bg-emerald-500/10 text-emerald-400 px-2 py-1 rounded-full border border-emerald-500/20 flex items-center gap-1">Verified ✅</span>
-                            </div>
+                            <span class="text-xs bg-cyan-500/10 text-cyan-400 px-2.5 py-1 rounded-full border border-cyan-500/20">Maps</span>
                         </div>
                         <div class="bg-slate-950 border border-slate-800 rounded-xl p-3 flex items-center justify-between gap-2">
                             <pre class="text-indigo-300 font-mono text-sm overflow-x-auto"><code id="code2">128071741625902</code></pre>
@@ -252,19 +288,19 @@
                     </div>
                 </div>
 
-                <!-- Steal an egg Card -->
+                <!-- Steal an egg Card (Maps) -->
                 <div class="model-card bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden shadow-lg hover:border-slate-700 transition flex flex-col" data-category="maps">
-                    <img src="https://images.unsplash.com/photo-1579373903781-fd5c0c30c4cd?q=80&w=600&auto=format&fit=crop" alt="Steal an egg" class="w-full h-48 object-cover">
+                    <div class="relative">
+                        <img src="https://images.unsplash.com/photo-1579373903781-fd5c0c30c4cd?q=80&w=600&auto=format&fit=crop" alt="Steal an egg" class="w-full h-48 object-cover">
+                        <span class="absolute top-3 right-3 bg-emerald-500/80 backdrop-blur-md text-white text-xs px-2.5 py-1 rounded-full font-bold border border-emerald-400/30 shadow-md">✓ Verified</span>
+                    </div>
                     <div class="p-5 flex flex-col flex-grow justify-between gap-4">
                         <div class="flex items-center justify-between">
                             <h3 class="font-bold text-lg text-slate-100">Steal an egg</h3>
-                            <div class="flex items-center gap-1.5">
-                                <span class="text-xs bg-cyan-500/10 text-cyan-400 px-2.5 py-1 rounded-full border border-cyan-500/20">Maps</span>
-                                <span class="text-xs bg-emerald-500/10 text-emerald-400 px-2 py-1 rounded-full border border-emerald-500/20 flex items-center gap-1">Testing ⏳</span>
-                            </div>
+                            <span class="text-xs bg-cyan-500/10 text-cyan-400 px-2.5 py-1 rounded-full border border-cyan-500/20">Maps</span>
                         </div>
                         <div class="bg-slate-950 border border-slate-800 rounded-xl p-3 flex items-center justify-between gap-2">
-                            <pre class="text-indigo-300 font-mono text-sm overflow-x-auto"><code id="code3">Comming Soon ⏳</code></pre>
+                            <pre class="text-indigo-300 font-mono text-sm overflow-x-auto"><code id="code3">99281648291043</code></pre>
                             <button class="px-3 py-1.5 bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-semibold rounded-lg transition shrink-0" onclick="copyCode('code3', this)">Copy</button>
                         </div>
                     </div>
