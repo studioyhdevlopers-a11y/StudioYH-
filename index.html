@@ -1,87 +1,125 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="en" dir="ltr" class="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>YH Dev - Scripts & Models Library</title>
-    <link rel="stylesheet" href="style.css">
+    <!-- Tailwind CSS CDN for Modern Styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        darkBg: '#0f172a',
+                        cardBg: '#1e293b',
+                        accent: '#6366f1',
+                    }
+                }
+            }
+        }
+    </script>
 </head>
-<body>
+<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col font-sans selection:bg-indigo-500 selection:text-white">
 
-    <header class="ui-corner">
-        <h1>YH Dev</h1>
-        <p>The ultimate library for secure Roblox Studio models & scripts</p>
-        
-        <!-- Search Box -->
-        <div class="search-box">
-            <input type="text" id="searchInput" onkeyup="searchScripts()" placeholder="Search for a model or code..." class="ui-corner">
+    <!-- Header Section -->
+    <header class="bg-slate-900/80 backdrop-blur-md border-b border-slate-800 sticky top-0 z-50 px-4 py-6 shadow-lg">
+        <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+            
+            <!-- Logo & Title -->
+            <div class="text-center md:text-left">
+                <h1 class="text-3xl font-extrabold tracking-tight bg-gradient-to-r from-indigo-400 to-cyan-400 bg-clip-text text-transparent">YH Dev</h1>
+                <p class="text-sm text-slate-400 mt-1">The ultimate library for secure Roblox Studio models & scripts</p>
+            </div>
+
+            <!-- Search Box -->
+            <div class="w-full md:w-80">
+                <input type="text" id="searchInput" onkeyup="searchScripts()" placeholder="Search for a model or code..." 
+                    class="w-full px-4 py-2 bg-slate-800 border border-slate-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm placeholder-slate-400 transition">
+            </div>
         </div>
 
         <!-- Category Menu -->
-        <nav class="category-menu">
-            <button class="cat-btn active ui-corner" onclick="filterCategory('all')">All</button>
-            <button class="cat-btn ui-corner" onclick="filterCategory('admin-panel')">Admin Panel</button>
-            <button class="cat-btn ui-corner" onclick="filterCategory('scripts')">Scripts</button>
-            <button class="cat-btn ui-corner" onclick="filterCategory('add-model')">➕ Post Your Model</button>
+        <nav class="max-w-6xl mx-auto flex flex-wrap items-center justify-center md:justify-start gap-2 mt-6">
+            <button class="cat-btn active px-4 py-2 rounded-xl text-sm font-medium bg-indigo-600 text-white transition hover:bg-indigo-700 shadow-sm" onclick="filterCategory('all')">All</button>
+            <button class="cat-btn px-4 py-2 rounded-xl text-sm font-medium bg-slate-800 text-slate-300 transition hover:bg-slate-700 hover:text-white" onclick="filterCategory('admin-panel')">Admin Panel</button>
+            <button class="cat-btn px-4 py-2 rounded-xl text-sm font-medium bg-slate-800 text-slate-300 transition hover:bg-slate-700 hover:text-white" onclick="filterCategory('scripts')">Scripts</button>
+            <button class="cat-btn px-4 py-2 rounded-xl text-sm font-medium bg-emerald-600 text-white transition hover:bg-emerald-700 shadow-sm" onclick="filterCategory('add-model')">➕ Post Your Model</button>
         </nav>
     </header>
 
-    <main class="container">
+    <!-- Main Content -->
+    <main class="max-w-6xl mx-auto px-4 py-8 flex-grow w-full">
 
         <!-- Post Your Model Form Section -->
-        <section id="add-model-section" class="form-section ui-corner" style="display: none;">
-            <h2>➕ Post a New Model</h2>
-            <form action="https://formspree.io/f/mjygqarv" method="POST">
+        <section id="add-model-section" class="bg-slate-900 border border-slate-800 rounded-2xl p-6 md:p-8 shadow-xl mb-8" style="display: none;">
+            <h2 class="text-xl font-bold mb-6 text-indigo-400 flex items-center gap-2">➕ Post a New Model</h2>
+            <form action="https://formspree.io/f/mjygqarv" method="POST" class="space-y-4">
                 
-                <div class="input-group">
-                    <label>Model Name:</label>
-                    <input type="text" name="modelName" class="ui-corner" placeholder="e.g. AdminPanel +" required>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="space-y-1">
+                        <label class="text-sm font-medium text-slate-300">Model Name:</label>
+                        <input type="text" name="modelName" placeholder="e.g. AdminPanel +" required
+                            class="w-full px-4 py-2 bg-slate-800 border border-slate-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm">
+                    </div>
+
+                    <div class="space-y-1">
+                        <label class="text-sm font-medium text-slate-300">Category:</label>
+                        <select name="modelCategory" required
+                            class="w-full px-4 py-2 bg-slate-800 border border-slate-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm">
+                            <option value="Admin Panel">Admin Panel</option>
+                            <option value="Scripts">Scripts</option>
+                        </select>
+                    </div>
                 </div>
 
-                <div class="input-group">
-                    <label>Category:</label>
-                    <select name="modelCategory" class="ui-corner" required>
-                        <option value="Admin Panel">Admin Panel</option>
-                        <option value="Scripts">Scripts</option>
-                    </select>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="space-y-1">
+                        <label class="text-sm font-medium text-slate-300">Your Email (to notify you when approved):</label>
+                        <input type="email" name="userEmail" placeholder="example@gmail.com" required
+                            class="w-full px-4 py-2 bg-slate-800 border border-slate-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm">
+                    </div>
+
+                    <div class="space-y-1">
+                        <label class="text-sm font-medium text-slate-300">Image URL:</label>
+                        <input type="url" name="modelImage" placeholder="Paste image link here..." required
+                            class="w-full px-4 py-2 bg-slate-800 border border-slate-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm">
+                    </div>
                 </div>
 
-                <div class="input-group">
-                    <label>Your Email (to notify you when approved):</label>
-                    <input type="email" name="userEmail" class="ui-corner" placeholder="example@gmail.com" required>
+                <div class="space-y-1">
+                    <label class="text-sm font-medium text-slate-300">Asset ID / Code:</label>
+                    <input type="text" name="modelCode" placeholder="e.g. 85268855286147" required
+                        class="w-full px-4 py-2 bg-slate-800 border border-slate-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm">
                 </div>
 
-                <div class="input-group">
-                    <label>Image URL:</label>
-                    <input type="url" name="modelImage" class="ui-corner" placeholder="Paste image link here..." required>
-                </div>
-
-                <div class="input-group">
-                    <label>Asset ID / Code:</label>
-                    <input type="text" name="modelCode" class="ui-corner" placeholder="e.g. 85268855286147" required>
-                </div>
-
-                <button type="submit" class="submit-btn ui-corner">Send Request to Admin 🚀</button>
+                <button type="submit" class="w-full py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold rounded-xl transition shadow-lg shadow-indigo-500/20 flex items-center justify-center gap-2">
+                    Send Request to Admin 🚀
+                </button>
             </form>
         </section>
 
         <!-- Models Grid -->
-        <div id="modelsGrid" class="models-grid">
+        <div id="modelsGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             <!-- Default Model Card -->
-            <div class="code-card ui-corner">
-                <img src="admin_panel.png" alt="AdminPanel +" class="card-image ui-corner">
-                <h3>AdminPanel +</h3>
-                <div class="code-box ui-corner">
-                    <pre><code id="code1">85268855286147</code></pre>
-                    <button class="copy-btn ui-corner" onclick="copyCode('code1', this)">Copy</button>
+            <div class="bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden shadow-lg hover:border-slate-700 transition flex flex-col">
+                <img src="admin_panel.png" alt="AdminPanel +" class="w-full h-48 object-cover">
+                <div class="p-5 flex flex-col flex-grow justify-between gap-4">
+                    <h3 class="font-bold text-lg text-slate-100">AdminPanel +</h3>
+                    <div class="bg-slate-950 border border-slate-800 rounded-xl p-3 flex items-center justify-between gap-2">
+                        <pre class="text-indigo-300 font-mono text-sm overflow-x-auto"><code id="code1">85268855286147</code></pre>
+                        <button class="px-3 py-1.5 bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-semibold rounded-lg transition shrink-0" onclick="copyCode('code1', this)">Copy</button>
+                    </div>
                 </div>
             </div>
         </div>
 
     </main>
 
-    <footer>
-        <p>© 2026 <strong>YH Dev</strong>. All rights reserved | Contact: <span>studioyhdevlopers@gmail.com</span></p>
+    <!-- Footer -->
+    <footer class="bg-slate-900 border-t border-slate-800 py-6 mt-12 text-center text-sm text-slate-400">
+        <p>© 2026 <strong>YH Dev</strong>. All rights reserved | Contact: <span class="text-indigo-400">studioyhdevlopers@gmail.com</span></p>
     </footer>
 
     <script src="script.js"></script>
