@@ -55,16 +55,16 @@
         <p id="splashText" class="text-slate-400 text-sm mt-6 tracking-wide font-medium">Loading YH Studio...</p>
     </div>
 
-    <!-- Update Popup Modal (v1.0.0.2 - Shows only once per user) -->
+    <!-- Update Popup Modal (v1.0.0.3 - Shows only once per user) -->
     <div id="updateModal" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-4 hidden">
         <div class="bg-slate-900 border border-slate-800 rounded-3xl p-6 md:p-8 max-w-md w-full shadow-2xl animate-scale-up relative">
             <div class="flex items-center justify-between mb-4">
-                <span class="text-xs font-bold text-indigo-400 bg-indigo-500/10 border border-indigo-500/20 px-3 py-1 rounded-full">Update v1.0.0.2</span>
+                <span class="text-xs font-bold text-indigo-400 bg-indigo-500/10 border border-indigo-500/20 px-3 py-1 rounded-full">Update v1.0.0.3</span>
                 <span class="text-xs text-slate-400">New Release</span>
             </div>
             <h3 class="text-xl font-extrabold text-white mb-2">What's New in YH Studio</h3>
             <p class="text-sm text-slate-300 mb-6 leading-relaxed">
-                • Added interactive <span class="text-cyan-300 font-semibold">Help Section</span> with direct support forms.<br>
+                • Added new escape & admin models in <span class="text-amber-300 font-semibold">Testing</span> status.<br>
                 • Enhanced user interface & smooth animations.<br>
                 • Improved mobile responsiveness.
             </p>
@@ -181,14 +181,14 @@
             <div class="bg-gradient-to-r from-indigo-900/40 via-slate-900 to-slate-900 border border-indigo-500/30 rounded-2xl p-5 md:p-6 mb-8 flex flex-col md:flex-row items-center justify-between gap-6 shadow-2xl animate-fade-in">
                 <div class="flex items-center gap-4 text-center md:text-left flex-col md:flex-row">
                     <div class="flex -space-x-3 overflow-hidden p-1">
-                        <img class="inline-block h-14 w-14 rounded-2xl object-cover ring-2 ring-indigo-500/50 shadow-lg transform hover:scale-110 transition duration-300" src="https://i.ibb.co/4nCgjgNz/IMG-0092.jpg" alt="Modern House">
-                        <img class="inline-block h-14 w-14 rounded-2xl object-cover ring-2 ring-cyan-500/50 shadow-lg transform hover:scale-110 transition duration-300" src="https://i.ibb.co/YFR2Fvts/IMG-0090.jpg" alt="Break a Lucky Block v2">
+                        <img class="inline-block h-14 w-14 rounded-2xl object-cover ring-2 ring-indigo-500/50 shadow-lg transform hover:scale-110 transition duration-300" src="https://i.ibb.co/Xrjd3TDD/IMG-0094.jpg" alt="1 + Speed escape">
+                        <img class="inline-block h-14 w-14 rounded-2xl object-cover ring-2 ring-cyan-500/50 shadow-lg transform hover:scale-110 transition duration-300" src="https://i.ibb.co/NH0n8j4/IMG-0094.jpg" alt="Admin Panel x">
                     </div>
                     <div>
                         <h2 class="text-xl font-bold text-white flex items-center justify-center md:justify-start gap-2">
-                            Welcome to YH Studio! <span class="text-xs bg-indigo-500 text-white px-2 py-0.5 rounded-full font-normal">New Drops</span>
+                            Welcome to YH Studio! <span class="text-xs bg-indigo-500 text-white px-2 py-0.5 rounded-full font-normal">New Testing Drops</span>
                         </h2>
-                        <p class="text-sm text-slate-300 mt-1">Check out our latest addition: <span class="text-indigo-300 font-semibold">Modern House</span>.</p>
+                        <p class="text-sm text-slate-300 mt-1">Check out our latest additions in testing: <span class="text-indigo-300 font-semibold">1 + Speed escape</span> & <span class="text-cyan-300 font-semibold">Admin Panel x</span>.</p>
                     </div>
                 </div>
                 <div class="text-xs text-slate-400 bg-slate-800/80 px-4 py-2 rounded-xl border border-slate-700">
@@ -248,6 +248,60 @@
             <!-- Models Grid -->
             <div id="modelsGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 
+                <!-- 1 + Speed escape -->
+                <div class="model-card bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden shadow-lg hover:border-slate-700 transition flex flex-col" data-category="maps">
+                    <img src="https://i.ibb.co/Xrjd3TDD/IMG-0094.jpg" alt="1 + Speed escape" class="w-full h-48 object-cover">
+                    <div class="p-5 flex flex-col flex-grow justify-between gap-4">
+                        <div class="flex items-center justify-between">
+                            <h3 class="font-bold text-lg text-slate-100">1 + Speed escape</h3>
+                            <div class="flex items-center gap-1.5">
+                                <span class="text-xs bg-amber-500/10 text-amber-400 px-2.5 py-1 rounded-full border border-amber-500/20">Testing</span>
+                                <span class="text-xs bg-cyan-500/10 text-cyan-400 px-2.5 py-1 rounded-full border border-cyan-500/20">Map</span>
+                            </div>
+                        </div>
+                        <div class="bg-slate-950 border border-slate-800 rounded-xl p-3 flex items-center justify-between gap-2">
+                            <pre class="text-indigo-300 font-mono text-sm overflow-x-auto"><code id="codeSpeedEscape">120904209099683</code></pre>
+                            <button class="px-3 py-1.5 bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-semibold rounded-lg transition shrink-0" onclick="copyCode('codeSpeedEscape', this)">Copy</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Admin Panel x -->
+                <div class="model-card bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden shadow-lg hover:border-slate-700 transition flex flex-col" data-category="admin">
+                    <img src="https://i.ibb.co/NH0n8j4/IMG-0094.jpg" alt="Admin Panel x" class="w-full h-48 object-cover">
+                    <div class="p-5 flex flex-col flex-grow justify-between gap-4">
+                        <div class="flex items-center justify-between">
+                            <h3 class="font-bold text-lg text-slate-100">Admin Panel x</h3>
+                            <div class="flex items-center gap-1.5">
+                                <span class="text-xs bg-amber-500/10 text-amber-400 px-2.5 py-1 rounded-full border border-amber-500/20">Testing</span>
+                                <span class="text-xs bg-purple-500/10 text-purple-400 px-2.5 py-1 rounded-full border border-purple-500/20">Admin</span>
+                            </div>
+                        </div>
+                        <div class="bg-slate-950 border border-slate-800 rounded-xl p-3 flex items-center justify-between gap-2">
+                            <pre class="text-indigo-300 font-mono text-sm overflow-x-auto"><code id="codeAdminPanelX">121964879063530</code></pre>
+                            <button class="px-3 py-1.5 bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-semibold rounded-lg transition shrink-0" onclick="copyCode('codeAdminPanelX', this)">Copy</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 1+ monkey escape -->
+                <div class="model-card bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden shadow-lg hover:border-slate-700 transition flex flex-col" data-category="maps">
+                    <img src="https://i.ibb.co/3mLnNQKf/IMG-0095.jpg" alt="1+ monkey escape" class="w-full h-48 object-cover">
+                    <div class="p-5 flex flex-col flex-grow justify-between gap-4">
+                        <div class="flex items-center justify-between">
+                            <h3 class="font-bold text-lg text-slate-100">1+ monkey escape</h3>
+                            <div class="flex items-center gap-1.5">
+                                <span class="text-xs bg-amber-500/10 text-amber-400 px-2.5 py-1 rounded-full border border-amber-500/20">Testing</span>
+                                <span class="text-xs bg-cyan-500/10 text-cyan-400 px-2.5 py-1 rounded-full border border-cyan-500/20">Map</span>
+                            </div>
+                        </div>
+                        <div class="bg-slate-950 border border-slate-800 rounded-xl p-3 flex items-center justify-between gap-2">
+                            <pre class="text-indigo-300 font-mono text-sm overflow-x-auto"><code id="codeMonkeyEscape">78976241017720</code></pre>
+                            <button class="px-3 py-1.5 bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-semibold rounded-lg transition shrink-0" onclick="copyCode('codeMonkeyEscape', this)">Copy</button>
+                        </div>
+                    </div>
+                </div>
+
                 <!-- Modern House -->
                 <div class="model-card bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden shadow-lg hover:border-slate-700 transition flex flex-col" data-category="maps">
                     <img src="https://i.ibb.co/4nCgjgNz/IMG-0092.jpg" alt="Modern House" class="w-full h-48 object-cover">
@@ -406,7 +460,8 @@
 
             setTimeout(() => {
                 if (loaderContainer) loaderContainer.style.display = 'none';
-                if (successCheck) successCheck.classList.remove('hidden');
+                if (successCheck) successCheck.classList.0 && successCheck.classList.remove('hidden');
+                else successCheck.classList.remove('hidden');
                 if (splashText) splashText.textContent = "Welcome to YH Studio!";
             }, 1100);
 
@@ -417,7 +472,8 @@
                         splashScreen.style.display = 'none';
                         if (mainContent) mainContent.style.opacity = '1';
                         
-                        if (!localStorage.getItem('yh_update_v1.0.0.2')) {
+                        // Checks for v1.0.0.3 specifically
+                        if (!localStorage.getItem('yh_update_v1.0.0.3')) {
                             updateModal.classList.remove('hidden');
                         }
                     }, 700);
@@ -426,7 +482,7 @@
         });
 
         function closeUpdateModal() {
-            localStorage.setItem('yh_update_v1.0.0.2', 'true');
+            localStorage.setItem('yh_update_v1.0.0.3', 'true');
             document.getElementById('updateModal').classList.add('hidden');
         }
 
