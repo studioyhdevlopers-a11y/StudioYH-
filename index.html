@@ -92,7 +92,7 @@
             <!-- Welcome Apple-Style Notification Banner -->
             <div class="bg-gradient-to-r from-indigo-900/40 via-slate-900 to-slate-900 border border-indigo-500/30 rounded-2xl p-5 md:p-6 mb-8 flex flex-col md:flex-row items-center justify-between gap-6 shadow-2xl animate-fade-in">
                 <div class="flex items-center gap-4 text-center md:text-left flex-col md:flex-row">
-                    <!-- Floating mini images animation for the new additions -->
+                    <!-- Floating mini images animation -->
                     <div class="flex -space-x-3 overflow-hidden p-1">
                         <img class="inline-block h-14 w-14 rounded-2xl object-cover ring-2 ring-red-500/50 shadow-lg transform hover:scale-110 transition duration-300" src="https://i.ibb.co/YFR2Fvts/IMG-0090.jpg" alt="Break a Lucky Block v2">
                         <img class="inline-block h-14 w-14 rounded-2xl object-cover ring-2 ring-cyan-500/50 shadow-lg transform hover:scale-110 transition duration-300" src="https://i.ibb.co/BV3tFyx8/IMG-0091.jpg" alt="Anime Sky">
@@ -162,30 +162,24 @@
             <!-- Models Grid -->
             <div id="modelsGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 
-                <!-- Break a Lucky Block v2 (New) -->
+                <!-- Break a Lucky Block v2 (Testing Status) -->
                 <div class="model-card bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden shadow-lg hover:border-slate-700 transition flex flex-col" data-category="maps">
-                    <div class="relative">
-                        <img src="https://i.ibb.co/YFR2Fvts/IMG-0090.jpg" alt="Break a Lucky Block v2" class="w-full h-48 object-cover">
-                        <span class="absolute top-3 right-3 bg-red-500/80 backdrop-blur-md text-white text-xs px-2.5 py-1 rounded-full font-bold border border-red-400/30 shadow-md">Testing ⏳</span>
-                    </div>
+                    <img src="https://i.ibb.co/YFR2Fvts/IMG-0090.jpg" alt="Break a Lucky Block v2" class="w-full h-48 object-cover">
                     <div class="p-5 flex flex-col flex-grow justify-between gap-4">
                         <div class="flex items-center justify-between">
                             <h3 class="font-bold text-lg text-slate-100">Break a Lucky Block v2</h3>
-                            <span class="text-xs bg-cyan-500/10 text-cyan-400 px-2.5 py-1 rounded-full border border-cyan-500/20">Maps</span>
+                            <span class="text-xs bg-red-500/10 text-red-400 px-2.5 py-1 rounded-full border border-red-500/20">Testing ⏳</span>
                         </div>
                         <div class="bg-slate-950 border border-slate-800 rounded-xl p-3 flex items-center justify-between gap-2">
-                            <pre class="text-indigo-300 font-mono text-sm overflow-x-auto"><code id="codeLuckyBlock">137090812881039</code></pre>
-                            <button class="px-3 py-1.5 bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-semibold rounded-lg transition shrink-0" onclick="copyCode('codeLuckyBlock', this)">Copy</button>
+                            <pre class="text-red-400 font-mono text-sm overflow-x-auto"><code id="codeLuckyBlock">****</code></pre>
+                            <button class="px-3 py-1.5 bg-slate-700 text-slate-400 text-xs font-semibold rounded-lg cursor-not-allowed shrink-0" disabled>Testing</button>
                         </div>
                     </div>
                 </div>
 
-                <!-- Anime Sky (New) -->
+                <!-- Anime Sky -->
                 <div class="model-card bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden shadow-lg hover:border-slate-700 transition flex flex-col" data-category="maps">
-                    <div class="relative">
-                        <img src="https://i.ibb.co/BV3tFyx8/IMG-0091.jpg" alt="Anime Sky" class="w-full h-48 object-cover">
-                        <span class="absolute top-3 right-3 bg-emerald-500/80 backdrop-blur-md text-white text-xs px-2.5 py-1 rounded-full font-bold border border-emerald-400/30 shadow-md">✓ Verified</span>
-                    </div>
+                    <img src="https://i.ibb.co/BV3tFyx8/IMG-0091.jpg" alt="Anime Sky" class="w-full h-48 object-cover">
                     <div class="p-5 flex flex-col flex-grow justify-between gap-4">
                         <div class="flex items-center justify-between">
                             <h3 class="font-bold text-lg text-slate-100">Anime Sky</h3>
@@ -198,12 +192,9 @@
                     </div>
                 </div>
 
-                <!-- Old Stud block Card (Maps) -->
+                <!-- Old Stud block Card -->
                 <div class="model-card bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden shadow-lg hover:border-slate-700 transition flex flex-col" data-category="maps">
-                    <div class="relative">
-                        <img src="https://i.ibb.co/PZ5cT1vD/IMG-0085.jpg" alt="Old Stud block" class="w-full h-48 object-cover">
-                        <span class="absolute top-3 right-3 bg-emerald-500/80 backdrop-blur-md text-white text-xs px-2.5 py-1 rounded-full font-bold border border-emerald-400/30 shadow-md">✓ Verified</span>
-                    </div>
+                    <img src="https://i.ibb.co/PZ5cT1vD/IMG-0085.jpg" alt="Old Stud block" class="w-full h-48 object-cover">
                     <div class="p-5 flex flex-col flex-grow justify-between gap-4">
                         <div class="flex items-center justify-between">
                             <h3 class="font-bold text-lg text-slate-100">Old Stud block</h3>
@@ -218,10 +209,7 @@
 
                 <!-- HD Admin 2 -->
                 <div class="model-card bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden shadow-lg hover:border-slate-700 transition flex flex-col" data-category="admin">
-                    <div class="relative">
-                        <img src="https://i.ibb.co/FqzT302f/IMG-0083.jpg" alt="HD Admin 2" class="w-full h-48 object-cover">
-                        <span class="absolute top-3 right-3 bg-emerald-500/80 backdrop-blur-md text-white text-xs px-2.5 py-1 rounded-full font-bold border border-emerald-400/30 shadow-md">✓ Verified</span>
-                    </div>
+                    <img src="https://i.ibb.co/FqzT302f/IMG-0083.jpg" alt="HD Admin 2" class="w-full h-48 object-cover">
                     <div class="p-5 flex flex-col flex-grow justify-between gap-4">
                         <div class="flex items-center justify-between">
                             <h3 class="font-bold text-lg text-slate-100">HD Admin 2</h3>
@@ -236,10 +224,7 @@
 
                 <!-- khol’s admin -->
                 <div class="model-card bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden shadow-lg hover:border-slate-700 transition flex flex-col" data-category="admin">
-                    <div class="relative">
-                        <img src="https://i.ibb.co/FL1Xb4rz/IMG-0084.jpg" alt="khol’s admin" class="w-full h-48 object-cover">
-                        <span class="absolute top-3 right-3 bg-emerald-500/80 backdrop-blur-md text-white text-xs px-2.5 py-1 rounded-full border border-emerald-400/30 shadow-md">✓ Verified</span>
-                    </div>
+                    <img src="https://i.ibb.co/FL1Xb4rz/IMG-0084.jpg" alt="khol’s admin" class="w-full h-48 object-cover">
                     <div class="p-5 flex flex-col flex-grow justify-between gap-4">
                         <div class="flex items-center justify-between">
                             <h3 class="font-bold text-lg text-slate-100">khol’s admin</h3>
@@ -254,10 +239,7 @@
 
                 <!-- Admin Panel Card -->
                 <div class="model-card bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden shadow-lg hover:border-slate-700 transition flex flex-col" data-category="admin-panel">
-                    <div class="relative">
-                        <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=600&auto=format&fit=crop" alt="AdminPanel +" class="w-full h-48 object-cover">
-                        <span class="absolute top-3 right-3 bg-emerald-500/80 backdrop-blur-md text-white text-xs px-2.5 py-1 rounded-full font-bold border border-emerald-400/30 shadow-md">✓ Verified</span>
-                    </div>
+                    <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=600&auto=format&fit=crop" alt="AdminPanel +" class="w-full h-48 object-cover">
                     <div class="p-5 flex flex-col flex-grow justify-between gap-4">
                         <div class="flex items-center justify-between">
                             <h3 class="font-bold text-lg text-slate-100">AdminPanel +</h3>
@@ -270,12 +252,9 @@
                     </div>
                 </div>
 
-                <!-- Studs Card (Maps) -->
+                <!-- Studs Card -->
                 <div class="model-card bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden shadow-lg hover:border-slate-700 transition flex flex-col" data-category="maps">
-                    <div class="relative">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/4/49/A_black_image.jpg" alt="Studs" class="w-full h-48 object-cover">
-                        <span class="absolute top-3 right-3 bg-emerald-500/80 backdrop-blur-md text-white text-xs px-2.5 py-1 rounded-full font-bold border border-emerald-400/30 shadow-md">✓ Verified</span>
-                    </div>
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/4/49/A_black_image.jpg" alt="Studs" class="w-full h-48 object-cover">
                     <div class="p-5 flex flex-col flex-grow justify-between gap-4">
                         <div class="flex items-center justify-between">
                             <h3 class="font-bold text-lg text-slate-100">Studs</h3>
@@ -288,19 +267,16 @@
                     </div>
                 </div>
 
-                <!-- Steal an egg Card (Maps) -->
+                <!-- Steal an egg Card -->
                 <div class="model-card bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden shadow-lg hover:border-slate-700 transition flex flex-col" data-category="maps">
-                    <div class="relative">
-                        <img src="https://images.unsplash.com/photo-1579373903781-fd5c0c30c4cd?q=80&w=600&auto=format&fit=crop" alt="Steal an egg" class="w-full h-48 object-cover">
-                        <span class="absolute top-3 right-3 bg-emerald-500/80 backdrop-blur-md text-white text-xs px-2.5 py-1 rounded-full font-bold border border-emerald-400/30 shadow-md">✓ Verified</span>
-                    </div>
+                    <img src="https://images.unsplash.com/photo-1579373903781-fd5c0c30c4cd?q=80&w=600&auto=format&fit=crop" alt="Steal an egg" class="w-full h-48 object-cover">
                     <div class="p-5 flex flex-col flex-grow justify-between gap-4">
                         <div class="flex items-center justify-between">
                             <h3 class="font-bold text-lg text-slate-100">Steal an egg</h3>
                             <span class="text-xs bg-cyan-500/10 text-cyan-400 px-2.5 py-1 rounded-full border border-cyan-500/20">Maps</span>
                         </div>
                         <div class="bg-slate-950 border border-slate-800 rounded-xl p-3 flex items-center justify-between gap-2">
-                            <pre class="text-indigo-300 font-mono text-sm overflow-x-auto"><code id="code3">99281648291043</code></pre>
+                            <pre class="text-indigo-300 font-mono text-sm overflow-x-auto"><code id="code3">106206596734864</code></pre>
                             <button class="px-3 py-1.5 bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-semibold rounded-lg transition shrink-0" onclick="copyCode('code3', this)">Copy</button>
                         </div>
                     </div>
