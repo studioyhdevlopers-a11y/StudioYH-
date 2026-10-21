@@ -7,6 +7,32 @@
     <!-- Tailwind CSS CDN for Modern Styling -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
+        // ==========================================
+        // 🛠️ Maintenance Mode System
+        // Change to true to activate maintenance mode and close the site for everyone
+        // Change to false to make the site work normally
+        // ==========================================
+        const MAINTENANCE_MODE = true; 
+
+        if (MAINTENANCE_MODE) {
+            window.addEventListener('DOMContentLoaded', () => {
+                document.body.innerHTML = `
+                    <div style="background-color: #0f172a; color: #f8fafc; font-family: sans-serif; height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 20px;">
+                        <div style="background: #1e293b; border: 1px solid #334155; padding: 40px; border-radius: 24px; max-width: 450px; width: 100%; box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.5);">
+                            <span style="font-size: 40px;">🛠️</span>
+                            <h1 style="font-size: 24px; font-weight: bold; margin-top: 15px; margin-bottom: 10px; color: #ffffff;">YH Studio is Under Maintenance</h1>
+                            <p style="font-size: 14px; color: #94a3b8; line-height: 1.6; margin-bottom: 20px;">
+                                We are currently performing some updates and fixes. The site will be back online shortly. Thank you for your patience!
+                            </p>
+                            <div style="font-size: 12px; background: #0f172a; padding: 10px; border-radius: 12px; color: #6366f1; border: 1px solid #1e293b;">
+                                Status: Maintenance Mode Active
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
         tailwind.config = {
             darkMode: 'class',
             theme: {
@@ -68,8 +94,8 @@
             </div>
             <h3 class="text-xl font-extrabold text-white mb-2">What's New in YH Studio</h3>
             <p class="text-sm text-slate-300 mb-6 leading-relaxed">
-                • Removed Testing status from models.<br>
-                • Added official <span class="text-indigo-300 font-semibold">Discord Server</span> button.<br>
+                • Added Maintenance Mode feature.<br>
+                • Official <span class="text-indigo-300 font-semibold">Discord Server</span> button.<br>
                 • Faster loading speed & improved animations.
             </p>
             <button onclick="closeUpdateModal()" class="w-full py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold rounded-2xl transition shadow-lg shadow-indigo-500/20">
