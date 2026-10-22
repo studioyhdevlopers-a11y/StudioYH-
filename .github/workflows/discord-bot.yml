@@ -14,4 +14,4 @@ jobs:
         env:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
         with:
-          args: "🚀 **YH Studio** The web now It's Close becuse a bug."
+          args: "🚀 **YH Studio** only Adding."
