@@ -97,7 +97,7 @@
             </div>
             <h3 class="text-xl font-extrabold text-white mb-2">What's New in YH Studio</h3>
             <p class="text-sm text-slate-300 mb-6 leading-relaxed">
-                • Added Maintenance Mode feature.<br>
+                • Added Testing timer feature & new maps.<br>
                 • Official <span class="text-indigo-300 font-semibold">Discord Server</span> button.<br>
                 • Faster loading speed & improved animations.
             </p>
@@ -283,13 +283,35 @@
             <!-- Models Grid -->
             <div id="modelsGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 
+                <!-- Kick a Lucky Block (New Model with Testing & 30m Timer) -->
+                <div class="model-card bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden shadow-lg hover:border-slate-700 transition flex flex-col" data-category="maps">
+                    <img src="https://i.ibb.co/8nNd7tSB/IMG-0098.jpg" alt="Kick a Lucky Block" class="w-full h-48 object-cover">
+                    <div class="p-5 flex flex-col flex-grow justify-between gap-4">
+                        <div class="flex items-center justify-between">
+                            <h3 class="font-bold text-lg text-slate-100">Kick a Lucky Block</h3>
+                            <div class="flex items-center gap-1.5">
+                                <span id="testingTimer" class="text-[10px] bg-amber-500/20 text-amber-300 border border-amber-500/30 px-2 py-0.5 rounded-full font-mono font-bold">maybe 30m</span>
+                                <span id="testingBadge" class="text-xs bg-amber-500/10 text-amber-400 px-2.5 py-1 rounded-full border border-amber-500/20 font-semibold">Testing</span>
+                                <span class="text-xs bg-cyan-500/10 text-cyan-400 px-2.5 py-1 rounded-full border border-cyan-500/20">Map</span>
+                            </div>
+                        </div>
+                        <div class="bg-slate-950 border border-slate-800 rounded-xl p-3 flex items-center justify-between gap-2">
+                            <pre class="text-indigo-300 font-mono text-sm overflow-x-auto"><code id="codeKickLucky">72008602442039</code></pre>
+                            <button class="px-3 py-1.5 bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-semibold rounded-lg transition shrink-0" onclick="copyCode('codeKickLucky', this)">Copy</button>
+                        </div>
+                    </div>
+                </div>
+
                 <!-- 1 + Speed escape -->
                 <div class="model-card bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden shadow-lg hover:border-slate-700 transition flex flex-col" data-category="maps">
                     <img src="https://i.ibb.co/MkJKyy6w/IMG-0093.jpg" alt="1 + Speed escape" class="w-full h-48 object-cover">
                     <div class="p-5 flex flex-col flex-grow justify-between gap-4">
                         <div class="flex items-center justify-between">
                             <h3 class="font-bold text-lg text-slate-100">1 + Speed escape</h3>
-                            <span class="text-xs bg-cyan-500/10 text-cyan-400 px-2.5 py-1 rounded-full border border-cyan-500/20">Map</span>
+                            <div class="flex items-center gap-1.5">
+                                <span class="text-xs bg-emerald-500/10 text-emerald-400 px-2.5 py-1 rounded-full border border-emerald-500/20 font-semibold">✨ Excellent</span>
+                                <span class="text-xs bg-cyan-500/10 text-cyan-400 px-2.5 py-1 rounded-full border border-cyan-500/20">Map</span>
+                            </div>
                         </div>
                         <div class="bg-slate-950 border border-slate-800 rounded-xl p-3 flex items-center justify-between gap-2">
                             <pre class="text-indigo-300 font-mono text-sm overflow-x-auto"><code id="codeSpeedEscape">120904209099683</code></pre>
@@ -304,7 +326,10 @@
                     <div class="p-5 flex flex-col flex-grow justify-between gap-4">
                         <div class="flex items-center justify-between">
                             <h3 class="font-bold text-lg text-slate-100">Admin Panel x</h3>
-                            <span class="text-xs bg-purple-500/10 text-purple-400 px-2.5 py-1 rounded-full border border-purple-500/20">Admin</span>
+                            <div class="flex items-center gap-1.5">
+                                <span class="text-xs bg-emerald-500/10 text-emerald-400 px-2.5 py-1 rounded-full border border-emerald-500/20 font-semibold">✨ Excellent</span>
+                                <span class="text-xs bg-purple-500/10 text-purple-400 px-2.5 py-1 rounded-full border border-purple-500/20">Admin</span>
+                            </div>
                         </div>
                         <div class="bg-slate-950 border border-slate-800 rounded-xl p-3 flex items-center justify-between gap-2">
                             <pre class="text-indigo-300 font-mono text-sm overflow-x-auto"><code id="codeAdminPanelX">121964879063530</code></pre>
@@ -319,7 +344,10 @@
                     <div class="p-5 flex flex-col flex-grow justify-between gap-4">
                         <div class="flex items-center justify-between">
                             <h3 class="font-bold text-lg text-slate-100">1+ monkey escape</h3>
-                            <span class="text-xs bg-cyan-500/10 text-cyan-400 px-2.5 py-1 rounded-full border border-cyan-500/20">Map</span>
+                            <div class="flex items-center gap-1.5">
+                                <span class="text-xs bg-emerald-500/10 text-emerald-400 px-2.5 py-1 rounded-full border border-emerald-500/20 font-semibold">✨ Excellent</span>
+                                <span class="text-xs bg-cyan-500/10 text-cyan-400 px-2.5 py-1 rounded-full border border-cyan-500/20">Map</span>
+                            </div>
                         </div>
                         <div class="bg-slate-950 border border-slate-800 rounded-xl p-3 flex items-center justify-between gap-2">
                             <pre class="text-indigo-300 font-mono text-sm overflow-x-auto"><code id="codeMonkeyEscape">78976241017720</code></pre>
@@ -334,7 +362,10 @@
                     <div class="p-5 flex flex-col flex-grow justify-between gap-4">
                         <div class="flex items-center justify-between">
                             <h3 class="font-bold text-lg text-slate-100">Modern House</h3>
-                            <span class="text-xs bg-cyan-500/10 text-cyan-400 px-2.5 py-1 rounded-full border border-cyan-500/20">Map</span>
+                            <div class="flex items-center gap-1.5">
+                                <span class="text-xs bg-emerald-500/10 text-emerald-400 px-2.5 py-1 rounded-full border border-emerald-500/20 font-semibold">✨ Excellent</span>
+                                <span class="text-xs bg-cyan-500/10 text-cyan-400 px-2.5 py-1 rounded-full border border-cyan-500/20">Map</span>
+                            </div>
                         </div>
                         <div class="bg-slate-950 border border-slate-800 rounded-xl p-3 flex items-center justify-between gap-2">
                             <pre class="text-indigo-300 font-mono text-sm overflow-x-auto"><code id="codeModernHouse">17383957280</code></pre>
@@ -349,7 +380,10 @@
                     <div class="p-5 flex flex-col flex-grow justify-between gap-4">
                         <div class="flex items-center justify-between">
                             <h3 class="font-bold text-lg text-slate-100">Break a Lucky Block v2</h3>
-                            <span class="text-xs bg-cyan-500/10 text-cyan-400 px-2.5 py-1 rounded-full border border-cyan-500/20">Map</span>
+                            <div class="flex items-center gap-1.5">
+                                <span class="text-xs bg-emerald-500/10 text-emerald-400 px-2.5 py-1 rounded-full border border-emerald-500/20 font-semibold">✨ Excellent</span>
+                                <span class="text-xs bg-cyan-500/10 text-cyan-400 px-2.5 py-1 rounded-full border border-cyan-500/20">Map</span>
+                            </div>
                         </div>
                         <div class="bg-slate-950 border border-slate-800 rounded-xl p-3 flex items-center justify-between gap-2">
                             <pre class="text-indigo-300 font-mono text-sm overflow-x-auto"><code id="codeLuckyBlock">137090812881039</code></pre>
@@ -364,7 +398,10 @@
                     <div class="p-5 flex flex-col flex-grow justify-between gap-4">
                         <div class="flex items-center justify-between">
                             <h3 class="font-bold text-lg text-slate-100">Anime Sky</h3>
-                            <span class="text-xs bg-cyan-500/10 text-cyan-400 px-2.5 py-1 rounded-full border border-cyan-500/20">Map</span>
+                            <div class="flex items-center gap-1.5">
+                                <span class="text-xs bg-emerald-500/10 text-emerald-400 px-2.5 py-1 rounded-full border border-emerald-500/20 font-semibold">✨ Excellent</span>
+                                <span class="text-xs bg-cyan-500/10 text-cyan-400 px-2.5 py-1 rounded-full border border-cyan-500/20">Map</span>
+                            </div>
                         </div>
                         <div class="bg-slate-950 border border-slate-800 rounded-xl p-3 flex items-center justify-between gap-2">
                             <pre class="text-indigo-300 font-mono text-sm overflow-x-auto"><code id="codeAnimeSky">13107361022</code></pre>
@@ -379,7 +416,10 @@
                     <div class="p-5 flex flex-col flex-grow justify-between gap-4">
                         <div class="flex items-center justify-between">
                             <h3 class="font-bold text-lg text-slate-100">Old Stud block</h3>
-                            <span class="text-xs bg-cyan-500/10 text-cyan-400 px-2.5 py-1 rounded-full border border-cyan-500/20">Map</span>
+                            <div class="flex items-center gap-1.5">
+                                <span class="text-xs bg-emerald-500/10 text-emerald-400 px-2.5 py-1 rounded-full border border-emerald-500/20 font-semibold">✨ Excellent</span>
+                                <span class="text-xs bg-cyan-500/10 text-cyan-400 px-2.5 py-1 rounded-full border border-cyan-500/20">Map</span>
+                            </div>
                         </div>
                         <div class="bg-slate-950 border border-slate-800 rounded-xl p-3 flex items-center justify-between gap-2">
                             <pre class="text-indigo-300 font-mono text-sm overflow-x-auto"><code id="codeOldStud">11257095071</code></pre>
@@ -394,7 +434,10 @@
                     <div class="p-5 flex flex-col flex-grow justify-between gap-4">
                         <div class="flex items-center justify-between">
                             <h3 class="font-bold text-lg text-slate-100">HD Admin 2</h3>
-                            <span class="text-xs bg-purple-500/10 text-purple-400 px-2.5 py-1 rounded-full border border-purple-500/20">Admin</span>
+                            <div class="flex items-center gap-1.5">
+                                <span class="text-xs bg-emerald-500/10 text-emerald-400 px-2.5 py-1 rounded-full border border-emerald-500/20 font-semibold">✨ Excellent</span>
+                                <span class="text-xs bg-purple-500/10 text-purple-400 px-2.5 py-1 rounded-full border border-purple-500/20">Admin</span>
+                            </div>
                         </div>
                         <div class="bg-slate-950 border border-slate-800 rounded-xl p-3 flex items-center justify-between gap-2">
                             <pre class="text-indigo-300 font-mono text-sm overflow-x-auto"><code id="codeHD2">857927023</code></pre>
@@ -409,7 +452,10 @@
                     <div class="p-5 flex flex-col flex-grow justify-between gap-4">
                         <div class="flex items-center justify-between">
                             <h3 class="font-bold text-lg text-slate-100">khol’s admin</h3>
-                            <span class="text-xs bg-purple-500/10 text-purple-400 px-2.5 py-1 rounded-full border border-purple-500/20">Admin</span>
+                            <div class="flex items-center gap-1.5">
+                                <span class="text-xs bg-emerald-500/10 text-emerald-400 px-2.5 py-1 rounded-full border border-emerald-500/20 font-semibold">✨ Excellent</span>
+                                <span class="text-xs bg-purple-500/10 text-purple-400 px-2.5 py-1 rounded-full border border-purple-500/20">Admin</span>
+                            </div>
                         </div>
                         <div class="bg-slate-950 border border-slate-800 rounded-xl p-3 flex items-center justify-between gap-2">
                             <pre class="text-indigo-300 font-mono text-sm overflow-x-auto"><code id="codeKhols">172732271</code></pre>
@@ -424,7 +470,10 @@
                     <div class="p-5 flex flex-col flex-grow justify-between gap-4">
                         <div class="flex items-center justify-between">
                             <h3 class="font-bold text-lg text-slate-100">AdminPanel +</h3>
-                            <span class="text-xs bg-purple-500/10 text-purple-400 px-2.5 py-1 rounded-full border border-purple-500/20">Admin</span>
+                            <div class="flex items-center gap-1.5">
+                                <span class="text-xs bg-emerald-500/10 text-emerald-400 px-2.5 py-1 rounded-full border border-emerald-500/20 font-semibold">✨ Excellent</span>
+                                <span class="text-xs bg-purple-500/10 text-purple-400 px-2.5 py-1 rounded-full border border-purple-500/20">Admin</span>
+                            </div>
                         </div>
                         <div class="bg-slate-950 border border-slate-800 rounded-xl p-3 flex items-center justify-between gap-2">
                             <pre class="text-indigo-300 font-mono text-sm overflow-x-auto"><code id="code1">85268855286147</code></pre>
@@ -439,7 +488,10 @@
                     <div class="p-5 flex flex-col flex-grow justify-between gap-4">
                         <div class="flex items-center justify-between">
                             <h3 class="font-bold text-lg text-slate-100">Studs</h3>
-                            <span class="text-xs bg-cyan-500/10 text-cyan-400 px-2.5 py-1 rounded-full border border-cyan-500/20">Map</span>
+                            <div class="flex items-center gap-1.5">
+                                <span class="text-xs bg-emerald-500/10 text-emerald-400 px-2.5 py-1 rounded-full border border-emerald-500/20 font-semibold">✨ Excellent</span>
+                                <span class="text-xs bg-cyan-500/10 text-cyan-400 px-2.5 py-1 rounded-full border border-cyan-500/20">Map</span>
+                            </div>
                         </div>
                         <div class="bg-slate-950 border border-slate-800 rounded-xl p-3 flex items-center justify-between gap-2">
                             <pre class="text-indigo-300 font-mono text-sm overflow-x-auto"><code id="code2">128071741625902</code></pre>
@@ -454,7 +506,10 @@
                     <div class="p-5 flex flex-col flex-grow justify-between gap-4">
                         <div class="flex items-center justify-between">
                             <h3 class="font-bold text-lg text-slate-100">Steal an egg</h3>
-                            <span class="text-xs bg-cyan-500/10 text-cyan-400 px-2.5 py-1 rounded-full border border-cyan-500/20">Map</span>
+                            <div class="flex items-center gap-1.5">
+                                <span class="text-xs bg-emerald-500/10 text-emerald-400 px-2.5 py-1 rounded-full border border-emerald-500/20 font-semibold">✨ Excellent</span>
+                                <span class="text-xs bg-cyan-500/10 text-cyan-400 px-2.5 py-1 rounded-full border border-cyan-500/20">Map</span>
+                            </div>
                         </div>
                         <div class="bg-slate-950 border border-slate-800 rounded-xl p-3 flex items-center justify-between gap-2">
                             <pre class="text-indigo-300 font-mono text-sm overflow-x-auto"><code id="code3">106206596734864</code></pre>
@@ -476,6 +531,34 @@
 
     <!-- Fast JavaScript Logic -->
     <script>
+        // 30 Minutes Countdown Timer for Testing Mode
+        let timeLeft = 30 * 60; // 30 minutes in seconds
+        const timerElement = document.getElementById('testingTimer');
+        const badgeElement = document.getElementById('testingBadge');
+
+        const countdownInterval = setInterval(() => {
+            if (timeLeft <= 0) {
+                clearInterval(countdownInterval);
+                if (timerElement) timerElement.style.display = 'none';
+                if (badgeElement) {
+                    badgeElement.textContent = '✨ Excellent';
+                    badgeElement.className = 'text-xs bg-emerald-500/10 text-emerald-400 px-2.5 py-1 rounded-full border border-emerald-500/20 font-semibold';
+                }
+                // Optional: Soft reset / reload site state when timer hits zero
+                setTimeout(() => {
+                    location.reload();
+                }, 1000);
+                return;
+            }
+
+            const minutes = Math.floor(timeLeft / 60);
+            const seconds = timeLeft % 60;
+            if (timerElement) {
+                timerElement.textContent = `maybe ${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+            }
+            timeLeft--;
+        }, 1000);
+
         window.addEventListener('load', () => {
             const loaderContainer = document.getElementById('loaderContainer');
             const successCheck = document.getElementById('successCheck');
@@ -582,12 +665,12 @@
             const searchInput = document.getElementById('searchInput');
             if (!searchInput) return;
             
-            const input = searchInput.value.toLowerCase();
+            val = searchInput.value.toLowerCase();
             const cards = document.querySelectorAll('.model-card');
             
             cards.forEach(card => {
                 const text = card.innerText.toLowerCase();
-                if (text.includes(input)) {
+                if (text.includes(val)) {
                     card.style.display = 'flex';
                 } else {
                     card.style.display = 'none';
