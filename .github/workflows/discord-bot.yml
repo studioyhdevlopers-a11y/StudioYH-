@@ -14,4 +14,4 @@ jobs:
         env:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
         with:
-          args: "🚀 **YH Studio** web it's back now."
+          args: ""
