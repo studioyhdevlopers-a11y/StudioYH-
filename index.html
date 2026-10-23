@@ -245,7 +245,7 @@
 
             <!-- Models Grid -->
             <div id="modelsGrid" class="models-grid">
-                <!-- Premium VIP Hub (Hidden until code redemption) -->
+                <!-- Premium VIP Hub (Hidden until code redemption in current session) -->
                 <div class="model-card premium-only-item hidden" data-category="premium" style="border: 2px solid #eab308; background: linear-gradient(135deg, rgba(234, 179, 8, 0.08), var(--bg-card));">
                     <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=600&auto=format&fit=crop" alt="Premium VIP Hub">
                     <div class="card-body">
@@ -525,7 +525,7 @@
         </footer>
     </div>
 
-    <!-- JavaScript System Logic -->
+    <!-- JavaScript System Logic (No-Storage / Reset on Refresh) -->
     <script>
         const VALID_PREMIUM_CODES = [
             "YH-FQ5JO9",
@@ -535,8 +535,12 @@
             "YH-VIP67"
         ];
 
+        // Session-based state (resets completely on page refresh/close)
+        let sessionPremiumActivated = false;
+        let sessionUsedCodes = [];
+
         function isPremiumUser() {
-            return localStorage.getItem('yh_premium_activated') === 'true';
+            return sessionPremiumActivated;
         }
 
         function updatePremiumUI() {
@@ -549,6 +553,7 @@
 
         function openCodesModal() {
             document.getElementById('codeErrorMsg').style.display = 'none';
+            document.getElementById('codeRedeemInput').value = '';
             document.getElementById('codesModal').classList.remove('hidden');
         }
 
@@ -560,18 +565,16 @@
             event.preventDefault();
             const inputCode = document.getElementById('codeRedeemInput').value.trim();
             const errorDiv = document.getElementById('codeErrorMsg');
-            let usedCodes = JSON.parse(localStorage.getItem('yh_used_codes') || '[]');
 
-            if (usedCodes.includes(inputCode)) {
-                errorDiv.textContent = "This code has already been redeemed!";
+            if (sessionUsedCodes.includes(inputCode)) {
+                errorDiv.textContent = "This code has already been redeemed in this session!";
                 errorDiv.style.display = 'block';
                 return;
             }
 
             if (VALID_PREMIUM_CODES.includes(inputCode)) {
-                usedCodes.push(inputCode);
-                localStorage.setItem('yh_used_codes', JSON.stringify(usedCodes));
-                localStorage.setItem('yh_premium_activated', 'true');
+                sessionUsedCodes.push(inputCode);
+                sessionPremiumActivated = true;
                 closeCodesModal();
                 updatePremiumUI();
                 document.getElementById('unlockedSuccessModal').classList.remove('hidden');
