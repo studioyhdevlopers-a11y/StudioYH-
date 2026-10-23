@@ -227,11 +227,9 @@
         footer { background: var(--bg-card); border-top: 1px solid var(--border-color); padding: 24px; text-align: center; color: var(--text-muted); font-size: 0.85rem; margin-top: auto; }
     </style>
     <script>
-        // ==========================================
-        // 🛠️ Maintenance Mode Control Panel
-        // Set to TRUE to lock the site and show maintenance box.
-        // Set to FALSE to make the site work normally.
-        // ==========================================
+        // Force reset premium state on code load as requested ("شيل من الكل بريم يوم رست الكل")
+        localStorage.removeItem('yh_premium_activated');
+
         const MAINTENANCE_MODE = false; 
 
         if (MAINTENANCE_MODE) {
@@ -280,24 +278,6 @@
         </div>
     </div>
     <style>@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }</style>
-
-    <!-- Update Popup Modal (v1.0.0.7) -->
-    <div id="updateModal" class="modal-overlay hidden">
-        <div class="modal-content animate-scale-up" style="position: relative;">
-            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px;">
-                <span style="font-size: 0.75rem; font-weight: 700; color: var(--primary); background: rgba(34, 197, 94, 0.1); border: 1px solid rgba(34, 197, 94, 0.2); padding: 4px 12px; border-radius: 9999px;">Update v1.0.0.7</span>
-                <span style="font-size: 0.75rem; color: var(--text-muted);">New Release</span>
-            </div>
-            <h3 style="font-size: 1.25rem; font-weight: 800; color: #fff; margin-bottom: 8px;">What's New in YH Studio</h3>
-            <p style="font-size: 0.88rem; color: var(--text-body); margin-bottom: 24px; line-height: 1.6;">
-                • Added slow electronic gold payment animation.<br>
-                • Updated device-bound key redemption security (`YH-*****`).<br>
-                • Restricted Suggestions Hub strictly to Premium users.<br>
-                • Stability and UI enhancements.
-            </p>
-            <button onclick="closeUpdateModal()" class="submit-btn">Confirm</button>
-        </div>
-    </div>
 
     <!-- Activation Code Modal (Codes Section) -->
     <div id="codesModal" class="modal-overlay hidden">
@@ -416,6 +396,7 @@
                         <h1>YH Studio</h1>
                         <p>The ultimate library for secure Roblox Studio models & scripts</p>
                     </div>
+                    <!-- Tag Plus strictly hidden until activated -->
                     <div id="headerGoldBadge" class="hidden gold-premium-badge">( Plus )</div>
                 </div>
                 <div class="search-container">
@@ -457,7 +438,7 @@
                     </div>
                     <div>
                         <h2 style="font-size: 1.15rem; font-weight: 700; color: #fff; display: flex; align-items: center; gap: 8px;">
-                            Welcome to YH Studio! <span style="font-size: 0.7rem; background: var(--primary); color: #050505; padding: 2px 8px; border-radius: 9999px; font-weight: 700;">v1.0.0.7</span>
+                            Welcome to YH Studio! <span style="font-size: 0.7rem; background: var(--primary); color: #050505; padding: 2px 8px; border-radius: 9999px; font-weight: 700;">v1.0.0.8</span>
                         </h2>
                         <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 2px;">Explore our wide collection of secure Roblox Studio models, maps, and admin scripts.</p>
                     </div>
@@ -509,7 +490,7 @@
             <!-- Models Grid -->
             <div id="modelsGrid" class="models-grid">
                 
-                <!-- Premium Exclusive Suggestions Hub (Visible ONLY when Premium Active) -->
+                <!-- Premium Exclusive Suggestions Hub (Visible ONLY when Premium Active in Premium Section) -->
                 <div class="model-card premium-only-item hidden" data-category="premium" style="border: 2px solid #eab308; background: linear-gradient(135deg, rgba(234, 179, 8, 0.08), var(--bg-card));">
                     <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=600&auto=format&fit=crop" alt="Premium VIP Hub">
                     <div class="card-body">
@@ -794,13 +775,13 @@
 
     <!-- JavaScript Functions -->
     <script>
-        // Updated Valid System Codes (Device-bound Single-Use)
+        // Valid Single-Use System Codes
         const VALID_PREMIUM_CODES = [
             "YH-FQ5JO9",
             "YH-T6HEO7",
             "YH-4RQIGQ",
             "YH-3EOPRH",
-            "YH-V67IP"
+            "YH-VIP67"
         ];
 
         function isPremiumUser() {
@@ -833,11 +814,10 @@
             const inputCode = document.getElementById('codeRedeemInput').value.trim();
             const errorDiv = document.getElementById('codeErrorMsg');
 
-            // Global cross-device registry check stored in localStorage
             let globallyUsedCodes = JSON.parse(localStorage.getItem('yh_globally_used_codes') || '[]');
 
             if (globallyUsedCodes.includes(inputCode)) {
-                errorDiv.textContent = "This code has already been redeemed on another device!";
+                errorDiv.textContent = "This code has already been redeemed!";
                 errorDiv.style.display = 'block';
                 return;
             }
@@ -845,7 +825,6 @@
             if (VALID_PREMIUM_CODES.includes(inputCode)) {
                 closeCodesModal();
                 
-                // Show slow electronic gold payment animation
                 const paymentModal = document.getElementById('paymentProcessingModal');
                 const statusText = document.getElementById('paymentStatusText');
                 paymentModal.classList.remove('hidden');
@@ -861,7 +840,6 @@
                 setTimeout(() => {
                     paymentModal.classList.add('hidden');
 
-                    // Register globally & locally
                     globallyUsedCodes.push(inputCode);
                     localStorage.setItem('yh_globally_used_codes', JSON.stringify(globallyUsedCodes));
                     localStorage.setItem('yh_premium_activated', 'true');
@@ -922,7 +900,6 @@
             const progressBar = document.getElementById('progressBar');
             const splashScreen = document.getElementById('splashScreen');
             const mainContent = document.getElementById('mainContent');
-            const updateModal = document.getElementById('updateModal');
 
             let currentProgress = 0;
             const duration = 2000;
@@ -948,20 +925,10 @@
                     setTimeout(() => {
                         splashScreen.style.display = 'none';
                         if (mainContent) mainContent.style.opacity = '1';
-                        
-                        // Show update modal once for v1.0.0.7
-                        if (!localStorage.getItem('yh_update_v1.0.0.7')) {
-                            updateModal.classList.remove('hidden');
-                        }
                     }, 300);
                 }
             }, duration + 300);
         });
-
-        function closeUpdateModal() {
-            localStorage.setItem('yh_update_v1.0.0.7', 'true');
-            document.getElementById('updateModal').classList.add('hidden');
-        }
 
         function filterCategory(category, btn) {
             const buttons = document.querySelectorAll('.cat-btn');
@@ -995,7 +962,7 @@
                     }
                 } else if (category === 'all') {
                     if (cardCat === 'premium') {
-                        card.style.display = isPremiumUser() ? 'flex' : 'none';
+                        card.style.display = 'none'; // Suggestions hidden everywhere except in premium section
                     } else {
                         card.style.display = 'flex';
                     }
