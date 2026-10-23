@@ -38,7 +38,6 @@
         }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
         @keyframes scaleUp { 0% { transform: scale(0.8); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
-        @keyframes goldGlowPulse { 0%, 100% { box-shadow: 0 0 15px rgba(234, 179, 8, 0.4); } 50% { box-shadow: 0 0 30px rgba(234, 179, 8, 0.8); } }
         .animate-fade-in { animation: fadeIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
         .animate-scale-up { animation: scaleUp 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
         #splashScreen { position: fixed; inset: 0; z-index: 50; background-color: var(--bg-main); display: flex; flex-direction: column; align-items: center; justify-content: center; transition: opacity 0.3s ease; }
@@ -50,7 +49,6 @@
         @media(min-width: 768px) { .header-inner { flex-direction: row; } }
         .logo-area { display: flex; align-items: center; gap: 12px; }
         header h1 { background: linear-gradient(135deg, #15803d 0%, #22c55e 50%, #4ade80 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-size: 2rem; font-weight: 800; letter-spacing: -0.025em; }
-        .gold-premium-badge { background: linear-gradient(135deg, rgba(234, 179, 8, 0.2), rgba(202, 138, 4, 0.4)); border: 2px solid var(--gold-primary); color: #facc15; font-size: 0.75rem; font-weight: 800; padding: 3px 12px; border-radius: var(--radius-pill); animation: goldGlowPulse 2s infinite ease-in-out; text-transform: uppercase; }
         header p { color: var(--text-muted); font-size: 0.88rem; margin-top: 4px; }
         .search-container { width: 100%; max-width: 320px; }
         .search-container input { width: 100%; padding: 12px 18px; background-color: var(--bg-input); border: 1px solid var(--border-color); color: var(--text-heading); border-radius: var(--radius-pill); outline: none; font-size: 0.9rem; transition: var(--transition); }
@@ -110,75 +108,75 @@
     <div id="codesModal" class="modal-overlay hidden">
         <div class="modal-content animate-scale-up" style="position: relative; text-align: center; border-color: rgba(234, 179, 8, 0.3);">
             <div style="display: inline-flex; align-items: center; justify-content: center; width: 64px; height: 64px; background: rgba(234, 179, 8, 0.15); border: 1px solid rgba(234, 179, 8, 0.3); border-radius: 16px; color: #eab308; font-size: 24px; margin-bottom: 20px;">🔑</div>
-            <h3 style="font-size: 1.35rem; font-weight: 800; color: #fff; margin-bottom: 8px;">Redeem Premium Code</h3>
-            <p style="font-size: 0.82rem; color: #94a3b8; margin-bottom: 20px;">Enter your unique code to unlock Premium features & Early Access models.</p>
+            <h3 style="font-size: 1.35rem; font-weight: 800; color: #fff; margin-bottom: 8px;">Enter Promo / Test Code</h3>
+            <p style="font-size: 0.82rem; color: #94a3b8; margin-bottom: 20px;">Type <code style="color: #facc15;">YH-TEST</code> for spinning wheel or <code style="color: #facc15;">YH-Random</code> for exclusive reward.</p>
             <form onsubmit="handleRedeemCode(event)" style="display: flex; flex-direction: column; gap: 14px;">
-                <input type="text" id="codeRedeemInput" placeholder="e.g. YH-XXXXXX" required style="width: 100%; padding: 12px 16px; background-color: var(--bg-input); border: 1px solid var(--border-color); color: #fff; border-radius: var(--radius-inner); outline: none; font-size: 0.95rem; text-align: center; font-family: monospace; letter-spacing: 2px;">
+                <input type="text" id="codeRedeemInput" placeholder="e.g. YH-TEST" required style="width: 100%; padding: 12px 16px; background-color: var(--bg-input); border: 1px solid var(--border-color); color: #fff; border-radius: var(--radius-inner); outline: none; font-size: 0.95rem; text-align: center; font-family: monospace; letter-spacing: 2px;">
                 <div id="codeErrorMsg" style="color: #ef4444; font-size: 0.8rem; display: none;"></div>
                 <div style="display: flex; gap: 10px;">
                     <button type="button" onclick="closeCodesModal()" style="flex: 1; padding: 11px; background: var(--bg-input); border: 1px solid var(--border-color); color: #fff; font-weight: 600; border-radius: var(--radius-inner); cursor: pointer;">Cancel</button>
-                    <button type="submit" style="flex: 1; padding: 11px; background: linear-gradient(135deg, #ca8a04 0%, #eab308 100%); color: #050505; font-weight: 700; border: none; border-radius: var(--radius-inner); cursor: pointer; box-shadow: 0 4px 15px rgba(234, 179, 8, 0.3);">Activate</button>
+                    <button type="submit" style="flex: 1; padding: 11px; background: linear-gradient(135deg, #ca8a04 0%, #eab308 100%); color: #050505; font-weight: 700; border: none; border-radius: var(--radius-inner); cursor: pointer; box-shadow: 0 4px 15px rgba(234, 179, 8, 0.3);">Submit</button>
                 </div>
             </form>
         </div>
     </div>
 
-    <!-- Golden Payment & Unlocked Modal Animation -->
-    <div id="unlockedSuccessModal" class="modal-overlay hidden">
-        <div class="modal-content animate-scale-up" style="position: relative; text-align: center; border: 2px solid #eab308; background: linear-gradient(135deg, rgba(234, 179, 8, 0.15), var(--bg-card)); box-shadow: 0 0 50px rgba(234, 179, 8, 0.4);">
-            <div style="font-size: 50px; margin-bottom: 12px;">🎉</div>
-            <h3 style="font-size: 1.6rem; font-weight: 900; color: #facc15; margin-bottom: 8px;">Premium Unlocked!</h3>
-            <p style="font-size: 0.85rem; color: #e2e8f0; margin-bottom: 20px;">Congratulations! Your Premium Membership is now active.</p>
-            <div style="background: rgba(15, 16, 21, 0.8); border: 1px solid rgba(234, 179, 8, 0.3); border-radius: 12px; padding: 16px; text-align: left; margin-bottom: 20px; font-size: 0.82rem; color: #cbd5e1; display: flex; flex-direction: column; gap: 8px;">
-                <div style="color: #facc15; font-weight: 700; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 6px;">✨ Unlocked Privileges:</div>
-                <div>✔ <b>Golden Header Badge:</b> ( Plus ) / ( Premium )</div>
-                <div>✔ <b>Exclusive Early Access Models & Maps</b></div>
-                <div>✔ <b>VIP Direct Feedback & Suggestions Hub</b></div>
+    <!-- Spinning Wheel Modal (For YH-TEST) -->
+    <div id="wheelModal" class="modal-overlay hidden">
+        <div class="modal-content animate-scale-up" style="text-align: center; position: relative;">
+            <h3 style="font-size: 1.4rem; font-weight: 800; color: #facc15; margin-bottom: 6px;">🎡 Lucky Wheel Simulator</h3>
+            <p style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 20px;">Spin to test your luck! Try to win Robux or an account.</p>
+            
+            <div style="position: relative; width: 220px; height: 220px; margin: 0 auto 20px auto; border-radius: 50%; border: 4px solid #eab308; display: flex; align-items: center; justify-content: center; background: radial-gradient(circle, #18181b, #090a0f); overflow: hidden; box-shadow: 0 0 30px rgba(234, 179, 8, 0.3);">
+                <div id="wheelElement" style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 1.1rem; color: #fff; transition: transform 4s cubic-bezier(0.15, 0.9, 0.2, 1); text-align: center; padding: 10px;">
+                    SPIN ME!
+                </div>
+                <div style="position: absolute; top: 0; width: 6px; height: 20px; background: #ef4444; border-radius: 2px;"></div>
             </div>
-            <button onclick="closeUnlockedSuccessModal()" style="width: 100%; padding: 12px; background: linear-gradient(135deg, #ca8a04 0%, #eab308 100%); color: #050505; font-weight: 800; border: none; border-radius: var(--radius-inner); cursor: pointer; box-shadow: 0 4px 20px rgba(234, 179, 8, 0.4);">Enjoy Premium 🚀</button>
-        </div>
-    </div>
 
-    <!-- Premium Restricted Notice Modal -->
-    <div id="premiumRestrictedModal" class="modal-overlay hidden">
-        <div class="modal-content animate-scale-up" style="position: relative; text-align: center; border-color: rgba(239, 68, 68, 0.3);">
-            <div style="display: inline-flex; align-items: center; justify-content: center; width: 64px; height: 64px; background: rgba(239, 68, 68, 0.15); border: 1px solid rgba(239, 68, 68, 0.3); border-radius: 16px; color: #ef4444; font-size: 24px; margin-bottom: 20px;">🔒</div>
-            <h3 style="font-size: 1.4rem; font-weight: 800; color: #fff; margin-bottom: 10px;">Access Denied</h3>
-            <p style="font-size: 0.9rem; color: #fca5a5; line-height: 1.5; margin-bottom: 24px;">You must purchase Premium to unlock this section!</p>
+            <div id="wheelResultMsg" style="font-size: 0.95rem; font-weight: 700; margin-bottom: 16px; min-height: 24px;"></div>
+
             <div style="display: flex; gap: 10px;">
-                <button onclick="closePremiumRestrictedModal()" style="flex: 1; padding: 11px; background: var(--bg-input); border: 1px solid var(--border-color); color: #fff; font-weight: 600; border-radius: var(--radius-inner); cursor: pointer;">Close</button>
-                <button onclick="switchToCodesFromRestricted()" style="flex: 1; padding: 11px; background: linear-gradient(135deg, #ca8a04 0%, #eab308 100%); color: #050505; font-weight: 700; border: none; border-radius: var(--radius-inner); cursor: pointer;">Enter Code</button>
+                <button type="button" onclick="closeWheelModal()" style="flex: 1; padding: 11px; background: var(--bg-input); border: 1px solid var(--border-color); color: #fff; font-weight: 600; border-radius: var(--radius-inner); cursor: pointer;">Close</button>
+                <button type="button" id="spinBtn" onclick="spinTheWheel()" style="flex: 1; padding: 11px; background: linear-gradient(135deg, #ca8a04 0%, #eab308 100%); color: #050505; font-weight: 800; border: none; border-radius: var(--radius-inner); cursor: pointer;">Spin Wheel 🎰</button>
             </div>
         </div>
     </div>
 
-    <!-- Help Modal -->
-    <div id="helpModal" class="modal-overlay hidden">
-        <div class="modal-content animate-scale-up" style="max-height: 90vh; overflow-y: auto;">
-            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px;">
-                <h3 style="font-size: 1.35rem; font-weight: 900; color: var(--primary);">Help & Support</h3>
-                <button onclick="closeHelpModal()" style="background: none; border: none; color: var(--text-muted); font-size: 1.2rem; cursor: pointer;">✕</button>
-            </div>
-            <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 20px;">Click on any question below to view the answer or submit a support request.</p>
-            <div style="display: flex; flex-direction: column; gap: 12px;">
-                <div style="background: var(--bg-input); border: 1px solid var(--border-color); border-radius: var(--radius-inner); padding: 14px;">
-                    <button onclick="toggleFaq('faq1')" style="width: 100%; background: none; border: none; color: #fff; text-align: left; font-weight: 600; font-size: 0.88rem; display: flex; justify-content: space-between; align-items: center; cursor: pointer;">
-                        <span>What should I do if my model is pending?</span>
-                        <span style="color: var(--primary); font-size: 1.2rem;">+</span>
-                    </button>
-                    <div id="faq1" class="hidden" style="margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--border-color); font-size: 0.8rem; color: var(--text-body);">
-                        <p style="margin-bottom: 12px;">First, please wait 3-5 hours. If it's still pending after that time, you can send a message to the YH Studio support team using the form below.</p>
-                        <form action="https://formspree.io/f/mjygqarv" method="POST" style="display: flex; flex-direction: column; gap: 8px;">
-                            <input type="hidden" name="supportType" value="Model Status Inquiry">
-                            <input type="text" name="modelName" placeholder="Model Name" required style="padding: 8px 12px; background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 8px; color: #fff; font-size: 0.8rem;">
-                            <input type="text" name="modelLink" placeholder="Model Link" required style="padding: 8px 12px; background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 8px; color: #fff; font-size: 0.8rem;">
-                            <input type="email" name="userEmail" placeholder="Your Email" required style="padding: 8px 12px; background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 8px; color: #fff; font-size: 0.8rem;">
-                            <button type="submit" class="submit-btn" style="padding: 8px; font-size: 0.8rem;">Send to Support 🚀</button>
-                        </form>
+    <!-- Electronic Payment Simulator Modal (For YH-Random) -->
+    <div id="paymentSimulatorModal" class="modal-overlay hidden">
+        <div class="modal-content animate-scale-up" style="text-align: center;">
+            <div style="width: 60px; height: 60px; border: 4px solid var(--border-color); border-top-color: #eab308; border-radius: 50%; animation: spin 0.8s linear infinite; margin: 0 auto 20px auto;"></div>
+            <h3 style="font-size: 1.3rem; font-weight: 800; color: #fff; margin-bottom: 8px;">Processing Electronic Payment...</h3>
+            <p style="font-size: 0.85rem; color: var(--text-muted);">Please wait while we verify your exclusive <code style="color: #facc15;">YH-Random</code> authorization.</p>
+        </div>
+    </div>
+
+    <!-- Account Reward Success Modal (For YH-Random) -->
+    <div id="accountRewardModal" class="modal-overlay hidden">
+        <div class="modal-content animate-scale-up" style="text-align: center; border: 2px solid #eab308; background: linear-gradient(135deg, rgba(234, 179, 8, 0.15), var(--bg-card)); box-shadow: 0 0 50px rgba(234, 179, 8, 0.4);">
+            <div style="font-size: 45px; margin-bottom: 10px;">🎉</div>
+            <h3 style="font-size: 1.5rem; font-weight: 900; color: #facc15; margin-bottom: 6px;">Congratulations!</h3>
+            <p style="font-size: 0.85rem; color: #e2e8f0; margin-bottom: 18px;">You successfully claimed your exclusive Random Roblox Account!</p>
+            
+            <div style="display: flex; flex-direction: column; gap: 12px; margin-bottom: 20px; text-align: left;">
+                <div>
+                    <label style="font-size: 0.78rem; color: var(--text-muted); display: block; margin-bottom: 4px;">Username:</label>
+                    <div class="code-box">
+                        <pre><code id="randUser">5xixeil</code></pre>
+                        <button class="copy-btn" onclick="copyCode('randUser', this)">Copy</button>
+                    </div>
+                </div>
+                <div>
+                    <label style="font-size: 0.78rem; color: var(--text-muted); display: block; margin-bottom: 4px;">Password:</label>
+                    <div class="code-box">
+                        <pre><code id="randPass">YH_Studio</code></pre>
+                        <button class="copy-btn" onclick="copyCode('randPass', this)">Copy</button>
                     </div>
                 </div>
             </div>
-            <button onclick="closeHelpModal()" style="width: 100%; margin-top: 20px; padding: 10px; background: var(--bg-input); border: 1px solid var(--border-color); color: #fff; font-weight: 600; border-radius: var(--radius-inner); cursor: pointer;">Close</button>
+
+            <button onclick="closeAccountRewardModal()" style="width: 100%; padding: 11px; background: linear-gradient(135deg, #ca8a04 0%, #eab308 100%); color: #050505; font-weight: 800; border: none; border-radius: var(--radius-inner); cursor: pointer;">Awesome 🚀</button>
         </div>
     </div>
 
@@ -191,7 +189,6 @@
                         <h1>YH Studio</h1>
                         <p>The ultimate library for secure Roblox Studio models & scripts</p>
                     </div>
-                    <div id="headerGoldBadge" class="hidden gold-premium-badge">( Plus )</div>
                 </div>
                 <div class="search-container">
                     <input type="text" id="searchInput" onkeyup="searchScripts()" placeholder="Search for a model or code...">
@@ -202,8 +199,6 @@
                 <button class="cat-btn" onclick="filterCategory('admin', this)">Admin</button>
                 <button class="cat-btn" onclick="filterCategory('Steal an Egg', this)">Steal an Egg</button>
                 <button class="cat-btn" onclick="filterCategory('maps', this)">Map</button>
-                <button id="navPremiumBtn" class="cat-btn" onclick="handlePremiumClick(this)" style="background: linear-gradient(135deg, rgba(202, 138, 4, 0.15), rgba(234, 179, 8, 0.25)); color: #facc15; border-color: rgba(234, 179, 8, 0.4); box-shadow: 0 0 15px rgba(234, 179, 8, 0.15);">⭐ Premium</button>
-                <button class="cat-btn" onclick="openHelpModal()" style="color: #38bdf8;">❓ Help</button>
                 <button class="cat-btn" onclick="openCodesModal()" style="color: #facc15; border-color: rgba(234, 179, 8, 0.3);">🔑 Codes</button>
                 <a href="https://discord.gg/z8WXEQzv4" target="_blank" class="cat-btn" style="color: #a5b4fc;">💬 Discord</a>
                 <button class="cat-btn" onclick="filterCategory('add-model', this)" style="background-color: var(--primary); color: #050505; margin-left: auto;">➕ Post Your Model</button>
@@ -219,7 +214,7 @@
                     </div>
                     <div>
                         <h2 style="font-size: 1.15rem; font-weight: 700; color: #fff; display: flex; align-items: center; gap: 8px;">
-                            Welcome to YH Studio! <span style="font-size: 0.7rem; background: var(--primary); color: #050505; padding: 2px 8px; border-radius: 9999px; font-weight: 700;">v1.0.0.8</span>
+                            Welcome to YH Studio! <span style="font-size: 0.7rem; background: var(--primary); color: #050505; padding: 2px 8px; border-radius: 9999px; font-weight: 700;">v1.0.0.9</span>
                         </h2>
                         <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 2px;">Explore our wide collection of secure Roblox Studio models, maps, and admin scripts.</p>
                     </div>
@@ -245,24 +240,6 @@
 
             <!-- Models Grid -->
             <div id="modelsGrid" class="models-grid">
-                <!-- Premium VIP Hub (Hidden until code redemption in current session) -->
-                <div class="model-card premium-only-item hidden" data-category="premium" style="border: 2px solid #eab308; background: linear-gradient(135deg, rgba(234, 179, 8, 0.08), var(--bg-card));">
-                    <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=600&auto=format&fit=crop" alt="Premium VIP Hub">
-                    <div class="card-body">
-                        <div style="display: flex; align-items: center; justify-content: space-between;">
-                            <h3 style="font-size: 1rem; font-weight: 700; color: #facc15;">⭐ VIP Early Access Hub</h3>
-                            <span style="font-size: 0.72rem; background: rgba(234, 179, 8, 0.15); color: #facc15; border: 1px solid rgba(234, 179, 8, 0.3); padding: 2px 10px; border-radius: 9999px;">Early Access</span>
-                        </div>
-                        <p style="font-size: 0.8rem; color: var(--text-body);">Send suggestions directly to studioyh!</p>
-                        <form action="https://formspree.io/f/mjygqarv" method="POST" style="display: flex; flex-direction: column; gap: 8px;">
-                            <input type="hidden" name="vipFeedback" value="Premium User Direct Suggestion">
-                            <input type="text" name="userName" placeholder="Your Roblox Name" required style="padding: 8px; background: var(--bg-input); border: 1px solid var(--border-color); border-radius: 8px; color: #fff; font-size: 0.8rem;">
-                            <textarea name="suggestion" placeholder="Write your suggestion..." required rows="2" style="padding: 8px; background: var(--bg-input); border: 1px solid var(--border-color); border-radius: 8px; color: #fff; font-size: 0.8rem; resize: none;"></textarea>
-                            <button type="submit" style="padding: 8px; background: linear-gradient(135deg, #ca8a04, #eab308); color: #050505; font-weight: 700; border: none; border-radius: 8px; cursor: pointer;">Send VIP Suggestion 🚀</button>
-                        </form>
-                    </div>
-                </div>
-
                 <!-- Admin Panel v2.8 -->
                 <div class="model-card" data-category="admin">
                     <img src="https://i.ibb.co/pv0HPLQz/IMG-0114.jpg" alt="Admin Panel v2.8">
@@ -525,32 +502,8 @@
         </footer>
     </div>
 
-    <!-- JavaScript System Logic (No-Storage / Reset on Refresh) -->
+    <!-- JavaScript Logic -->
     <script>
-        const VALID_PREMIUM_CODES = [
-            "YH-FQ5JO9",
-            "YH-T6HEO7",
-            "YH-4RQIGQ",
-            "YH-3EOPRH",
-            "YH-VIP67"
-        ];
-
-        // Session-based state (resets completely on page refresh/close)
-        let sessionPremiumActivated = false;
-        let sessionUsedCodes = [];
-
-        function isPremiumUser() {
-            return sessionPremiumActivated;
-        }
-
-        function updatePremiumUI() {
-            if (isPremiumUser()) {
-                document.getElementById('headerGoldBadge').classList.remove('hidden');
-            } else {
-                document.getElementById('headerGoldBadge').classList.add('hidden');
-            }
-        }
-
         function openCodesModal() {
             document.getElementById('codeErrorMsg').style.display = 'none';
             document.getElementById('codeRedeemInput').value = '';
@@ -566,60 +519,90 @@
             const inputCode = document.getElementById('codeRedeemInput').value.trim();
             const errorDiv = document.getElementById('codeErrorMsg');
 
-            if (sessionUsedCodes.includes(inputCode)) {
-                errorDiv.textContent = "This code has already been redeemed in this session!";
+            closeCodesModal();
+
+            if (inputCode === "YH-TEST") {
+                // Open Wheel Simulator
+                document.getElementById('wheelResultMsg').textContent = "";
+                document.getElementById('wheelElement').style.transform = "rotate(0deg)";
+                document.getElementById('wheelElement').textContent = "SPIN ME!";
+                document.getElementById('spinBtn').disabled = false;
+                document.getElementById('wheelModal').classList.remove('hidden');
+            } 
+            else if (inputCode === "YH-Random") {
+                // Check if YH-Random was already used
+                if (localStorage.getItem('yh_random_used') === 'true') {
+                    openCodesModal();
+                    errorDiv.textContent = "This exclusive code has already been redeemed!";
+                    errorDiv.style.display = 'block';
+                    return;
+                }
+
+                // Mark as used
+                localStorage.setItem('yh_random_used', 'true');
+
+                // Show payment simulator (slow process)
+                document.getElementById('paymentSimulatorModal').classList.remove('hidden');
+                setTimeout(() => {
+                    document.getElementById('paymentSimulatorModal').classList.add('hidden');
+                    document.getElementById('accountRewardModal').classList.remove('hidden');
+                }, 2500);
+            } 
+            else {
+                openCodesModal();
+                errorDiv.textContent = "Invalid code! Try YH-TEST or YH-Random.";
                 errorDiv.style.display = 'block';
-                return;
-            }
-
-            if (VALID_PREMIUM_CODES.includes(inputCode)) {
-                sessionUsedCodes.push(inputCode);
-                sessionPremiumActivated = true;
-                closeCodesModal();
-                updatePremiumUI();
-                document.getElementById('unlockedSuccessModal').classList.remove('hidden');
-            } else {
-                errorDiv.textContent = "Invalid code! Please check and try again.";
-                errorDiv.style.display = 'block';
             }
         }
 
-        function closeUnlockedSuccessModal() {
-            document.getElementById('unlockedSuccessModal').classList.add('hidden');
+        // Wheel Spinning Logic
+        function spinTheWheel() {
+            const spinBtn = document.getElementById('spinBtn');
+            const resultMsg = document.getElementById('wheelResultMsg');
+            const wheel = document.getElementById('wheelElement');
+            
+            spinBtn.disabled = true;
+            resultMsg.textContent = "Spinning...";
+            resultMsg.style.color = "#facc15";
+
+            // Random rotation degrees (multiple full spins + random offset)
+            const randomDegree = 1800 + Math.floor(Math.random() * 360);
+            wheel.style.transform = `rotate(${randomDegree}deg)`;
+
+            setTimeout(() => {
+                // Determine outcome based on exact probabilities requested:
+                // Nothing: 75%, Random Account: 35%, 500 Robux: 0.005%
+                const rand = Math.random() * 100;
+                let outcome = "";
+
+                if (rand < 0.005) {
+                    outcome = "500 Robux";
+                    resultMsg.textContent = "🎉 JACKPOT! You won 500 Robux!";
+                    resultMsg.style.color = "#22c55e";
+                } else if (rand < 35.005) {
+                    outcome = "Random Roblox account";
+                    resultMsg.textContent = "🎁 You won a Random Roblox Account!";
+                    resultMsg.style.color = "#38bdf8";
+                } else {
+                    outcome = "Nothing";
+                    resultMsg.textContent = "Try again after 30 seconds";
+                    resultMsg.style.color = "#ef4444";
+                }
+
+                wheel.textContent = outcome;
+                spinBtn.disabled = false;
+            }, 4000);
         }
 
-        function handlePremiumClick(btn) {
-            if (isPremiumUser()) {
-                filterCategory('premium', btn);
-            } else {
-                document.getElementById('premiumRestrictedModal').classList.remove('hidden');
-            }
+        function closeWheelModal() {
+            document.getElementById('wheelModal').classList.add('hidden');
         }
 
-        function closePremiumRestrictedModal() {
-            document.getElementById('premiumRestrictedModal').classList.add('hidden');
-        }
-
-        function switchToCodesFromRestricted() {
-            closePremiumRestrictedModal();
-            openCodesModal();
-        }
-
-        function openHelpModal() {
-            document.getElementById('helpModal').classList.remove('hidden');
-        }
-
-        function closeHelpModal() {
-            document.getElementById('helpModal').classList.add('hidden');
-        }
-
-        function toggleFaq(id) {
-            const el = document.getElementById(id);
-            if (el) el.classList.toggle('hidden');
+        function closeAccountRewardModal() {
+            document.getElementById('accountRewardModal').classList.add('hidden');
         }
 
         window.addEventListener('load', () => {
-            updatePremiumUI();
             const loaderContainer = document.getElementById('loaderContainer');
             const successCheck = document.getElementById('successCheck');
             const splashText = document.getElementById('splashText');
@@ -678,13 +661,7 @@
             const cards = document.querySelectorAll('.model-card');
             cards.forEach(card => {
                 const cardCat = card.getAttribute('data-category');
-                if (category === 'premium') {
-                    card.style.display = (cardCat === 'premium') ? 'flex' : 'none';
-                } else if (category === 'all') {
-                    card.style.display = (cardCat === 'premium') ? (isPremiumUser() ? 'flex' : 'none') : 'flex';
-                } else {
-                    card.style.display = (cardCat === category) ? 'flex' : 'none';
-                }
+                card.style.display = (cardCat === category || category === 'all') ? 'flex' : 'none';
             });
         }
 
