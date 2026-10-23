@@ -7,253 +7,80 @@
     <!-- Plus Jakarta Sans Modern Font -->
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-        /* ==========================================
-           YH Studio - Modern Dark Glassmorphism CSS Theme
-           ========================================== */
         :root {
             --bg-main: #090a0f;
             --bg-card: rgba(24, 24, 27, 0.75);
             --bg-input: #0f1015;
-            
             --primary: #22c55e;
             --primary-hover: #16a34a;
             --primary-glow: rgba(34, 197, 94, 0.25);
-
             --gold-primary: #eab308;
             --gold-glow: rgba(234, 179, 8, 0.35);
-            
             --text-heading: #ffffff;
             --text-body: #cbd5e1;
             --text-muted: #71717a;
-            
             --border-color: rgba(255, 255, 255, 0.08);
             --border-hover: rgba(34, 197, 94, 0.4);
             --glass-backdrop: blur(16px);
-            
             --radius-pill: 9999px;
             --radius-card: 20px;
             --radius-inner: 12px;
-            
             --transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
         }
-
         * { box-sizing: border-box; margin: 0; padding: 0; }
-
         body {
             font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
             background-color: var(--bg-main);
-            background-image: 
-                radial-gradient(at 10% 10%, rgba(34, 197, 94, 0.08) 0px, transparent 50%),
-                radial-gradient(at 90% 90%, rgba(99, 102, 241, 0.05) 0px, transparent 50%);
-            background-attachment: fixed;
-            color: var(--text-body);
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            direction: ltr;
-            text-align: left;
-            -webkit-font-smoothing: antialiased;
-            overflow-x: hidden;
+            background-image: radial-gradient(at 10% 10%, rgba(34, 197, 94, 0.08) 0px, transparent 50%), radial-gradient(at 90% 90%, rgba(99, 102, 241, 0.05) 0px, transparent 50%);
+            background-attachment: fixed; color: var(--text-body); min-height: 100vh;
+            display: flex; flex-direction: column; direction: ltr; text-align: left;
+            -webkit-font-smoothing: antialiased; overflow-x: hidden;
         }
-
-        /* Animations */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        @keyframes scaleUp {
-            0% { transform: scale(0.8); opacity: 0; }
-            100% { transform: scale(1); opacity: 1; }
-        }
-        @keyframes goldGlowPulse {
-            0%, 100% { box-shadow: 0 0 15px rgba(234, 179, 8, 0.4); }
-            50% { box-shadow: 0 0 30px rgba(234, 179, 8, 0.8); }
-        }
-        @keyframes slowProcessPulse {
-            0% { border-color: rgba(234, 179, 8, 0.2); box-shadow: 0 0 10px rgba(234, 179, 8, 0.1); }
-            50% { border-color: rgba(234, 179, 8, 0.9); box-shadow: 0 0 35px rgba(234, 179, 8, 0.6); }
-            100% { border-color: rgba(234, 179, 8, 0.2); box-shadow: 0 0 10px rgba(234, 179, 8, 0.1); }
-        }
-
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes scaleUp { 0% { transform: scale(0.8); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
+        @keyframes goldGlowPulse { 0%, 100% { box-shadow: 0 0 15px rgba(234, 179, 8, 0.4); } 50% { box-shadow: 0 0 30px rgba(234, 179, 8, 0.8); } }
         .animate-fade-in { animation: fadeIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
         .animate-scale-up { animation: scaleUp 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
-        .processing-glow { animation: slowProcessPulse 2.5s infinite ease-in-out; }
-
-        /* Splash Screen */
-        #splashScreen {
-            position: fixed; inset: 0; z-index: 50; background-color: var(--bg-main);
-            display: flex; flex-direction: column; align-items: center; justify-content: center;
-            transition: opacity 0.3s ease;
-        }
-
-        /* Modals & Overlays */
-        .modal-overlay {
-            position: fixed; inset: 0; z-index: 50;
-            background-color: rgba(9, 10, 15, 0.85);
-            backdrop-filter: blur(12px);
-            display: flex; align-items: center; justify-content: center; padding: 16px;
-        }
+        #splashScreen { position: fixed; inset: 0; z-index: 50; background-color: var(--bg-main); display: flex; flex-direction: column; align-items: center; justify-content: center; transition: opacity 0.3s ease; }
+        .modal-overlay { position: fixed; inset: 0; z-index: 50; background-color: rgba(9, 10, 15, 0.85); backdrop-filter: blur(12px); display: flex; align-items: center; justify-content: center; padding: 16px; }
         .modal-overlay.hidden { display: none; }
-        .modal-content {
-            background: var(--bg-card);
-            backdrop-filter: var(--glass-backdrop);
-            border: 1px solid var(--border-color);
-            border-radius: var(--radius-card);
-            padding: 28px; max-width: 480px; width: 100%;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
-        }
-
-        /* Header Section */
-        header {
-            background: var(--bg-card);
-            backdrop-filter: var(--glass-backdrop);
-            border-bottom: 1px solid var(--border-color);
-            position: sticky; top: 0; z-index: 40; padding: 20px 16px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-        }
-        .header-inner {
-            max-width: 1100px; margin: 0 auto; display: flex;
-            flex-direction: column; align-items: center; justify-content: space-between; gap: 16px;
-        }
+        .modal-content { background: var(--bg-card); backdrop-filter: var(--glass-backdrop); border: 1px solid var(--border-color); border-radius: var(--radius-card); padding: 28px; max-width: 480px; width: 100%; box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6); }
+        header { background: var(--bg-card); backdrop-filter: var(--glass-backdrop); border-bottom: 1px solid var(--border-color); position: sticky; top: 0; z-index: 40; padding: 20px 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
+        .header-inner { max-width: 1100px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; justify-content: space-between; gap: 16px; }
         @media(min-width: 768px) { .header-inner { flex-direction: row; } }
-
         .logo-area { display: flex; align-items: center; gap: 12px; }
-
-        header h1 {
-            background: linear-gradient(135deg, #15803d 0%, #22c55e 50%, #4ade80 100%);
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-            font-size: 2rem; font-weight: 800; letter-spacing: -0.025em;
-            filter: drop-shadow(0 0 15px rgba(34, 197, 94, 0.3));
-        }
-
-        /* Gold Plus Badge for Header */
-        .gold-premium-badge {
-            background: linear-gradient(135deg, rgba(234, 179, 8, 0.2), rgba(202, 138, 4, 0.4));
-            border: 2px solid var(--gold-primary);
-            color: #facc15; font-size: 0.75rem; font-weight: 800;
-            padding: 3px 12px; border-radius: var(--radius-pill);
-            animation: goldGlowPulse 2s infinite ease-in-out;
-            letter-spacing: 0.05em; text-transform: uppercase;
-        }
-
+        header h1 { background: linear-gradient(135deg, #15803d 0%, #22c55e 50%, #4ade80 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-size: 2rem; font-weight: 800; letter-spacing: -0.025em; }
+        .gold-premium-badge { background: linear-gradient(135deg, rgba(234, 179, 8, 0.2), rgba(202, 138, 4, 0.4)); border: 2px solid var(--gold-primary); color: #facc15; font-size: 0.75rem; font-weight: 800; padding: 3px 12px; border-radius: var(--radius-pill); animation: goldGlowPulse 2s infinite ease-in-out; text-transform: uppercase; }
         header p { color: var(--text-muted); font-size: 0.88rem; margin-top: 4px; }
-
         .search-container { width: 100%; max-width: 320px; }
-        .search-container input {
-            width: 100%; padding: 12px 18px; background-color: var(--bg-input);
-            border: 1px solid var(--border-color); color: var(--text-heading);
-            border-radius: var(--radius-pill); outline: none; font-size: 0.9rem; transition: var(--transition);
-        }
+        .search-container input { width: 100%; padding: 12px 18px; background-color: var(--bg-input); border: 1px solid var(--border-color); color: var(--text-heading); border-radius: var(--radius-pill); outline: none; font-size: 0.9rem; transition: var(--transition); }
         .search-container input:focus { border-color: var(--primary); box-shadow: 0 0 0 3px var(--primary-glow); }
-
-        /* Navigation & Categories */
-        .nav-menu {
-            max-width: 1100px; margin: 16px auto 0 auto;
-            display: flex; flex-wrap: wrap; align-items: center; gap: 8px;
-        }
-        .cat-btn {
-            background-color: var(--bg-input); color: var(--text-muted);
-            border: 1px solid var(--border-color); padding: 8px 16px;
-            font-weight: 600; font-size: 0.85rem; border-radius: var(--radius-pill);
-            cursor: pointer; transition: var(--transition); text-decoration: none;
-            display: inline-flex; align-items: center; gap: 6px;
-        }
-        .cat-btn.active, .cat-btn:hover {
-            background-color: var(--primary); color: #050505;
-            border-color: var(--primary); box-shadow: 0 4px 15px var(--primary-glow);
-            transform: translateY(-1px);
-        }
-
+        .nav-menu { max-width: 1100px; margin: 16px auto 0 auto; display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+        .cat-btn { background-color: var(--bg-input); color: var(--text-muted); border: 1px solid var(--border-color); padding: 8px 16px; font-weight: 600; font-size: 0.85rem; border-radius: var(--radius-pill); cursor: pointer; transition: var(--transition); text-decoration: none; display: inline-flex; align-items: center; gap: 6px; }
+        .cat-btn.active, .cat-btn:hover { background-color: var(--primary); color: #050505; border-color: var(--primary); box-shadow: 0 4px 15px var(--primary-glow); transform: translateY(-1px); }
         main { max-width: 1100px; margin: 0 auto; padding: 24px 16px; flex-grow: 1; width: 100%; }
-
-        .welcome-banner {
-            background: linear-gradient(135deg, rgba(34, 197, 94, 0.1), rgba(24, 24, 27, 0.8));
-            border: 1px solid rgba(34, 197, 94, 0.2); border-radius: var(--radius-card);
-            padding: 24px; margin-bottom: 32px; display: flex; flex-direction: column; gap: 16px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
-        }
+        .welcome-banner { background: linear-gradient(135deg, rgba(34, 197, 94, 0.1), rgba(24, 24, 27, 0.8)); border: 1px solid rgba(34, 197, 94, 0.2); border-radius: var(--radius-card); padding: 24px; margin-bottom: 32px; display: flex; flex-direction: column; gap: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.4); }
         @media(min-width: 768px) { .welcome-banner { flex-direction: row; justify-content: space-between; align-items: center; } }
-
-        /* Form Section */
-        .form-section {
-            background: var(--bg-card); backdrop-filter: var(--glass-backdrop);
-            border: 1px solid var(--border-color); border-radius: var(--radius-card);
-            padding: 28px; margin-bottom: 32px; box-shadow: 0 10px 30px rgba(0,0,0,0.4);
-        }
+        .form-section { background: var(--bg-card); backdrop-filter: var(--glass-backdrop); border: 1px solid var(--border-color); border-radius: var(--radius-card); padding: 28px; margin-bottom: 32px; box-shadow: 0 10px 30px rgba(0,0,0,0.4); }
         .form-section h2 { color: var(--primary); font-size: 1.25rem; margin-bottom: 20px; }
         .form-grid { display: grid; grid-template-columns: 1fr; gap: 16px; }
         @media(min-width: 768px) { .form-grid { grid-template-columns: 1fr 1fr; } }
         .form-group { margin-bottom: 16px; }
         .form-group label { display: block; margin-bottom: 6px; color: var(--text-body); font-size: 0.85rem; font-weight: 600; }
-        .form-group input, .form-group select {
-            width: 100%; padding: 11px 14px; background-color: var(--bg-input);
-            border: 1px solid var(--border-color); color: var(--text-heading);
-            border-radius: var(--radius-inner); outline: none; font-size: 0.9rem; transition: var(--transition);
-        }
-        .form-group input:focus, .form-group select:focus {
-            border-color: var(--primary); box-shadow: 0 0 0 3px var(--primary-glow);
-        }
-        .submit-btn {
-            width: 100%; padding: 12px; background-color: var(--primary); color: #050505;
-            border: none; font-weight: 700; border-radius: var(--radius-inner); cursor: pointer; transition: var(--transition);
-            box-shadow: 0 4px 15px var(--primary-glow);
-        }
+        .form-group input, .form-group select { width: 100%; padding: 11px 14px; background-color: var(--bg-input); border: 1px solid var(--border-color); color: var(--text-heading); border-radius: var(--radius-inner); outline: none; font-size: 0.9rem; transition: var(--transition); }
+        .form-group input:focus, .form-group select:focus { border-color: var(--primary); box-shadow: 0 0 0 3px var(--primary-glow); }
+        .submit-btn { width: 100%; padding: 12px; background-color: var(--primary); color: #050505; border: none; font-weight: 700; border-radius: var(--radius-inner); cursor: pointer; transition: var(--transition); box-shadow: 0 4px 15px var(--primary-glow); }
         .submit-btn:hover { background-color: var(--primary-hover); transform: translateY(-2px); }
-
         .models-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
-        .model-card {
-            background: var(--bg-card); backdrop-filter: var(--glass-backdrop);
-            border: 1px solid var(--border-color); border-radius: var(--radius-card);
-            overflow: hidden; display: flex; flex-direction: column; transition: var(--transition);
-            box-shadow: 0 8px 24px rgba(0,0,0,0.3);
-        }
-        .model-card:hover {
-            border-color: var(--border-hover); transform: translateY(-4px);
-            box-shadow: 0 12px 30px rgba(0,0,0,0.5), 0 0 20px rgba(34, 197, 94, 0.15);
-        }
+        .model-card { background: var(--bg-card); backdrop-filter: var(--glass-backdrop); border: 1px solid var(--border-color); border-radius: var(--radius-card); overflow: hidden; display: flex; flex-direction: column; transition: var(--transition); box-shadow: 0 8px 24px rgba(0,0,0,0.3); }
+        .model-card:hover { border-color: var(--border-hover); transform: translateY(-4px); box-shadow: 0 12px 30px rgba(0,0,0,0.5), 0 0 20px rgba(34, 197, 94, 0.15); }
         .model-card img { width: 100%; height: 180px; object-fit: cover; transition: var(--transition); }
         .card-body { padding: 18px; display: flex; flex-direction: column; flex-grow: 1; justify-content: space-between; gap: 14px; }
-        .code-box {
-            background-color: var(--bg-input); border: 1px solid var(--border-color);
-            border-radius: var(--radius-inner); padding: 10px 14px;
-            display: flex; align-items: center; justify-content: space-between; gap: 8px;
-        }
+        .code-box { background-color: var(--bg-input); border: 1px solid var(--border-color); border-radius: var(--radius-inner); padding: 10px 14px; display: flex; align-items: center; justify-content: space-between; gap: 8px; }
         pre { color: var(--primary); font-family: Consolas, Monaco, monospace; font-size: 0.88rem; font-weight: 600; overflow-x: auto; }
-        .copy-btn {
-            background-color: var(--primary); color: #050505; border: none;
-            padding: 6px 14px; font-weight: 700; font-size: 0.8rem; border-radius: 8px; cursor: pointer; transition: var(--transition);
-        }
-
+        .copy-btn { background-color: var(--primary); color: #050505; border: none; padding: 6px 14px; font-weight: 700; font-size: 0.8rem; border-radius: 8px; cursor: pointer; transition: var(--transition); }
         footer { background: var(--bg-card); border-top: 1px solid var(--border-color); padding: 24px; text-align: center; color: var(--text-muted); font-size: 0.85rem; margin-top: auto; }
     </style>
-    <script>
-        // Force reset premium state on code load as requested ("شيل من الكل بريم يوم رست الكل")
-        localStorage.removeItem('yh_premium_activated');
-
-        const MAINTENANCE_MODE = false; 
-
-        if (MAINTENANCE_MODE) {
-            window.addEventListener('DOMContentLoaded', () => {
-                document.body.innerHTML = `
-                    <div style="background-color: #090a0f; color: #cbd5e1; min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 16px; font-family: 'Plus Jakarta Sans', sans-serif; width: 100%;">
-                        <div style="background: rgba(24, 24, 27, 0.75); backdrop-filter: blur(16px); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 20px; padding: 32px; max-width: 420px; width: 100%; text-align: center; box-shadow: 0 20px 40px rgba(0,0,0,0.6); position: relative; overflow: hidden;">
-                            <div style="position: absolute; top: -40px; right: -40px; width: 120px; height: 120px; background: rgba(34, 197, 94, 0.1); border-radius: 50%; filter: blur(20px); pointer-events: none;"></div>
-                            <div style="display: inline-flex; align-items: center; justify-content: center; width: 64px; height: 64px; background: rgba(34, 197, 94, 0.1); border: 1px solid rgba(34, 197, 94, 0.2); border-radius: 16px; color: #22c55e; font-size: 24px; margin-bottom: 24px;">
-                                🛠️
-                            </div>
-                            <h1 style="font-size: 1.5rem; font-weight: 800; color: #fff; margin-bottom: 12px;">YH Studio is Under Maintenance</h1>
-                            <p style="font-size: 0.88rem; color: #94a3b8; line-height: 1.6; margin-bottom: 24px;">
-                                We are currently performing updates and fixing some issues or adding new features. The site will be back online shortly. Thank you for your patience!
-                            </p>
-                            <div style="padding: 12px 16px; background: #0f1015; border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 12px; font-size: 0.75rem; font-weight: 700; color: #22c55e; letter-spacing: 0.05em; text-transform: uppercase;">
-                                Status: Maintenance Mode Active
-                            </div>
-                        </div>
-                    </div>
-                `;
-            });
-        }
-    </script>
 </head>
 <body>
 
@@ -279,15 +106,12 @@
     </div>
     <style>@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }</style>
 
-    <!-- Activation Code Modal (Codes Section) -->
+    <!-- Activation Code Modal -->
     <div id="codesModal" class="modal-overlay hidden">
         <div class="modal-content animate-scale-up" style="position: relative; text-align: center; border-color: rgba(234, 179, 8, 0.3);">
-            <div style="display: inline-flex; align-items: center; justify-content: center; width: 64px; height: 64px; background: rgba(234, 179, 8, 0.15); border: 1px solid rgba(234, 179, 8, 0.3); border-radius: 16px; color: #eab308; font-size: 24px; margin-bottom: 20px;">
-                🔑
-            </div>
+            <div style="display: inline-flex; align-items: center; justify-content: center; width: 64px; height: 64px; background: rgba(234, 179, 8, 0.15); border: 1px solid rgba(234, 179, 8, 0.3); border-radius: 16px; color: #eab308; font-size: 24px; margin-bottom: 20px;">🔑</div>
             <h3 style="font-size: 1.35rem; font-weight: 800; color: #fff; margin-bottom: 8px;">Redeem Premium Code</h3>
             <p style="font-size: 0.82rem; color: #94a3b8; margin-bottom: 20px;">Enter your unique code to unlock Premium features & Early Access models.</p>
-            
             <form onsubmit="handleRedeemCode(event)" style="display: flex; flex-direction: column; gap: 14px;">
                 <input type="text" id="codeRedeemInput" placeholder="e.g. YH-XXXXXX" required style="width: 100%; padding: 12px 16px; background-color: var(--bg-input); border: 1px solid var(--border-color); color: #fff; border-radius: var(--radius-inner); outline: none; font-size: 0.95rem; text-align: center; font-family: monospace; letter-spacing: 2px;">
                 <div id="codeErrorMsg" style="color: #ef4444; font-size: 0.8rem; display: none;"></div>
@@ -299,29 +123,18 @@
         </div>
     </div>
 
-    <!-- Slow Electronic Gold Payment Animation Modal -->
-    <div id="paymentProcessingModal" class="modal-overlay hidden">
-        <div class="modal-content animate-scale-up processing-glow" style="position: relative; text-align: center; border: 2px solid #eab308; background: linear-gradient(135deg, rgba(234, 179, 8, 0.1), var(--bg-card));">
-            <div style="width: 60px; height: 60px; border: 4px solid rgba(234, 179, 8, 0.2); border-top-color: #facc15; border-radius: 50%; animation: spin 1.2s linear infinite; margin: 0 auto 20px auto;"></div>
-            <h3 style="font-size: 1.4rem; font-weight: 800; color: #facc15; margin-bottom: 8px;">Processing Payment...</h3>
-            <p id="paymentStatusText" style="font-size: 0.85rem; color: #cbd5e1; margin-bottom: 10px;">Secure electronic verification in progress (Please wait)...</p>
-        </div>
-    </div>
-
-    <!-- Golden Unlocked Privileges Modal -->
+    <!-- Golden Payment & Unlocked Modal Animation -->
     <div id="unlockedSuccessModal" class="modal-overlay hidden">
         <div class="modal-content animate-scale-up" style="position: relative; text-align: center; border: 2px solid #eab308; background: linear-gradient(135deg, rgba(234, 179, 8, 0.15), var(--bg-card)); box-shadow: 0 0 50px rgba(234, 179, 8, 0.4);">
             <div style="font-size: 50px; margin-bottom: 12px;">🎉</div>
             <h3 style="font-size: 1.6rem; font-weight: 900; color: #facc15; margin-bottom: 8px;">Premium Unlocked!</h3>
             <p style="font-size: 0.85rem; color: #e2e8f0; margin-bottom: 20px;">Congratulations! Your Premium Membership is now active.</p>
-            
             <div style="background: rgba(15, 16, 21, 0.8); border: 1px solid rgba(234, 179, 8, 0.3); border-radius: 12px; padding: 16px; text-align: left; margin-bottom: 20px; font-size: 0.82rem; color: #cbd5e1; display: flex; flex-direction: column; gap: 8px;">
                 <div style="color: #facc15; font-weight: 700; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 6px;">✨ Unlocked Privileges:</div>
                 <div>✔ <b>Golden Header Badge:</b> ( Plus ) / ( Premium )</div>
                 <div>✔ <b>Exclusive Early Access Models & Maps</b></div>
                 <div>✔ <b>VIP Direct Feedback & Suggestions Hub</b></div>
             </div>
-
             <button onclick="closeUnlockedSuccessModal()" style="width: 100%; padding: 12px; background: linear-gradient(135deg, #ca8a04 0%, #eab308 100%); color: #050505; font-weight: 800; border: none; border-radius: var(--radius-inner); cursor: pointer; box-shadow: 0 4px 20px rgba(234, 179, 8, 0.4);">Enjoy Premium 🚀</button>
         </div>
     </div>
@@ -329,13 +142,9 @@
     <!-- Premium Restricted Notice Modal -->
     <div id="premiumRestrictedModal" class="modal-overlay hidden">
         <div class="modal-content animate-scale-up" style="position: relative; text-align: center; border-color: rgba(239, 68, 68, 0.3);">
-            <div style="display: inline-flex; align-items: center; justify-content: center; width: 64px; height: 64px; background: rgba(239, 68, 68, 0.15); border: 1px solid rgba(239, 68, 68, 0.3); border-radius: 16px; color: #ef4444; font-size: 24px; margin-bottom: 20px;">
-                🔒
-            </div>
+            <div style="display: inline-flex; align-items: center; justify-content: center; width: 64px; height: 64px; background: rgba(239, 68, 68, 0.15); border: 1px solid rgba(239, 68, 68, 0.3); border-radius: 16px; color: #ef4444; font-size: 24px; margin-bottom: 20px;">🔒</div>
             <h3 style="font-size: 1.4rem; font-weight: 800; color: #fff; margin-bottom: 10px;">Access Denied</h3>
-            <p style="font-size: 0.9rem; color: #fca5a5; line-height: 1.5; margin-bottom: 24px;">
-                You must purchase Premium to unlock this section!
-            </p>
+            <p style="font-size: 0.9rem; color: #fca5a5; line-height: 1.5; margin-bottom: 24px;">You must purchase Premium to unlock this section!</p>
             <div style="display: flex; gap: 10px;">
                 <button onclick="closePremiumRestrictedModal()" style="flex: 1; padding: 11px; background: var(--bg-input); border: 1px solid var(--border-color); color: #fff; font-weight: 600; border-radius: var(--radius-inner); cursor: pointer;">Close</button>
                 <button onclick="switchToCodesFromRestricted()" style="flex: 1; padding: 11px; background: linear-gradient(135deg, #ca8a04 0%, #eab308 100%); color: #050505; font-weight: 700; border: none; border-radius: var(--radius-inner); cursor: pointer;">Enter Code</button>
@@ -343,7 +152,7 @@
         </div>
     </div>
 
-    <!-- Help Section Modal -->
+    <!-- Help Modal -->
     <div id="helpModal" class="modal-overlay hidden">
         <div class="modal-content animate-scale-up" style="max-height: 90vh; overflow-y: auto;">
             <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px;">
@@ -351,7 +160,6 @@
                 <button onclick="closeHelpModal()" style="background: none; border: none; color: var(--text-muted); font-size: 1.2rem; cursor: pointer;">✕</button>
             </div>
             <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 20px;">Click on any question below to view the answer or submit a support request.</p>
-
             <div style="display: flex; flex-direction: column; gap: 12px;">
                 <div style="background: var(--bg-input); border: 1px solid var(--border-color); border-radius: var(--radius-inner); padding: 14px;">
                     <button onclick="toggleFaq('faq1')" style="width: 100%; background: none; border: none; color: #fff; text-align: left; font-weight: 600; font-size: 0.88rem; display: flex; justify-content: space-between; align-items: center; cursor: pointer;">
@@ -369,26 +177,13 @@
                         </form>
                     </div>
                 </div>
-
-                <div style="background: var(--bg-input); border: 1px solid var(--border-color); border-radius: var(--radius-inner); padding: 14px;">
-                    <button onclick="toggleFaq('faq2')" style="width: 100%; background: none; border: none; color: #fff; text-align: left; font-weight: 600; font-size: 0.88rem; display: flex; justify-content: space-between; align-items: center; cursor: pointer;">
-                        <span>Are all models safe?</span>
-                        <span style="color: var(--primary); font-size: 1.2rem;">+</span>
-                    </button>
-                    <div id="faq2" class="hidden" style="margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--border-color); font-size: 0.8rem; color: var(--text-body);">
-                        <p>Yes, absolutely! All models are safe and virus-free.</p>
-                    </div>
-                </div>
             </div>
-
             <button onclick="closeHelpModal()" style="width: 100%; margin-top: 20px; padding: 10px; background: var(--bg-input); border: 1px solid var(--border-color); color: #fff; font-weight: 600; border-radius: var(--radius-inner); cursor: pointer;">Close</button>
         </div>
     </div>
 
     <!-- Main Site Wrapper -->
     <div id="mainContent" style="opacity: 0; transition: opacity 0.5s ease; display: flex; flex-direction: column; min-height: 100vh;">
-
-        <!-- Header Section -->
         <header>
             <div class="header-inner">
                 <div class="logo-area">
@@ -396,40 +191,26 @@
                         <h1>YH Studio</h1>
                         <p>The ultimate library for secure Roblox Studio models & scripts</p>
                     </div>
-                    <!-- Tag Plus strictly hidden until activated -->
                     <div id="headerGoldBadge" class="hidden gold-premium-badge">( Plus )</div>
                 </div>
                 <div class="search-container">
                     <input type="text" id="searchInput" onkeyup="searchScripts()" placeholder="Search for a model or code...">
                 </div>
             </div>
-
-            <!-- Navigation Bar -->
             <nav class="nav-menu">
                 <button class="cat-btn active" onclick="filterCategory('all', this)">All</button>
                 <button class="cat-btn" onclick="filterCategory('admin', this)">Admin</button>
                 <button class="cat-btn" onclick="filterCategory('Steal an Egg', this)">Steal an Egg</button>
                 <button class="cat-btn" onclick="filterCategory('maps', this)">Map</button>
-                
-                <!-- Premium Gold Button -->
-                <button id="navPremiumBtn" class="cat-btn" onclick="handlePremiumClick(this)" style="background: linear-gradient(135deg, rgba(202, 138, 4, 0.15), rgba(234, 179, 8, 0.25)); color: #facc15; border-color: rgba(234, 179, 8, 0.4); box-shadow: 0 0 15px rgba(234, 179, 8, 0.15);">
-                    ⭐ Premium
-                </button>
-
+                <button id="navPremiumBtn" class="cat-btn" onclick="handlePremiumClick(this)" style="background: linear-gradient(135deg, rgba(202, 138, 4, 0.15), rgba(234, 179, 8, 0.25)); color: #facc15; border-color: rgba(234, 179, 8, 0.4); box-shadow: 0 0 15px rgba(234, 179, 8, 0.15);">⭐ Premium</button>
                 <button class="cat-btn" onclick="openHelpModal()" style="color: #38bdf8;">❓ Help</button>
-                
-                <!-- Codes Section Button -->
                 <button class="cat-btn" onclick="openCodesModal()" style="color: #facc15; border-color: rgba(234, 179, 8, 0.3);">🔑 Codes</button>
-
                 <a href="https://discord.gg/z8WXEQzv4" target="_blank" class="cat-btn" style="color: #a5b4fc;">💬 Discord</a>
-
                 <button class="cat-btn" onclick="filterCategory('add-model', this)" style="background-color: var(--primary); color: #050505; margin-left: auto;">➕ Post Your Model</button>
             </nav>
         </header>
 
-        <!-- Main Body -->
         <main>
-            <!-- Welcome Banner -->
             <div class="welcome-banner animate-fade-in">
                 <div style="display: flex; align-items: center; gap: 16px;">
                     <div style="display: flex; gap: -12px;">
@@ -443,9 +224,6 @@
                         <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 2px;">Explore our wide collection of secure Roblox Studio models, maps, and admin scripts.</p>
                     </div>
                 </div>
-                <div style="font-size: 0.78rem; color: var(--text-muted); background: var(--bg-input); padding: 8px 14px; border-radius: var(--radius-inner); border: 1px solid var(--border-color);">
-                    ✨ Secure & Verified
-                </div>
             </div>
 
             <!-- Post Your Model Form Section -->
@@ -453,44 +231,21 @@
                 <h2>➕ Post a New Model</h2>
                 <form action="https://formspree.io/f/mjygqarv" method="POST">
                     <div class="form-grid">
-                        <div class="form-group">
-                            <label>Model Name:</label>
-                            <input type="text" name="modelName" placeholder="e.g. Modern House" required>
-                        </div>
-                        <div class="form-group">
-                            <label>Category:</label>
-                            <select name="modelCategory" required>
-                                <option value="admin">Admin</option>
-                                <option value="Steal an Egg">Steal an Egg</option>
-                                <option value="maps">Map</option>
-                            </select>
-                        </div>
+                        <div class="form-group"><label>Model Name:</label><input type="text" name="modelName" placeholder="e.g. Modern House" required></div>
+                        <div class="form-group"><label>Category:</label><select name="modelCategory" required><option value="admin">Admin</option><option value="Steal an Egg">Steal an Egg</option><option value="maps">Map</option></select></div>
                     </div>
-
                     <div class="form-grid">
-                        <div class="form-group">
-                            <label>Your Email (to notify you when approved):</label>
-                            <input type="email" name="userEmail" placeholder="example@gmail.com" required>
-                        </div>
-                        <div class="form-group">
-                            <label>Image URL:</label>
-                            <input type="url" name="modelImage" placeholder="Paste image link here..." required>
-                        </div>
+                        <div class="form-group"><label>Your Email:</label><input type="email" name="userEmail" placeholder="example@gmail.com" required></div>
+                        <div class="form-group"><label>Image URL:</label><input type="url" name="modelImage" placeholder="Paste image link here..." required></div>
                     </div>
-
-                    <div class="form-group">
-                        <label>Asset ID / Code:</label>
-                        <input type="text" name="modelCode" placeholder="e.g. 17383957280" required>
-                    </div>
-
+                    <div class="form-group"><label>Asset ID / Code:</label><input type="text" name="modelCode" placeholder="e.g. 17383957280" required></div>
                     <button type="submit" class="submit-btn" style="margin-top: 8px;">Send Request to Admin 🚀</button>
                 </form>
             </section>
 
             <!-- Models Grid -->
             <div id="modelsGrid" class="models-grid">
-                
-                <!-- Premium Exclusive Suggestions Hub (Visible ONLY when Premium Active in Premium Section) -->
+                <!-- Premium VIP Hub (Hidden until code redemption) -->
                 <div class="model-card premium-only-item hidden" data-category="premium" style="border: 2px solid #eab308; background: linear-gradient(135deg, rgba(234, 179, 8, 0.08), var(--bg-card));">
                     <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=600&auto=format&fit=crop" alt="Premium VIP Hub">
                     <div class="card-body">
@@ -733,7 +488,7 @@
                     </div>
                 </div>
 
-                <!-- Admin Panel Card -->
+                <!-- AdminPanel + -->
                 <div class="model-card" data-category="admin">
                     <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=600&auto=format&fit=crop" alt="AdminPanel +">
                     <div class="card-body">
@@ -748,7 +503,7 @@
                     </div>
                 </div>
 
-                <!-- Studs Card -->
+                <!-- Studs -->
                 <div class="model-card" data-category="maps">
                     <img src="https://upload.wikimedia.org/wikipedia/commons/4/49/A_black_image.jpg" alt="Studs">
                     <div class="card-body">
@@ -762,20 +517,16 @@
                         </div>
                     </div>
                 </div>
-
             </div>
         </main>
 
-        <!-- Footer -->
         <footer>
             <p>© 2026 <strong>YH Studio</strong>. All rights reserved | Contact: <span style="color: var(--primary);">studioyhdevlopers@gmail.com</span></p>
         </footer>
-
     </div>
 
-    <!-- JavaScript Functions -->
+    <!-- JavaScript System Logic -->
     <script>
-        // Valid Single-Use System Codes
         const VALID_PREMIUM_CODES = [
             "YH-FQ5JO9",
             "YH-T6HEO7",
@@ -797,10 +548,6 @@
         }
 
         function openCodesModal() {
-            if (isPremiumUser()) {
-                alert("You already have an active Premium session on this device!");
-                return;
-            }
             document.getElementById('codeErrorMsg').style.display = 'none';
             document.getElementById('codesModal').classList.remove('hidden');
         }
@@ -813,41 +560,21 @@
             event.preventDefault();
             const inputCode = document.getElementById('codeRedeemInput').value.trim();
             const errorDiv = document.getElementById('codeErrorMsg');
+            let usedCodes = JSON.parse(localStorage.getItem('yh_used_codes') || '[]');
 
-            let globallyUsedCodes = JSON.parse(localStorage.getItem('yh_globally_used_codes') || '[]');
-
-            if (globallyUsedCodes.includes(inputCode)) {
+            if (usedCodes.includes(inputCode)) {
                 errorDiv.textContent = "This code has already been redeemed!";
                 errorDiv.style.display = 'block';
                 return;
             }
 
             if (VALID_PREMIUM_CODES.includes(inputCode)) {
+                usedCodes.push(inputCode);
+                localStorage.setItem('yh_used_codes', JSON.stringify(usedCodes));
+                localStorage.setItem('yh_premium_activated', 'true');
                 closeCodesModal();
-                
-                const paymentModal = document.getElementById('paymentProcessingModal');
-                const statusText = document.getElementById('paymentStatusText');
-                paymentModal.classList.remove('hidden');
-
-                setTimeout(() => {
-                    statusText.textContent = "Connecting to secure bank gateway...";
-                }, 1200);
-
-                setTimeout(() => {
-                    statusText.textContent = "Verifying license key...";
-                }, 2500);
-
-                setTimeout(() => {
-                    paymentModal.classList.add('hidden');
-
-                    globallyUsedCodes.push(inputCode);
-                    localStorage.setItem('yh_globally_used_codes', JSON.stringify(globallyUsedCodes));
-                    localStorage.setItem('yh_premium_activated', 'true');
-
-                    updatePremiumUI();
-                    document.getElementById('unlockedSuccessModal').classList.remove('hidden');
-                }, 3800);
-
+                updatePremiumUI();
+                document.getElementById('unlockedSuccessModal').classList.remove('hidden');
             } else {
                 errorDiv.textContent = "Invalid code! Please check and try again.";
                 errorDiv.style.display = 'block';
@@ -884,15 +611,12 @@
         }
 
         function toggleFaq(id) {
-            const element = document.getElementById(id);
-            if (element) {
-                element.classList.toggle('hidden');
-            }
+            const el = document.getElementById(id);
+            if (el) el.classList.toggle('hidden');
         }
 
         window.addEventListener('load', () => {
             updatePremiumUI();
-
             const loaderContainer = document.getElementById('loaderContainer');
             const successCheck = document.getElementById('successCheck');
             const splashText = document.getElementById('splashText');
@@ -933,9 +657,7 @@
         function filterCategory(category, btn) {
             const buttons = document.querySelectorAll('.cat-btn');
             buttons.forEach(b => b.classList.remove('active'));
-            if (btn && !btn.getAttribute('href')) {
-                btn.classList.add('active');
-            }
+            if (btn && !btn.getAttribute('href')) btn.classList.add('active');
 
             const addModelSection = document.getElementById('add-model-section');
             const modelsGrid = document.getElementById('modelsGrid');
@@ -953,25 +675,12 @@
             const cards = document.querySelectorAll('.model-card');
             cards.forEach(card => {
                 const cardCat = card.getAttribute('data-category');
-                
                 if (category === 'premium') {
-                    if (cardCat === 'premium') {
-                        card.style.display = 'flex';
-                    } else {
-                        card.style.display = 'none';
-                    }
+                    card.style.display = (cardCat === 'premium') ? 'flex' : 'none';
                 } else if (category === 'all') {
-                    if (cardCat === 'premium') {
-                        card.style.display = 'none'; // Suggestions hidden everywhere except in premium section
-                    } else {
-                        card.style.display = 'flex';
-                    }
+                    card.style.display = (cardCat === 'premium') ? (isPremiumUser() ? 'flex' : 'none') : 'flex';
                 } else {
-                    if (cardCat === category) {
-                        card.style.display = 'flex';
-                    } else {
-                        card.style.display = 'none';
-                    }
+                    card.style.display = (cardCat === category) ? 'flex' : 'none';
                 }
             });
         }
@@ -979,7 +688,6 @@
         function copyCode(elementId, btn) {
             const codeElement = document.getElementById(elementId);
             if (!codeElement) return;
-            
             navigator.clipboard.writeText(codeElement.innerText).then(() => {
                 const originalText = btn.innerText;
                 btn.innerText = 'Copied!';
@@ -996,14 +704,9 @@
             if (!searchInput) return;
             const input = searchInput.value.toLowerCase();
             const cards = document.querySelectorAll('.model-card');
-            
             cards.forEach(card => {
                 const text = card.innerText.toLowerCase();
-                if (text.includes(input)) {
-                    card.style.display = 'flex';
-                } else {
-                    card.style.display = 'none';
-                }
+                card.style.display = text.includes(input) ? 'flex' : 'none';
             });
         }
     </script>
