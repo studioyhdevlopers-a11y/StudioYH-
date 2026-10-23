@@ -4,53 +4,60 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>YH Studio - Scripts & Models Library</title>
-    <!-- Tailwind CSS CDN for Modern Styling -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        // ==========================================
-        // 🛠️ Maintenance Mode Control Panel
-        // Set to TRUE to lock the site and show maintenance box.
-        // Set to FALSE to make the site work normally.
-        // ==========================================
-        const MAINTENANCE_MODE = false; 
-
-        if (MAINTENANCE_MODE) {
-            window.addEventListener('DOMContentLoaded', () => {
-                document.body.innerHTML = `
-                    <div class="bg-slate-950 text-slate-100 min-h-screen flex items-center justify-center p-4 font-sans selection:bg-indigo-500 selection:text-white w-full">
-                        <div class="bg-slate-900 border border-slate-800 rounded-3xl p-8 max-w-md w-full text-center shadow-2xl relative overflow-hidden">
-                            <div class="absolute -top-10 -right-10 w-32 h-32 bg-indigo-500/10 rounded-full blur-2xl pointer-events-none"></div>
-                            <div class="inline-flex items-center justify-center w-16 h-16 bg-amber-500/10 border border-amber-500/20 rounded-2xl text-amber-400 text-2xl mb-6 shadow-inner">
-                                🛠️
-                            </div>
-                            <h1 class="text-2xl font-black text-white mb-3">YH Studio is Under Maintenance</h1>
-                            <p class="text-sm text-slate-400 leading-relaxed mb-6">
-                                We are currently performing updates and fixing some issues or adding new features. The site will be back online shortly. Thank you for your patience!
-                            </p>
-                            <div class="py-3 px-4 bg-slate-950 border border-slate-800 rounded-2xl text-xs font-semibold text-indigo-400 tracking-wide uppercase">
-                                Status: Maintenance Mode Active
-                            </div>
-                        </div>
-                    </div>
-                `;
-            });
-        }
-
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    colors: {
-                        darkBg: '#0f172a',
-                        cardBg: '#1e293b',
-                        accent: '#6366f1',
-                    }
-                }
-            }
-        }
-    </script>
+    <!-- Plus Jakarta Sans Modern Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-        /* Apple-style smooth animations */
+        /* ==========================================
+           YH Studio - Modern Dark Glassmorphism CSS Theme
+           ========================================== */
+        :root {
+            --bg-main: #090a0f;
+            --bg-card: rgba(24, 24, 27, 0.75);
+            --bg-input: #0f1015;
+            
+            --primary: #22c55e;
+            --primary-hover: #16a34a;
+            --primary-glow: rgba(34, 197, 94, 0.25);
+            
+            --text-heading: #ffffff;
+            --text-body: #cbd5e1;
+            --text-muted: #71717a;
+            
+            --border-color: rgba(255, 255, 255, 0.08);
+            --border-hover: rgba(34, 197, 94, 0.4);
+            --glass-backdrop: blur(16px);
+            
+            --radius-pill: 9999px;
+            --radius-card: 20px;
+            --radius-inner: 12px;
+            
+            --transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', 'Segoe UI', system-ui, sans-serif;
+            background-color: var(--bg-main);
+            background-image: 
+                radial-gradient(at 10% 10%, rgba(34, 197, 94, 0.08) 0px, transparent 50%),
+                radial-gradient(at 90% 90%, rgba(99, 102, 241, 0.05) 0px, transparent 50%);
+            background-attachment: fixed;
+            color: var(--text-body);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            direction: ltr;
+            text-align: left;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+
+        /* Animations */
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
@@ -65,199 +72,476 @@
         .animate-scale-up {
             animation: scaleUp 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
+
+        /* Splash Screen */
+        #splashScreen {
+            position: fixed;
+            inset: 0;
+            z-index: 50;
+            background-color: var(--bg-main);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.3s ease;
+        }
+
+        /* Modals & Overlays */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 50;
+            background-color: rgba(9, 10, 15, 0.85);
+            backdrop-filter: blur(12px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+        }
+        .modal-overlay.hidden {
+            display: none;
+        }
+        .modal-content {
+            background: var(--bg-card);
+            backdrop-filter: var(--glass-backdrop);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-card);
+            padding: 28px;
+            max-width: 480px;
+            width: 100%;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+        }
+
+        /* Header Section */
+        header {
+            background: var(--bg-card);
+            backdrop-filter: var(--glass-backdrop);
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            z-index: 40;
+            padding: 20px 16px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        .header-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            md-flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+        }
+        @media(min-width: 768px) {
+            .header-inner { flex-direction: row; }
+        }
+
+        header h1 {
+            color: var(--primary);
+            font-size: 2rem;
+            font-weight: 800;
+            letter-spacing: -0.025em;
+            text-shadow: 0 0 20px var(--primary-glow);
+        }
+        header p {
+            color: var(--text-muted);
+            font-size: 0.88rem;
+            margin-top: 4px;
+        }
+
+        /* Search Box */
+        .search-container {
+            width: 100%;
+            max-width: 320px;
+        }
+        .search-container input {
+            width: 100%;
+            padding: 12px 18px;
+            background-color: var(--bg-input);
+            border: 1px solid var(--border-color);
+            color: var(--text-heading);
+            border-radius: var(--radius-pill);
+            outline: none;
+            font-size: 0.9rem;
+            transition: var(--transition);
+        }
+        .search-container input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px var(--primary-glow);
+        }
+
+        /* Navigation & Categories */
+        .nav-menu {
+            max-width: 1100px;
+            margin: 16px auto 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 8px;
+        }
+        .cat-btn {
+            background-color: var(--bg-input);
+            color: var(--text-muted);
+            border: 1px solid var(--border-color);
+            padding: 8px 16px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            border-radius: var(--radius-pill);
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .cat-btn.active, .cat-btn:hover {
+            background-color: var(--primary);
+            color: #050505;
+            border-color: var(--primary);
+            box-shadow: 0 4px 15px var(--primary-glow);
+            transform: translateY(-1px);
+        }
+
+        /* Main Content Layout */
+        main {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 24px 16px;
+            flex-grow: 1;
+            width: 100%;
+        }
+
+        /* Welcome Banner */
+        .welcome-banner {
+            background: linear-gradient(135deg, rgba(34, 197, 94, 0.1), rgba(24, 24, 27, 0.8));
+            border: 1px solid rgba(34, 197, 94, 0.2);
+            border-radius: var(--radius-card);
+            padding: 24px;
+            margin-bottom: 32px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+        }
+        @media(min-width: 768px) {
+            .welcome-banner { flex-direction: row; justify-content: space-between; align-items: center; }
+        }
+
+        /* Form Section */
+        .form-section {
+            background: var(--bg-card);
+            backdrop-filter: var(--glass-backdrop);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-card);
+            padding: 28px;
+            margin-bottom: 32px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+        }
+        .form-section h2 {
+            color: var(--primary);
+            font-size: 1.25rem;
+            margin-bottom: 20px;
+        }
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 16px;
+        }
+        @media(min-width: 768px) {
+            .form-grid { grid-template-columns: 1fr 1fr; }
+        }
+        .form-group {
+            margin-bottom: 16px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 6px;
+            color: var(--text-body);
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 11px 14px;
+            background-color: var(--bg-input);
+            border: 1px solid var(--border-color);
+            color: var(--text-heading);
+            border-radius: var(--radius-inner);
+            outline: none;
+            font-size: 0.9rem;
+            transition: var(--transition);
+        }
+        .form-group input:focus, .form-group select:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px var(--primary-glow);
+        }
+        .submit-btn {
+            width: 100%;
+            padding: 12px;
+            background-color: var(--primary);
+            color: #050505;
+            border: none;
+            font-weight: 700;
+            border-radius: var(--radius-inner);
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: 0 4px 15px var(--primary-glow);
+        }
+        .submit-btn:hover {
+            background-color: var(--primary-hover);
+            transform: translateY(-2px);
+        }
+
+        /* Models Grid & Cards */
+        .models-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+        }
+        .model-card {
+            background: var(--bg-card);
+            backdrop-filter: var(--glass-backdrop);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-card);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transition: var(--transition);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+        }
+        .model-card:hover {
+            border-color: var(--border-hover);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.5), 0 0 20px rgba(34, 197, 94, 0.15);
+        }
+        .model-card img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+        .model-card:hover img {
+            transform: scale(1.02);
+        }
+        .card-body {
+            padding: 18px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+            justify-content: space-between;
+            gap: 14px;
+        }
+        .code-box {
+            background-color: var(--bg-input);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-inner);
+            padding: 10px 14px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 8px;
+        }
+        pre {
+            color: var(--primary);
+            font-family: Consolas, Monaco, monospace;
+            font-size: 0.88rem;
+            font-weight: 600;
+            overflow-x: auto;
+        }
+        .copy-btn {
+            background-color: var(--primary);
+            color: #050505;
+            border: none;
+            padding: 6px 14px;
+            font-weight: 700;
+            font-size: 0.8rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        .copy-btn:hover {
+            background-color: var(--primary-hover);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--bg-card);
+            border-top: 1px solid var(--border-color);
+            padding: 24px;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            margin-top: auto;
+        }
     </style>
 </head>
-<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col font-sans selection:bg-indigo-500 selection:text-white overflow-x-hidden">
+<body>
 
-    <!-- Splash Screen (Apple Style Fast Intro Animation with Progress Bar) -->
-    <div id="splashScreen" class="fixed inset-0 z-50 bg-slate-950 flex flex-col items-center justify-center transition-opacity duration-300">
-        <div class="w-80 max-w-xs flex flex-col items-center">
-            <!-- Icon/Success Checkmark Container (Removed YH letters, kept clean circle spinner) -->
-            <div class="relative w-16 h-16 flex items-center justify-center mb-6">
-                <div id="loaderContainer" class="absolute inset-0 flex items-center justify-center">
-                    <div class="w-14 h-14 border-4 border-slate-800 border-t-indigo-500 rounded-full animate-spin"></div>
+    <!-- Splash Screen with Progress Bar -->
+    <div id="splashScreen">
+        <div style="width: 280px; display: flex; flex-direction: column; align-items: center;">
+            <div style="position: relative; width: 64px; height: 64px; display: flex; align-items: center; justify-content: center; margin-bottom: 24px;">
+                <div id="loaderContainer" style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;">
+                    <div style="width: 50px; height: 50px; border: 4px solid #27272a; border-top-color: var(--primary); border-radius: 50%; animation: spin 0.8s linear infinite;"></div>
                 </div>
-                <!-- Success Checkmark (Hidden Initially) -->
-                <div id="successCheck" class="hidden absolute inset-0 w-16 h-16 bg-emerald-500/20 border-2 border-emerald-500 rounded-full flex items-center justify-center animate-scale-up shadow-lg shadow-emerald-500/30">
-                    <svg class="w-8 h-8 text-emerald-400" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path>
-                    </svg>
+                <div id="successCheck" class="hidden" style="position: absolute; inset: 0; background: rgba(34, 197, 94, 0.2); border: 2px solid var(--primary); border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                    <svg style="width: 32px; height: 32px; color: var(--primary);" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path></svg>
                 </div>
             </div>
-
-            <!-- Labels row: Left (Website Loading) and Right (0% -> 100%) -->
-            <div class="w-full flex justify-between items-center text-xs font-medium text-slate-400 mb-2 tracking-wide">
+            <div style="width: 100%; display: flex; justify-content: space-between; font-size: 0.8rem; color: var(--text-muted); margin-bottom: 8px; font-weight: 500;">
                 <span id="splashText">Website Loading</span>
                 <span id="progressPercentage">0%</span>
             </div>
-
-            <!-- Thin straight progress bar -->
-            <div class="w-full h-1 bg-slate-800 rounded-full overflow-hidden">
-                <div id="progressBar" class="h-full bg-indigo-500 w-0 transition-all duration-100 ease-out rounded-full shadow-sm shadow-indigo-500/50"></div>
+            <div style="width: 100%; height: 4px; background: #27272a; border-radius: 9999px; overflow: hidden;">
+                <div id="progressBar" style="height: 100%; background: var(--primary); width: 0; transition: width 0.1s ease-out; border-radius: 9999px;"></div>
             </div>
         </div>
     </div>
+    <style>@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }</style>
 
-    <!-- Update Popup Modal (v1.0.0.6 - Shows only once per user) -->
-    <div id="updateModal" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-4 hidden">
-        <div class="bg-slate-900 border border-slate-800 rounded-3xl p-6 md:p-8 max-w-md w-full shadow-2xl animate-scale-up relative">
-            <div class="flex items-center justify-between mb-4">
-                <span class="text-xs font-bold text-indigo-400 bg-indigo-500/10 border border-indigo-500/20 px-3 py-1 rounded-full">Update v1.0.0.6</span>
-                <span class="text-xs text-slate-400">New Release</span>
+    <!-- Update Popup Modal (v1.0.0.6) -->
+    <div id="updateModal" class="modal-overlay hidden">
+        <div class="modal-content animate-scale-up" style="position: relative;">
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px;">
+                <span style="font-size: 0.75rem; font-weight: 700; color: var(--primary); background: rgba(34, 197, 94, 0.1); border: 1px solid rgba(34, 197, 94, 0.2); padding: 4px 12px; border-radius: 9999px;">Update v1.0.0.6</span>
+                <span style="font-size: 0.75rem; color: var(--text-muted);">New Release</span>
             </div>
-            <h3 class="text-xl font-extrabold text-white mb-2">What's New in YH Studio</h3>
-            <p class="text-sm text-slate-300 mb-6 leading-relaxed">
-                • Added <span class="text-indigo-300 font-semibold">Admin Panel v2.8</span>.<br>
-                • Added <span class="text-indigo-300 font-semibold">Steal an Egg v5</span>.<br>
-                • Renamed scripts category to <span class="text-indigo-300 font-semibold">Steal an Egg</span> and updated iterations.<br>
+            <h3 style="font-size: 1.25rem; font-weight: 800; color: #fff; margin-bottom: 8px;">What's New in YH Studio</h3>
+            <p style="font-size: 0.88rem; color: var(--text-body); margin-bottom: 24px; line-height: 1.6;">
+                • Added <span style="color: var(--primary); font-weight: 600;">Admin Panel v2.8</span>.<br>
+                • Added <span style="color: var(--primary); font-weight: 600;">Steal an Egg v5</span>.<br>
+                • Renamed scripts category to <span style="color: var(--primary); font-weight: 600;">Steal an Egg</span> and updated iterations.<br>
                 • Performance & UI optimizations.
             </p>
-            <button onclick="closeUpdateModal()" class="w-full py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold rounded-2xl transition shadow-lg shadow-indigo-500/20">
-                Confirm
-            </button>
+            <button onclick="closeUpdateModal()" class="submit-btn">Confirm</button>
         </div>
     </div>
 
     <!-- Help Section Modal -->
-    <div id="helpModal" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-4 hidden">
-        <div class="bg-slate-900 border border-slate-800 rounded-3xl p-6 md:p-8 max-w-lg w-full shadow-2xl animate-scale-up relative max-h-[90vh] overflow-y-auto">
-            <div class="flex items-center justify-between mb-4">
-                <h3 class="text-2xl font-black bg-gradient-to-r from-indigo-400 to-cyan-400 bg-clip-text text-transparent">Help & Support</h3>
-                <button onclick="closeHelpModal()" class="text-slate-400 hover:text-white text-lg font-bold">✕</button>
+    <div id="helpModal" class="modal-overlay hidden">
+        <div class="modal-content animate-scale-up" style="max-height: 90vh; overflow-y: auto;">
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px;">
+                <h3 style="font-size: 1.35rem; font-weight: 900; color: var(--primary);">Help & Support</h3>
+                <button onclick="closeHelpModal()" style="background: none; border: none; color: var(--text-muted); font-size: 1.2rem; cursor: pointer;">✕</button>
             </div>
-            <p class="text-xs text-slate-400 mb-6">Click on any question below to view the answer or submit a support request.</p>
+            <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 20px;">Click on any question below to view the answer or submit a support request.</p>
 
-            <div class="space-y-4">
-                <!-- FAQ 1: Testing Status -->
-                <div class="bg-slate-950 border border-slate-800 rounded-2xl p-4 transition">
-                    <button onclick="toggleFaq('faq1')" class="w-full text-left font-semibold text-slate-200 text-sm flex justify-between items-center">
+            <div style="display: flex; flex-direction: column; gap: 12px;">
+                <!-- FAQ 1 -->
+                <div style="background: var(--bg-input); border: 1px solid var(--border-color); border-radius: var(--radius-inner); padding: 14px;">
+                    <button onclick="toggleFaq('faq1')" style="width: 100%; background: none; border: none; color: #fff; text-align: left; font-weight: 600; font-size: 0.88rem; display: flex; justify-content: space-between; align-items: center; cursor: pointer;">
                         <span>What should I do if my model is pending?</span>
-                        <span class="text-indigo-400 text-lg">+</span>
+                        <span style="color: var(--primary); font-size: 1.2rem;">+</span>
                     </button>
-                    <div id="faq1" class="hidden mt-3 pt-3 border-t border-slate-800 text-xs text-slate-300 space-y-3">
-                        <p>First, please wait 3-5 hours. If it's still pending after that time, you can send a message to the YH Studio support team using the form below.</p>
-                        
-                        <form action="https://formspree.io/f/mjygqarv" method="POST" class="space-y-2 mt-2">
+                    <div id="faq1" class="hidden" style="margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--border-color); font-size: 0.8rem; color: var(--text-body);">
+                        <p style="margin-bottom: 12px;">First, please wait 3-5 hours. If it's still pending after that time, you can send a message to the YH Studio support team using the form below.</p>
+                        <form action="https://formspree.io/f/mjygqarv" method="POST" style="display: flex; flex-direction: column; gap: 8px;">
                             <input type="hidden" name="supportType" value="Model Status Inquiry">
-                            <input type="text" name="modelName" placeholder="Model Name" required class="w-full px-3 py-2 bg-slate-900 border border-slate-700 rounded-xl text-xs">
-                            <input type="text" name="modelLink" placeholder="Model Link" required class="w-full px-3 py-2 bg-slate-900 border border-slate-700 rounded-xl text-xs">
-                            <input type="email" name="userEmail" placeholder="Your Email" required class="w-full px-3 py-2 bg-slate-900 border border-slate-700 rounded-xl text-xs">
-                            <input type="file" name="modelImage" class="w-full text-xs text-slate-400 file:mr-4 file:py-1 file:px-3 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-slate-800 file:text-indigo-300 hover:file:bg-slate-700">
-                            <button type="submit" class="w-full py-2 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold rounded-xl text-xs transition">Send to Support 🚀</button>
+                            <input type="text" name="modelName" placeholder="Model Name" required style="padding: 8px 12px; background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 8px; color: #fff; font-size: 0.8rem;">
+                            <input type="text" name="modelLink" placeholder="Model Link" required style="padding: 8px 12px; background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 8px; color: #fff; font-size: 0.8rem;">
+                            <input type="email" name="userEmail" placeholder="Your Email" required style="padding: 8px 12px; background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 8px; color: #fff; font-size: 0.8rem;">
+                            <button type="submit" class="submit-btn" style="padding: 8px; font-size: 0.8rem;">Send to Support 🚀</button>
                         </form>
                     </div>
                 </div>
 
-                <!-- FAQ 2: Are all models safe? -->
-                <div class="bg-slate-950 border border-slate-800 rounded-2xl p-4 transition">
-                    <button onclick="toggleFaq('faq2')" class="w-full text-left font-semibold text-slate-200 text-sm flex justify-between items-center">
+                <!-- FAQ 2 -->
+                <div style="background: var(--bg-input); border: 1px solid var(--border-color); border-radius: var(--radius-inner); padding: 14px;">
+                    <button onclick="toggleFaq('faq2')" style="width: 100%; background: none; border: none; color: #fff; text-align: left; font-weight: 600; font-size: 0.88rem; display: flex; justify-content: space-between; align-items: center; cursor: pointer;">
                         <span>Are all models safe?</span>
-                        <span class="text-indigo-400 text-lg">+</span>
+                        <span style="color: var(--primary); font-size: 1.2rem;">+</span>
                     </button>
-                    <div id="faq2" class="hidden mt-3 pt-3 border-t border-slate-800 text-xs text-slate-300">
+                    <div id="faq2" class="hidden" style="margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--border-color); font-size: 0.8rem; color: var(--text-body);">
                         <p>Yes, absolutely! All models are safe and virus-free.</p>
                     </div>
                 </div>
 
-                <!-- FAQ 3: Model is not working -->
-                <div class="bg-slate-950 border border-slate-800 rounded-2xl p-4 transition">
-                    <button onclick="toggleFaq('faq3')" class="w-full text-left font-semibold text-slate-200 text-sm flex justify-between items-center">
+                <!-- FAQ 3 -->
+                <div style="background: var(--bg-input); border: 1px solid var(--border-color); border-radius: var(--radius-inner); padding: 14px;">
+                    <button onclick="toggleFaq('faq3')" style="width: 100%; background: none; border: none; color: #fff; text-align: left; font-weight: 600; font-size: 0.88rem; display: flex; justify-content: space-between; align-items: center; cursor: pointer;">
                         <span>The model is not working?</span>
-                        <span class="text-indigo-400 text-lg">+</span>
+                        <span style="color: var(--primary); font-size: 1.2rem;">+</span>
                     </button>
-                    <div id="faq3" class="hidden mt-3 pt-3 border-t border-slate-800 text-xs text-slate-300 space-y-3">
-                        <p>Oh, if the model is not working for you, another button will appear in my message. Click it and type the model name to be checked.</p>
-                        
-                        <form action="https://formspree.io/f/mjygqarv" method="POST" class="space-y-2 mt-2">
+                    <div id="faq3" class="hidden" style="margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--border-color); font-size: 0.8rem; color: var(--text-body);">
+                        <p style="margin-bottom: 12px;">Oh, if the model is not working for you, another button will appear in my message. Click it and type the model name to be checked.</p>
+                        <form action="https://formspree.io/f/mjygqarv" method="POST" style="display: flex; flex-direction: column; gap: 8px;">
                             <input type="hidden" name="supportType" value="Broken Model Report">
-                            <input type="text" name="modelName" placeholder="Model Name" required class="w-full px-3 py-2 bg-slate-900 border border-slate-700 rounded-xl text-xs">
-                            <input type="text" name="modelId" placeholder="Model ID / Code" required class="w-full px-3 py-2 bg-slate-900 border border-slate-700 rounded-xl text-xs">
-                            <input type="email" name="userEmail" placeholder="Your Email" required class="w-full px-3 py-2 bg-slate-900 border border-slate-700 rounded-xl text-xs">
-                            <button type="submit" class="w-full py-2 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold rounded-xl text-xs transition">Submit for Review 🔍</button>
+                            <input type="text" name="modelName" placeholder="Model Name" required style="padding: 8px 12px; background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 8px; color: #fff; font-size: 0.8rem;">
+                            <input type="text" name="modelId" placeholder="Model ID / Code" required style="padding: 8px 12px; background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 8px; color: #fff; font-size: 0.8rem;">
+                            <input type="email" name="userEmail" placeholder="Your Email" required style="padding: 8px 12px; background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 8px; color: #fff; font-size: 0.8rem;">
+                            <button type="submit" class="submit-btn" style="padding: 8px; font-size: 0.8rem;">Submit for Review 🔍</button>
                         </form>
                     </div>
                 </div>
             </div>
 
-            <button onclick="closeHelpModal()" class="w-full mt-6 py-3 bg-slate-800 hover:bg-slate-700 text-white font-semibold rounded-2xl transition border border-slate-700 text-sm">
-                Close
-            </button>
+            <button onclick="closeHelpModal()" style="width: 100%; margin-top: 20px; padding: 10px; background: var(--bg-input); border: 1px solid var(--border-color); color: #fff; font-weight: 600; border-radius: var(--radius-inner); cursor: pointer;">Close</button>
         </div>
     </div>
 
-    <!-- Main Site Wrapper (Hidden until intro finishes) -->
-    <div id="mainContent" class="opacity-0 transition-opacity duration-500 flex flex-col min-h-screen">
+    <!-- Main Site Wrapper -->
+    <div id="mainContent" style="opacity: 0; transition: opacity 0.5s ease; display: flex; flex-direction: column; min-height: 100vh;">
 
         <!-- Header Section -->
-        <header class="bg-slate-900/80 backdrop-blur-md border-b border-slate-800 sticky top-0 z-40 px-4 py-6 shadow-lg">
-            <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
-                
-                <div class="text-center md:text-left">
-                    <h1 class="text-3xl font-extrabold tracking-tight bg-gradient-to-r from-indigo-400 to-cyan-400 bg-clip-text text-transparent">YH Studio</h1>
-                    <p class="text-sm text-slate-400 mt-1">The ultimate library for secure Roblox Studio models & scripts</p>
+        <header>
+            <div class="header-inner">
+                <div>
+                    <h1>YH Studio</h1>
+                    <p>The ultimate library for secure Roblox Studio models & scripts</p>
                 </div>
-
-                <div class="w-full md:w-80">
-                    <input type="text" id="searchInput" onkeyup="searchScripts()" placeholder="Search for a model or code..." 
-                        class="w-full px-4 py-2 bg-slate-800 border border-slate-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm placeholder-slate-400 transition">
+                <div class="search-container">
+                    <input type="text" id="searchInput" onkeyup="searchScripts()" placeholder="Search for a model or code...">
                 </div>
             </div>
 
-            <!-- Standardized Category Menu with Discord Button Added -->
-            <nav class="max-w-6xl mx-auto flex flex-wrap items-center justify-center md:justify-start gap-2 mt-6">
-                <button class="cat-btn active px-4 py-2 rounded-xl text-sm font-semibold bg-indigo-600 text-white transition hover:bg-indigo-700 shadow-sm" onclick="filterCategory('all')">All</button>
-                <button class="cat-btn px-4 py-2 rounded-xl text-sm font-semibold bg-slate-800/80 border border-slate-700/50 text-slate-300 transition hover:bg-slate-700 hover:text-white" onclick="filterCategory('admin')">Admin</button>
-                <button class="cat-btn px-4 py-2 rounded-xl text-sm font-semibold bg-slate-800/80 border border-slate-700/50 text-slate-300 transition hover:bg-slate-700 hover:text-white" onclick="filterCategory('Steal an Egg')">Steal an Egg</button>
-                <button class="cat-btn px-4 py-2 rounded-xl text-sm font-semibold bg-slate-800/80 border border-slate-700/50 text-slate-300 transition hover:bg-slate-700 hover:text-white" onclick="filterCategory('maps')">Map</button>
-                <button class="cat-btn px-4 py-2 rounded-xl text-sm font-semibold bg-slate-800/80 border border-slate-700/50 text-cyan-400 transition hover:bg-slate-700 hover:text-cyan-300" onclick="openHelpModal()">❓ Help</button>
+            <!-- Navigation Bar -->
+            <nav class="nav-menu">
+                <button class="cat-btn active" onclick="filterCategory('all', this)">All</button>
+                <button class="cat-btn" onclick="filterCategory('admin', this)">Admin</button>
+                <button class="cat-btn" onclick="filterCategory('Steal an Egg', this)">Steal an Egg</button>
+                <button class="cat-btn" onclick="filterCategory('maps', this)">Map</button>
+                <button class="cat-btn" onclick="openHelpModal()" style="color: #38bdf8;">❓ Help</button>
                 
-                <!-- Discord Button -->
-                <a href="https://discord.gg/z8WXEQzv4" target="_blank" class="px-4 py-2 rounded-xl text-sm font-semibold bg-slate-800/80 border border-slate-700/50 text-indigo-400 transition hover:bg-indigo-600 hover:text-white flex items-center gap-1.5 shadow-sm">
-                    💬 Discord
-                </a>
+                <a href="https://discord.gg/z8WXEQzv4" target="_blank" class="cat-btn" style="color: #a5b4fc;">💬 Discord</a>
 
-                <button class="cat-btn px-4 py-2 rounded-xl text-sm font-semibold bg-emerald-600 text-white transition hover:bg-emerald-700 shadow-sm ml-auto" onclick="filterCategory('add-model')">➕ Post Your Model</button>
+                <button class="cat-btn" onclick="filterCategory('add-model', this)" style="background-color: var(--primary); color: #050505; margin-left: auto;">➕ Post Your Model</button>
             </nav>
         </header>
 
-        <!-- Main Content Body -->
-        <main class="max-w-6xl mx-auto px-4 py-8 flex-grow w-full">
-
-            <!-- Welcome Apple-Style Notification Banner -->
-            <div class="bg-gradient-to-r from-indigo-900/40 via-slate-900 to-slate-900 border border-indigo-500/30 rounded-2xl p-5 md:p-6 mb-8 flex flex-col md:flex-row items-center justify-between gap-6 shadow-2xl animate-fade-in">
-                <div class="flex items-center gap-4 text-center md:text-left flex-col md:flex-row">
-                    <div class="flex -space-x-3 overflow-hidden p-1">
-                        <img class="inline-block h-14 w-14 rounded-2xl object-cover ring-2 ring-indigo-500/50 shadow-lg transform hover:scale-110 transition duration-300" src="https://i.ibb.co/pv0HPLQz/IMG-0114.jpg" alt="Admin Panel v2.8">
-                        <img class="inline-block h-14 w-14 rounded-2xl object-cover ring-2 ring-cyan-500/50 shadow-lg transform hover:scale-110 transition duration-300" src="https://i.ibb.co/Wvr2P6Yb/IMG-0113.jpg" alt="Steal an Egg v5">
+        <!-- Main Body -->
+        <main>
+            <!-- Welcome Banner -->
+            <div class="welcome-banner animate-fade-in">
+                <div style="display: flex; align-items: center; gap: 16px;">
+                    <div style="display: flex; gap: -12px;">
+                        <img src="https://i.ibb.co/pv0HPLQz/IMG-0114.jpg" alt="Admin Panel v2.8" style="width: 56px; height: 56px; border-radius: 14px; object-fit: cover; border: 2px solid rgba(34,197,94,0.4);">
+                        <img src="https://i.ibb.co/Wvr2P6Yb/IMG-0113.jpg" alt="Steal an Egg v5" style="width: 56px; height: 56px; border-radius: 14px; object-fit: cover; border: 2px solid rgba(56,189,248,0.4); margin-left: -12px;">
                     </div>
                     <div>
-                        <h2 class="text-xl font-bold text-white flex items-center justify-center md:justify-start gap-2">
-                            Welcome to YH Studio! <span class="text-xs bg-indigo-500 text-white px-2 py-0.5 rounded-full font-normal">v1.0.0.6 Update</span>
+                        <h2 style="font-size: 1.15rem; font-weight: 700; color: #fff; display: flex; align-items: center; gap: 8px;">
+                            Welcome to YH Studio! <span style="font-size: 0.7rem; background: var(--primary); color: #050505; padding: 2px 8px; border-radius: 9999px; font-weight: 700;">v1.0.0.6</span>
                         </h2>
-                        <p class="text-sm text-slate-300 mt-1">Explore our wide collection of secure Roblox Studio models, maps, and admin scripts.</p>
+                        <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 2px;">Explore our wide collection of secure Roblox Studio models, maps, and admin scripts.</p>
                     </div>
                 </div>
-                <div class="text-xs text-slate-400 bg-slate-800/80 px-4 py-2 rounded-xl border border-slate-700">
+                <div style="font-size: 0.78srem; color: var(--text-muted); background: var(--bg-input); padding: 8px 14px; border-radius: var(--radius-inner); border: 1px solid var(--border-color);">
                     ✨ Secure & Verified
                 </div>
             </div>
 
             <!-- Post Your Model Form Section -->
-            <section id="add-model-section" class="bg-slate-900 border border-slate-800 rounded-2xl p-6 md:p-8 shadow-xl mb-8" style="display: none;">
-                <h2 class="text-xl font-bold mb-6 text-indigo-400 flex items-center gap-2">➕ Post a New Model</h2>
-                <form action="https://formspree.io/f/mjygqarv" method="POST" class="space-y-4">
-                    
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div class="space-y-1">
-                            <label class="text-sm font-medium text-slate-300">Model Name:</label>
-                            <input type="text" name="modelName" placeholder="e.g. Modern House" required
-                                class="w-full px-4 py-2 bg-slate-800 border border-slate-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm">
+            <section id="add-model-section" class="form-section" style="display: none;">
+                <h2>➕ Post a New Model</h2>
+                <form action="https://formspree.io/f/mjygqarv" method="POST">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>Model Name:</label>
+                            <input type="text" name="modelName" placeholder="e.g. Modern House" required>
                         </div>
-
-                        <div class="space-y-1">
-                            <label class="text-sm font-medium text-slate-300">Category:</label>
-                            <select name="modelCategory" required
-                                class="w-full px-4 py-2 bg-slate-800 border border-slate-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm">
+                        <div class="form-group">
+                            <label>Category:</label>
+                            <select name="modelCategory" required>
                                 <option value="admin">Admin</option>
                                 <option value="Steal an Egg">Steal an Egg</option>
                                 <option value="maps">Map</option>
@@ -265,302 +549,295 @@
                         </div>
                     </div>
 
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div class="space-y-1">
-                            <label class="text-sm font-medium text-slate-300">Your Email (to notify you when approved):</label>
-                            <input type="email" name="userEmail" placeholder="example@gmail.com" required
-                                class="w-full px-4 py-2 bg-slate-800 border border-slate-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>Your Email (to notify you when approved):</label>
+                            <input type="email" name="userEmail" placeholder="example@gmail.com" required>
                         </div>
-
-                        <div class="space-y-1">
-                            <label class="text-sm font-medium text-slate-300">Image URL:</label>
-                            <input type="url" name="modelImage" placeholder="Paste image link here..." required
-                                class="w-full px-4 py-2 bg-slate-800 border border-slate-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm">
+                        <div class="form-group">
+                            <label>Image URL:</label>
+                            <input type="url" name="modelImage" placeholder="Paste image link here..." required>
                         </div>
                     </div>
 
-                    <div class="space-y-1">
-                        <label class="text-sm font-medium text-slate-300">Asset ID / Code:</label>
-                        <input type="text" name="modelCode" placeholder="e.g. 17383957280" required
-                            class="w-full px-4 py-2 bg-slate-800 border border-slate-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm">
+                    <div class="form-group">
+                        <label>Asset ID / Code:</label>
+                        <input type="text" name="modelCode" placeholder="e.g. 17383957280" required>
                     </div>
 
-                    <button type="submit" class="w-full py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold rounded-xl transition shadow-lg shadow-indigo-500/20 flex items-center justify-center gap-2">
-                        Send Request to Admin 🚀
-                    </button>
+                    <button type="submit" class="submit-btn" style="margin-top: 8px;">Send Request to Admin 🚀</button>
                 </form>
             </section>
 
             <!-- Models Grid -->
-            <div id="modelsGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div id="modelsGrid" class="models-grid">
                 
                 <!-- Admin Panel v2.8 -->
-                <div class="model-card bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden shadow-lg hover:border-slate-700 transition flex flex-col" data-category="admin">
-                    <img src="https://i.ibb.co/pv0HPLQz/IMG-0114.jpg" alt="Admin Panel v2.8" class="w-full h-48 object-cover">
-                    <div class="p-5 flex flex-col flex-grow justify-between gap-4">
-                        <div class="flex items-center justify-between">
-                            <h3 class="font-bold text-lg text-slate-100">Admin Panel v2.8</h3>
-                            <span class="text-xs bg-purple-500/10 text-purple-400 px-2.5 py-1 rounded-full border border-purple-500/20">Admin</span>
+                <div class="model-card" data-category="admin">
+                    <img src="https://i.ibb.co/pv0HPLQz/IMG-0114.jpg" alt="Admin Panel v2.8">
+                    <div class="card-body">
+                        <div style="display: flex; align-items: center; justify-content: space-between;">
+                            <h3 style="font-size: 1rem; font-weight: 700; color: #fff;">Admin Panel v2.8</h3>
+                            <span style="font-size: 0.72rem; background: rgba(168, 85, 247, 0.1); color: #c084fc; border: 1px solid rgba(168, 85, 247, 0.2); padding: 2px 10px; border-radius: 9999px;">Admin</span>
                         </div>
-                        <div class="bg-slate-950 border border-slate-800 rounded-xl p-3 flex items-center justify-between gap-2">
-                            <pre class="text-indigo-300 font-mono text-sm overflow-x-auto"><code id="codeAdminPanel28">76495740255468</code></pre>
-                            <button class="px-3 py-1.5 bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-semibold rounded-lg transition shrink-0" onclick="copyCode('codeAdminPanel28', this)">Copy</button>
+                        <div class="code-box">
+                            <pre><code id="codeAdminPanel28">76495740255468</code></pre>
+                            <button class="copy-btn" onclick="copyCode('codeAdminPanel28', this)">Copy</button>
                         </div>
                     </div>
                 </div>
 
                 <!-- Steal an Egg v2 -->
-                <div class="model-card bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden shadow-lg hover:border-slate-700 transition flex flex-col" data-category="Steal an Egg">
-                    <img src="https://i.ibb.co/chBgVfDB/IMG-0110.jpg" alt="Steal an Egg v2" class="w-full h-48 object-cover">
-                    <div class="p-5 flex flex-col flex-grow justify-between gap-4">
-                        <div class="flex items-center justify-between">
-                            <h3 class="font-bold text-lg text-slate-100">Steal an Egg v2</h3>
-                            <span class="text-xs bg-amber-500/10 text-amber-400 px-2.5 py-1 rounded-full border border-amber-500/20">Steal an Egg</span>
+                <div class="model-card" data-category="Steal an Egg">
+                    <img src="https://i.ibb.co/chBgVfDB/IMG-0110.jpg" alt="Steal an Egg v2">
+                    <div class="card-body">
+                        <div style="display: flex; align-items: center; justify-content: space-between;">
+                            <h3 style="font-size: 1rem; font-weight: 700; color: #fff;">Steal an Egg v2</h3>
+                            <span style="font-size: 0.72rem; background: rgba(245, 158, 11, 0.1); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.2); padding: 2px 10px; border-radius: 9999px;">Steal an Egg</span>
                         </div>
-                        <div class="bg-slate-950 border border-slate-800 rounded-xl p-3 flex items-center justify-between gap-2">
-                            <pre class="text-indigo-300 font-mono text-sm overflow-x-auto"><code id="codeStealEggV2">78345888080009</code></pre>
-                            <button class="px-3 py-1.5 bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-semibold rounded-lg transition shrink-0" onclick="copyCode('codeStealEggV2', this)">Copy</button>
+                        <div class="code-box">
+                            <pre><code id="codeStealEggV2">78345888080009</code></pre>
+                            <button class="copy-btn" onclick="copyCode('codeStealEggV2', this)">Copy</button>
                         </div>
                     </div>
                 </div>
 
                 <!-- Steal an Egg v3 -->
-                <div class="model-card bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden shadow-lg hover:border-slate-700 transition flex flex-col" data-category="Steal an Egg">
-                    <img src="https://i.ibb.co/tTKfJf7T/IMG-0111.jpg" alt="Steal an Egg v3" class="w-full h-48 object-cover">
-                    <div class="p-5 flex flex-col flex-grow justify-between gap-4">
-                        <div class="flex items-center justify-between">
-                            <h3 class="font-bold text-lg text-slate-100">Steal an Egg v3</h3>
-                            <span class="text-xs bg-amber-500/10 text-amber-400 px-2.5 py-1 rounded-full border border-amber-500/20">Steal an Egg</span>
+                <div class="model-card" data-category="Steal an Egg">
+                    <img src="https://i.ibb.co/tTKfJf7T/IMG-0111.jpg" alt="Steal an Egg v3">
+                    <div class="card-body">
+                        <div style="display: flex; align-items: center; justify-content: space-between;">
+                            <h3 style="font-size: 1rem; font-weight: 700; color: #fff;">Steal an Egg v3</h3>
+                            <span style="font-size: 0.72rem; background: rgba(245, 158, 11, 0.1); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.2); padding: 2px 10px; border-radius: 9999px;">Steal an Egg</span>
                         </div>
-                        <div class="bg-slate-950 border border-slate-800 rounded-xl p-3 flex items-center justify-between gap-2">
-                            <pre class="text-indigo-300 font-mono text-sm overflow-x-auto"><code id="codeStealEggV3">98209375181842</code></pre>
-                            <button class="px-3 py-1.5 bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-semibold rounded-lg transition shrink-0" onclick="copyCode('codeStealEggV3', this)">Copy</button>
+                        <div class="code-box">
+                            <pre><code id="codeStealEggV3">98209375181842</code></pre>
+                            <button class="copy-btn" onclick="copyCode('codeStealEggV3', this)">Copy</button>
                         </div>
                     </div>
                 </div>
 
                 <!-- Steal an Egg v4 -->
-                <div class="model-card bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden shadow-lg hover:border-slate-700 transition flex flex-col" data-category="Steal an Egg">
-                    <img src="https://i.ibb.co/xKn4kz7S/IMG-0112.jpg" alt="Steal an Egg v4" class="w-full h-48 object-cover">
-                    <div class="p-5 flex flex-col flex-grow justify-between gap-4">
-                        <div class="flex items-center justify-between">
-                            <h3 class="font-bold text-lg text-slate-100">Steal an Egg v4</h3>
-                            <span class="text-xs bg-amber-500/10 text-amber-400 px-2.5 py-1 rounded-full border border-amber-500/20">Steal an Egg</span>
+                <div class="model-card" data-category="Steal an Egg">
+                    <img src="https://i.ibb.co/xKn4kz7S/IMG-0112.jpg" alt="Steal an Egg v4">
+                    <div class="card-body">
+                        <div style="display: flex; align-items: center; justify-content: space-between;">
+                            <h3 style="font-size: 1rem; font-weight: 700; color: #fff;">Steal an Egg v4</h3>
+                            <span style="font-size: 0.72rem; background: rgba(245, 158, 11, 0.1); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.2); padding: 2px 10px; border-radius: 9999px;">Steal an Egg</span>
                         </div>
-                        <div class="bg-slate-950 border border-slate-800 rounded-xl p-3 flex items-center justify-between gap-2">
-                            <pre class="text-indigo-300 font-mono text-sm overflow-x-auto"><code id="codeStealEggV4">127823029091052</code></pre>
-                            <button class="px-3 py-1.5 bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-semibold rounded-lg transition shrink-0" onclick="copyCode('codeStealEggV4', this)">Copy</button>
+                        <div class="code-box">
+                            <pre><code id="codeStealEggV4">127823029091052</code></pre>
+                            <button class="copy-btn" onclick="copyCode('codeStealEggV4', this)">Copy</button>
                         </div>
                     </div>
                 </div>
 
                 <!-- Steal an Egg v5 -->
-                <div class="model-card bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden shadow-lg hover:border-slate-700 transition flex flex-col" data-category="Steal an Egg">
-                    <img src="https://i.ibb.co/Wvr2P6Yb/IMG-0113.jpg" alt="Steal an Egg v5" class="w-full h-48 object-cover">
-                    <div class="p-5 flex flex-col flex-grow justify-between gap-4">
-                        <div class="flex items-center justify-between">
-                            <h3 class="font-bold text-lg text-slate-100">Steal an Egg v5</h3>
-                            <span class="text-xs bg-amber-500/10 text-amber-400 px-2.5 py-1 rounded-full border border-amber-500/20">Steal an Egg</span>
+                <div class="model-card" data-category="Steal an Egg">
+                    <img src="https://i.ibb.co/Wvr2P6Yb/IMG-0113.jpg" alt="Steal an Egg v5">
+                    <div class="card-body">
+                        <div style="display: flex; align-items: center; justify-content: space-between;">
+                            <h3 style="font-size: 1rem; font-weight: 700; color: #fff;">Steal an Egg v5</h3>
+                            <span style="font-size: 0.72rem; background: rgba(245, 158, 11, 0.1); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.2); padding: 2px 10px; border-radius: 9999px;">Steal an Egg</span>
                         </div>
-                        <div class="bg-slate-950 border border-slate-800 rounded-xl p-3 flex items-center justify-between gap-2">
-                            <pre class="text-indigo-300 font-mono text-sm overflow-x-auto"><code id="codeStealEggV5">127997313953229</code></pre>
-                            <button class="px-3 py-1.5 bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-semibold rounded-lg transition shrink-0" onclick="copyCode('codeStealEggV5', this)">Copy</button>
+                        <div class="code-box">
+                            <pre><code id="codeStealEggV5">127997313953229</code></pre>
+                            <button class="copy-btn" onclick="copyCode('codeStealEggV5', this)">Copy</button>
                         </div>
                     </div>
                 </div>
 
                 <!-- Kick a Lucky Block -->
-                <div class="model-card bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden shadow-lg hover:border-slate-700 transition flex flex-col" data-category="maps">
-                    <img src="https://i.ibb.co/8nNd7tSB/IMG-0098.jpg" alt="Kick a Lucky Block" class="w-full h-48 object-cover">
-                    <div class="p-5 flex flex-col flex-grow justify-between gap-4">
-                        <div class="flex items-center justify-between">
-                            <h3 class="font-bold text-lg text-slate-100">Kick a Lucky Block</h3>
-                            <span class="text-xs bg-cyan-500/10 text-cyan-400 px-2.5 py-1 rounded-full border border-cyan-500/20">Map</span>
+                <div class="model-card" data-category="maps">
+                    <img src="https://i.ibb.co/8nNd7tSB/IMG-0098.jpg" alt="Kick a Lucky Block">
+                    <div class="card-body">
+                        <div style="display: flex; align-items: center; justify-content: space-between;">
+                            <h3 style="font-size: 1rem; font-weight: 700; color: #fff;">Kick a Lucky Block</h3>
+                            <span style="font-size: 0.72rem; background: rgba(6, 182, 212, 0.1); color: #22d3ee; border: 1px solid rgba(6, 182, 212, 0.2); padding: 2px 10px; border-radius: 9999px;">Map</span>
                         </div>
-                        <div class="bg-slate-950 border border-slate-800 rounded-xl p-3 flex items-center justify-between gap-2">
-                            <pre class="text-indigo-300 font-mono text-sm overflow-x-auto"><code id="codeKickLuckyBlock">72008602442039</code></pre>
-                            <button class="px-3 py-1.5 bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-semibold rounded-lg transition shrink-0" onclick="copyCode('codeKickLuckyBlock', this)">Copy</button>
+                        <div class="code-box">
+                            <pre><code id="codeKickLuckyBlock">72008602442039</code></pre>
+                            <button class="copy-btn" onclick="copyCode('codeKickLuckyBlock', this)">Copy</button>
                         </div>
                     </div>
                 </div>
 
                 <!-- 1 + Speed escape -->
-                <div class="model-card bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden shadow-lg hover:border-slate-700 transition flex flex-col" data-category="maps">
-                    <img src="https://i.ibb.co/MkJKyy6w/IMG-0093.jpg" alt="1 + Speed escape" class="w-full h-48 object-cover">
-                    <div class="p-5 flex flex-col flex-grow justify-between gap-4">
-                        <div class="flex items-center justify-between">
-                            <h3 class="font-bold text-lg text-slate-100">1 + Speed escape</h3>
-                            <span class="text-xs bg-cyan-500/10 text-cyan-400 px-2.5 py-1 rounded-full border border-cyan-500/20">Map</span>
+                <div class="model-card" data-category="maps">
+                    <img src="https://i.ibb.co/MkJKyy6w/IMG-0093.jpg" alt="1 + Speed escape">
+                    <div class="card-body">
+                        <div style="display: flex; align-items: center; justify-content: space-between;">
+                            <h3 style="font-size: 1rem; font-weight: 700; color: #fff;">1 + Speed escape</h3>
+                            <span style="font-size: 0.72rem; background: rgba(6, 182, 212, 0.1); color: #22d3ee; border: 1px solid rgba(6, 182, 212, 0.2); padding: 2px 10px; border-radius: 9999px;">Map</span>
                         </div>
-                        <div class="bg-slate-950 border border-slate-800 rounded-xl p-3 flex items-center justify-between gap-2">
-                            <pre class="text-indigo-300 font-mono text-sm overflow-x-auto"><code id="codeSpeedEscape">120904209099683</code></pre>
-                            <button class="px-3 py-1.5 bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-semibold rounded-lg transition shrink-0" onclick="copyCode('codeSpeedEscape', this)">Copy</button>
+                        <div class="code-box">
+                            <pre><code id="codeSpeedEscape">120904209099683</code></pre>
+                            <button class="copy-btn" onclick="copyCode('codeSpeedEscape', this)">Copy</button>
                         </div>
                     </div>
                 </div>
 
                 <!-- Admin Panel x -->
-                <div class="model-card bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden shadow-lg hover:border-slate-700 transition flex flex-col" data-category="admin">
-                    <img src="https://i.ibb.co/NH0n8j4/IMG-0094.jpg" alt="Admin Panel x" class="w-full h-48 object-cover">
-                    <div class="p-5 flex flex-col flex-grow justify-between gap-4">
-                        <div class="flex items-center justify-between">
-                            <h3 class="font-bold text-lg text-slate-100">Admin Panel x</h3>
-                            <span class="text-xs bg-purple-500/10 text-purple-400 px-2.5 py-1 rounded-full border border-purple-500/20">Admin</span>
+                <div class="model-card" data-category="admin">
+                    <img src="https://i.ibb.co/NH0n8j4/IMG-0094.jpg" alt="Admin Panel x">
+                    <div class="card-body">
+                        <div style="display: flex; align-items: center; justify-content: space-between;">
+                            <h3 style="font-size: 1rem; font-weight: 700; color: #fff;">Admin Panel x</h3>
+                            <span style="font-size: 0.72rem; background: rgba(168, 85, 247, 0.1); color: #c084fc; border: 1px solid rgba(168, 85, 247, 0.2); padding: 2px 10px; border-radius: 9999px;">Admin</span>
                         </div>
-                        <div class="bg-slate-950 border border-slate-800 rounded-xl p-3 flex items-center justify-between gap-2">
-                            <pre class="text-indigo-300 font-mono text-sm overflow-x-auto"><code id="codeAdminPanelX">121964879063530</code></pre>
-                            <button class="px-3 py-1.5 bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-semibold rounded-lg transition shrink-0" onclick="copyCode('codeAdminPanelX', this)">Copy</button>
+                        <div class="code-box">
+                            <pre><code id="codeAdminPanelX">121964879063530</code></pre>
+                            <button class="copy-btn" onclick="copyCode('codeAdminPanelX', this)">Copy</button>
                         </div>
                     </div>
                 </div>
 
                 <!-- 1+ monkey escape -->
-                <div class="model-card bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden shadow-lg hover:border-slate-700 transition flex flex-col" data-category="maps">
-                    <img src="https://i.ibb.co/3mLnNQKf/IMG-0095.jpg" alt="1+ monkey escape" class="w-full h-48 object-cover">
-                    <div class="p-5 flex flex-col flex-grow justify-between gap-4">
-                        <div class="flex items-center justify-between">
-                            <h3 class="font-bold text-lg text-slate-100">1+ monkey escape</h3>
-                            <span class="text-xs bg-cyan-500/10 text-cyan-400 px-2.5 py-1 rounded-full border border-cyan-500/20">Map</span>
+                <div class="model-card" data-category="maps">
+                    <img src="https://i.ibb.co/3mLnNQKf/IMG-0095.jpg" alt="1+ monkey escape">
+                    <div class="card-body">
+                        <div style="display: flex; align-items: center; justify-content: space-between;">
+                            <h3 style="font-size: 1rem; font-weight: 700; color: #fff;">1+ monkey escape</h3>
+                            <span style="font-size: 0.72rem; background: rgba(6, 182, 212, 0.1); color: #22d3ee; border: 1px solid rgba(6, 182, 212, 0.2); padding: 2px 10px; border-radius: 9999px;">Map</span>
                         </div>
-                        <div class="bg-slate-950 border border-slate-800 rounded-xl p-3 flex items-center justify-between gap-2">
-                            <pre class="text-indigo-300 font-mono text-sm overflow-x-auto"><code id="codeMonkeyEscape">78976241017720</code></pre>
-                            <button class="px-3 py-1.5 bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-semibold rounded-lg transition shrink-0" onclick="copyCode('codeMonkeyEscape', this)">Copy</button>
+                        <div class="code-box">
+                            <pre><code id="codeMonkeyEscape">78976241017720</code></pre>
+                            <button class="copy-btn" onclick="copyCode('codeMonkeyEscape', this)">Copy</button>
                         </div>
                     </div>
                 </div>
 
                 <!-- Modern House -->
-                <div class="model-card bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden shadow-lg hover:border-slate-700 transition flex flex-col" data-category="maps">
-                    <img src="https://i.ibb.co/4nCgjgNz/IMG-0092.jpg" alt="Modern House" class="w-full h-48 object-cover">
-                    <div class="p-5 flex flex-col flex-grow justify-between gap-4">
-                        <div class="flex items-center justify-between">
-                            <h3 class="font-bold text-lg text-slate-100">Modern House</h3>
-                            <span class="text-xs bg-cyan-500/10 text-cyan-400 px-2.5 py-1 rounded-full border border-cyan-500/20">Map</span>
+                <div class="model-card" data-category="maps">
+                    <img src="https://i.ibb.co/4nCgjgNz/IMG-0092.jpg" alt="Modern House">
+                    <div class="card-body">
+                        <div style="display: flex; align-items: center; justify-content: space-between;">
+                            <h3 style="font-size: 1rem; font-weight: 700; color: #fff;">Modern House</h3>
+                            <span style="font-size: 0.72rem; background: rgba(6, 182, 212, 0.1); color: #22d3ee; border: 1px solid rgba(6, 182, 212, 0.2); padding: 2px 10px; border-radius: 9999px;">Map</span>
                         </div>
-                        <div class="bg-slate-950 border border-slate-800 rounded-xl p-3 flex items-center justify-between gap-2">
-                            <pre class="text-indigo-300 font-mono text-sm overflow-x-auto"><code id="codeModernHouse">17383957280</code></pre>
-                            <button class="px-3 py-1.5 bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-semibold rounded-lg transition shrink-0" onclick="copyCode('codeModernHouse', this)">Copy</button>
+                        <div class="code-box">
+                            <pre><code id="codeModernHouse">17383957280</code></pre>
+                            <button class="copy-btn" onclick="copyCode('codeModernHouse', this)">Copy</button>
                         </div>
                     </div>
                 </div>
 
                 <!-- Break a Lucky Block v2 -->
-                <div class="model-card bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden shadow-lg hover:border-slate-700 transition flex flex-col" data-category="maps">
-                    <img src="https://i.ibb.co/YFR2Fvts/IMG-0090.jpg" alt="Break a Lucky Block v2" class="w-full h-48 object-cover">
-                    <div class="p-5 flex flex-col flex-grow justify-between gap-4">
-                        <div class="flex items-center justify-between">
-                            <h3 class="font-bold text-lg text-slate-100">Break a Lucky Block v2</h3>
-                            <span class="text-xs bg-cyan-500/10 text-cyan-400 px-2.5 py-1 rounded-full border border-cyan-500/20">Map</span>
+                <div class="model-card" data-category="maps">
+                    <img src="https://i.ibb.co/YFR2Fvts/IMG-0090.jpg" alt="Break a Lucky Block v2">
+                    <div class="card-body">
+                        <div style="display: flex; align-items: center; justify-content: space-between;">
+                            <h3 style="font-size: 1rem; font-weight: 700; color: #fff;">Break a Lucky Block v2</h3>
+                            <span style="font-size: 0.72rem; background: rgba(6, 182, 212, 0.1); color: #22d3ee; border: 1px solid rgba(6, 182, 212, 0.2); padding: 2px 10px; border-radius: 9999px;">Map</span>
                         </div>
-                        <div class="bg-slate-950 border border-slate-800 rounded-xl p-3 flex items-center justify-between gap-2">
-                            <pre class="text-indigo-300 font-mono text-sm overflow-x-auto"><code id="codeLuckyBlock">137090812881039</code></pre>
-                            <button class="px-3 py-1.5 bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-semibold rounded-lg transition shrink-0" onclick="copyCode('codeLuckyBlock', this)">Copy</button>
+                        <div class="code-box">
+                            <pre><code id="codeLuckyBlock">137090812881039</code></pre>
+                            <button class="copy-btn" onclick="copyCode('codeLuckyBlock', this)">Copy</button>
                         </div>
                     </div>
                 </div>
 
                 <!-- Anime Sky -->
-                <div class="model-card bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden shadow-lg hover:border-slate-700 transition flex flex-col" data-category="maps">
-                    <img src="https://i.ibb.co/BV3tFyx8/IMG-0091.jpg" alt="Anime Sky" class="w-full h-48 object-cover">
-                    <div class="p-5 flex flex-col flex-grow justify-between gap-4">
-                        <div class="flex items-center justify-between">
-                            <h3 class="font-bold text-lg text-slate-100">Anime Sky</h3>
-                            <span class="text-xs bg-cyan-500/10 text-cyan-400 px-2.5 py-1 rounded-full border border-cyan-500/20">Map</span>
+                <div class="model-card" data-category="maps">
+                    <img src="https://i.ibb.co/BV3tFyx8/IMG-0091.jpg" alt="Anime Sky">
+                    <div class="card-body">
+                        <div style="display: flex; align-items: center; justify-content: space-between;">
+                            <h3 style="font-size: 1rem; font-weight: 700; color: #fff;">Anime Sky</h3>
+                            <span style="font-size: 0.72rem; background: rgba(6, 182, 212, 0.1); color: #22d3ee; border: 1px solid rgba(6, 182, 212, 0.2); padding: 2px 10px; border-radius: 9999px;">Map</span>
                         </div>
-                        <div class="bg-slate-950 border border-slate-800 rounded-xl p-3 flex items-center justify-between gap-2">
-                            <pre class="text-indigo-300 font-mono text-sm overflow-x-auto"><code id="codeAnimeSky">13107361022</code></pre>
-                            <button class="px-3 py-1.5 bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-semibold rounded-lg transition shrink-0" onclick="copyCode('codeAnimeSky', this)">Copy</button>
+                        <div class="code-box">
+                            <pre><code id="codeAnimeSky">13107361022</code></pre>
+                            <button class="copy-btn" onclick="copyCode('codeAnimeSky', this)">Copy</button>
                         </div>
                     </div>
                 </div>
 
                 <!-- Old Stud block -->
-                <div class="model-card bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden shadow-lg hover:border-slate-700 transition flex flex-col" data-category="maps">
-                    <img src="https://i.ibb.co/PZ5cT1vD/IMG-0085.jpg" alt="Old Stud block" class="w-full h-48 object-cover">
-                    <div class="p-5 flex flex-col flex-grow justify-between gap-4">
-                        <div class="flex items-center justify-between">
-                            <h3 class="font-bold text-lg text-slate-100">Old Stud block</h3>
-                            <span class="text-xs bg-cyan-500/10 text-cyan-400 px-2.5 py-1 rounded-full border border-cyan-500/20">Map</span>
+                <div class="model-card" data-category="maps">
+                    <img src="https://i.ibb.co/PZ5cT1vD/IMG-0085.jpg" alt="Old Stud block">
+                    <div class="card-body">
+                        <div style="display: flex; align-items: center; justify-content: space-between;">
+                            <h3 style="font-size: 1rem; font-weight: 700; color: #fff;">Old Stud block</h3>
+                            <span style="font-size: 0.72rem; background: rgba(6, 182, 212, 0.1); color: #22d3ee; border: 1px solid rgba(6, 182, 212, 0.2); padding: 2px 10px; border-radius: 9999px;">Map</span>
                         </div>
-                        <div class="bg-slate-950 border border-slate-800 rounded-xl p-3 flex items-center justify-between gap-2">
-                            <pre class="text-indigo-300 font-mono text-sm overflow-x-auto"><code id="codeOldStud">11257095071</code></pre>
-                            <button class="px-3 py-1.5 bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-semibold rounded-lg transition shrink-0" onclick="copyCode('codeOldStud', this)">Copy</button>
+                        <div class="code-box">
+                            <pre><code id="codeOldStud">11257095071</code></pre>
+                            <button class="copy-btn" onclick="copyCode('codeOldStud', this)">Copy</button>
                         </div>
                     </div>
                 </div>
 
                 <!-- HD Admin 2 -->
-                <div class="model-card bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden shadow-lg hover:border-slate-700 transition flex flex-col" data-category="admin">
-                    <img src="https://i.ibb.co/FqzT302f/IMG-0083.jpg" alt="HD Admin 2" class="w-full h-48 object-cover">
-                    <div class="p-5 flex flex-col flex-grow justify-between gap-4">
-                        <div class="flex items-center justify-between">
-                            <h3 class="font-bold text-lg text-slate-100">HD Admin 2</h3>
-                            <span class="text-xs bg-purple-500/10 text-purple-400 px-2.5 py-1 rounded-full border border-purple-500/20">Admin</span>
+                <div class="model-card" data-category="admin">
+                    <img src="https://i.ibb.co/FqzT302f/IMG-0083.jpg" alt="HD Admin 2">
+                    <div class="card-body">
+                        <div style="display: flex; align-items: center; justify-content: space-between;">
+                            <h3 style="font-size: 1rem; font-weight: 700; color: #fff;">HD Admin 2</h3>
+                            <span style="font-size: 0.72rem; background: rgba(168, 85, 247, 0.1); color: #c084fc; border: 1px solid rgba(168, 85, 247, 0.2); padding: 2px 10px; border-radius: 9999px;">Admin</span>
                         </div>
-                        <div class="bg-slate-950 border border-slate-800 rounded-xl p-3 flex items-center justify-between gap-2">
-                            <pre class="text-indigo-300 font-mono text-sm overflow-x-auto"><code id="codeHD2">857927023</code></pre>
-                            <button class="px-3 py-1.5 bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-semibold rounded-lg transition shrink-0" onclick="copyCode('codeHD2', this)">Copy</button>
+                        <div class="code-box">
+                            <pre><code id="codeHD2">857927023</code></pre>
+                            <button class="copy-btn" onclick="copyCode('codeHD2', this)">Copy</button>
                         </div>
                     </div>
                 </div>
 
                 <!-- khol’s admin -->
-                <div class="model-card bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden shadow-lg hover:border-slate-700 transition flex flex-col" data-category="admin">
-                    <img src="https://i.ibb.co/FL1Xb4rz/IMG-0084.jpg" alt="khol’s admin" class="w-full h-48 object-cover">
-                    <div class="p-5 flex flex-col flex-grow justify-between gap-4">
-                        <div class="flex items-center justify-between">
-                            <h3 class="font-bold text-lg text-slate-100">khol’s admin</h3>
-                            <span class="text-xs bg-purple-500/10 text-purple-400 px-2.5 py-1 rounded-full border border-purple-500/20">Admin</span>
+                <div class="model-card" data-category="admin">
+                    <img src="https://i.ibb.co/FL1Xb4rz/IMG-0084.jpg" alt="khol’s admin">
+                    <div class="card-body">
+                        <div style="display: flex; align-items: center; justify-content: space-between;">
+                            <h3 style="font-size: 1rem; font-weight: 700; color: #fff;">khol’s admin</h3>
+                            <span style="font-size: 0.72rem; background: rgba(168, 85, 247, 0.1); color: #c084fc; border: 1px solid rgba(168, 85, 247, 0.2); padding: 2px 10px; border-radius: 9999px;">Admin</span>
                         </div>
-                        <div class="bg-slate-950 border border-slate-800 rounded-xl p-3 flex items-center justify-between gap-2">
-                            <pre class="text-indigo-300 font-mono text-sm overflow-x-auto"><code id="codeKhols">172732271</code></pre>
-                            <button class="px-3 py-1.5 bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-semibold rounded-lg transition shrink-0" onclick="copyCode('codeKhols', this)">Copy</button>
+                        <div class="code-box">
+                            <pre><code id="codeKhols">172732271</code></pre>
+                            <button class="copy-btn" onclick="copyCode('codeKhols', this)">Copy</button>
                         </div>
                     </div>
                 </div>
 
                 <!-- Admin Panel Card -->
-                <div class="model-card bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden shadow-lg hover:border-slate-700 transition flex flex-col" data-category="admin">
-                    <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=600&auto=format&fit=crop" alt="AdminPanel +" class="w-full h-48 object-cover">
-                    <div class="p-5 flex flex-col flex-grow justify-between gap-4">
-                        <div class="flex items-center justify-between">
-                            <h3 class="font-bold text-lg text-slate-100">AdminPanel +</h3>
-                            <span class="text-xs bg-purple-500/10 text-purple-400 px-2.5 py-1 rounded-full border border-purple-500/20">Admin</span>
+                <div class="model-card" data-category="admin">
+                    <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=600&auto=format&fit=crop" alt="AdminPanel +">
+                    <div class="card-body">
+                        <div style="display: flex; align-items: center; justify-content: space-between;">
+                            <h3 style="font-size: 1rem; font-weight: 700; color: #fff;">AdminPanel +</h3>
+                            <span style="font-size: 0.72rem; background: rgba(168, 85, 247, 0.1); color: #c084fc; border: 1px solid rgba(168, 85, 247, 0.2); padding: 2px 10px; border-radius: 9999px;">Admin</span>
                         </div>
-                        <div class="bg-slate-950 border border-slate-800 rounded-xl p-3 flex items-center justify-between gap-2">
-                            <pre class="text-indigo-300 font-mono text-sm overflow-x-auto"><code id="code1">85268855286147</code></pre>
-                            <button class="px-3 py-1.5 bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-semibold rounded-lg transition shrink-0" onclick="copyCode('code1', this)">Copy</button>
+                        <div class="code-box">
+                            <pre><code id="code1">85268855286147</code></pre>
+                            <button class="copy-btn" onclick="copyCode('code1', this)">Copy</button>
                         </div>
                     </div>
                 </div>
 
                 <!-- Studs Card -->
-                <div class="model-card bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden shadow-lg hover:border-slate-700 transition flex flex-col" data-category="maps">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/4/49/A_black_image.jpg" alt="Studs" class="w-full h-48 object-cover">
-                    <div class="p-5 flex flex-col flex-grow justify-between gap-4">
-                        <div class="flex items-center justify-between">
-                            <h3 class="font-bold text-lg text-slate-100">Studs</h3>
-                            <span class="text-xs bg-cyan-500/10 text-cyan-400 px-2.5 py-1 rounded-full border border-cyan-500/20">Map</span>
+                <div class="model-card" data-category="maps">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/4/49/A_black_image.jpg" alt="Studs">
+                    <div class="card-body">
+                        <div style="display: flex; align-items: center; justify-content: space-between;">
+                            <h3 style="font-size: 1rem; font-weight: 700; color: #fff;">Studs</h3>
+                            <span style="font-size: 0.72rem; background: rgba(6, 182, 212, 0.1); color: #22d3ee; border: 1px solid rgba(6, 182, 212, 0.2); padding: 2px 10px; border-radius: 9999px;">Map</span>
                         </div>
-                        <div class="bg-slate-950 border border-slate-800 rounded-xl p-3 flex items-center justify-between gap-2">
-                            <pre class="text-indigo-300 font-mono text-sm overflow-x-auto"><code id="code2">128071741625902</code></pre>
-                            <button class="px-3 py-1.5 bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-semibold rounded-lg transition shrink-0" onclick="copyCode('code2', this)">Copy</button>
+                        <div class="code-box">
+                            <pre><code id="code2">128071741625902</code></pre>
+                            <button class="copy-btn" onclick="copyCode('code2', this)">Copy</button>
                         </div>
                     </div>
                 </div>
 
             </div>
-
         </main>
 
         <!-- Footer -->
-        <footer class="bg-slate-900 border-t border-slate-800 py-6 mt-12 text-center text-sm text-slate-400">
-            <p>© 2026 <strong>YH Studio</strong>. All rights reserved | Contact: <span class="text-indigo-400">studioyhdevlopers@gmail.com</span></p>
+        <footer>
+            <p>© 2026 <strong>YH Studio</strong>. All rights reserved | Contact: <span style="color: var(--primary);">studioyhdevlopers@gmail.com</span></p>
         </footer>
 
     </div>
 
-    <!-- Fast JavaScript Logic with Progress Bar Timer (Max 3 seconds) -->
+    <!-- JavaScript Functions -->
     <script>
         window.addEventListener('load', () => {
             const loaderContainer = document.getElementById('loaderContainer');
@@ -573,7 +850,7 @@
             const updateModal = document.getElementById('updateModal');
 
             let currentProgress = 0;
-            const duration = 2500; // 2.5 seconds total loading time (less than 3 seconds)
+            const duration = 2500;
             const intervalTime = 25; 
             const increment = 100 / (duration / intervalTime);
 
@@ -583,7 +860,6 @@
                     currentProgress = 100;
                     clearInterval(loadingInterval);
 
-                    // When complete: show checkmark & finish text
                     if (loaderContainer) loaderContainer.style.display = 'none';
                     if (successCheck) successCheck.classList.remove('hidden');
                     if (splashText) splashText.textContent = "Loaded Successfully";
@@ -593,7 +869,6 @@
                 if (progressBar) progressBar.style.width = currentProgress + '%';
             }, intervalTime);
 
-            // Hide splash screen after completion
             setTimeout(() => {
                 if (splashScreen) {
                     splashScreen.style.opacity = '0';
@@ -637,26 +912,19 @@
             navigator.clipboard.writeText(codeText).then(() => {
                 const originalText = btn.innerText;
                 btn.innerText = 'Copied!';
-                btn.classList.add('bg-emerald-600');
+                btn.style.backgroundColor = '#16a34a';
                 setTimeout(() => {
                     btn.innerText = originalText;
-                    btn.classList.remove('bg-emerald-600');
+                    btn.style.backgroundColor = '';
                 }, 2000);
             });
         }
 
-        function filterCategory(category) {
+        function filterCategory(category, btn) {
             const buttons = document.querySelectorAll('.cat-btn');
-            buttons.forEach(btn => {
-                btn.classList.remove('bg-indigo-600', 'text-white', 'active');
-                if (!btn.classList.contains('bg-emerald-600') && !btn.classList.contains('text-cyan-400')) {
-                    btn.classList.add('bg-slate-800/80', 'border', 'border-slate-700/50', 'text-slate-300');
-                }
-            });
-
-            if (event && event.target && !event.target.classList.contains('bg-emerald-600') && !event.target.classList.contains('text-cyan-400')) {
-                event.target.classList.remove('bg-slate-800/80', 'border', 'border-slate-700/50', 'text-slate-300');
-                event.target.classList.add('bg-indigo-600', 'text-white', 'active');
+            buttons.forEach(b => b.classList.remove('active'));
+            if (btn && !btn.getAttribute('href')) {
+                btn.classList.add('active');
             }
 
             const addModelSection = document.getElementById('add-model-section');
