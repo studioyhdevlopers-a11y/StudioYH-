@@ -14,4 +14,4 @@ jobs:
         env:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
         with:
-          args: "🚀 **YH Studio** has been updated! New changes or models have been deployed successfully."
+          args: " **YH Studio** Only Editing Or Adding things ..  "
