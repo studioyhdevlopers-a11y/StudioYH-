@@ -72,10 +72,10 @@
     <!-- Splash Screen (Apple Style Fast Intro Animation with Progress Bar) -->
     <div id="splashScreen" class="fixed inset-0 z-50 bg-slate-950 flex flex-col items-center justify-center transition-opacity duration-300">
         <div class="w-80 max-w-xs flex flex-col items-center">
-            <!-- Icon/Success Checkmark Container -->
+            <!-- Icon/Success Checkmark Container (Removed YH letters, kept clean circle spinner) -->
             <div class="relative w-16 h-16 flex items-center justify-center mb-6">
-                <div id="loaderContainer" class="absolute inset-0 flex items-center justify-center text-indigo-400 font-bold text-xl">
-                    YH
+                <div id="loaderContainer" class="absolute inset-0 flex items-center justify-center">
+                    <div class="w-14 h-14 border-4 border-slate-800 border-t-indigo-500 rounded-full animate-spin"></div>
                 </div>
                 <!-- Success Checkmark (Hidden Initially) -->
                 <div id="successCheck" class="hidden absolute inset-0 w-16 h-16 bg-emerald-500/20 border-2 border-emerald-500 rounded-full flex items-center justify-center animate-scale-up shadow-lg shadow-emerald-500/30">
