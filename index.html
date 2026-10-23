@@ -497,8 +497,8 @@
             <h3 style="font-size: 1.25rem; font-weight: 800; color: #fff; margin-bottom: 8px;">What's New in YH Studio</h3>
             <p style="font-size: 0.88rem; color: var(--text-body); margin-bottom: 24px; line-height: 1.6;">
                 • Added persistent <span style="color: var(--primary); font-weight: 600;">Log in System</span>.<br>
-                • Optimized search & header layout with custom rounded buttons.<br>
-                • Added Owner Admin Panel features for <span style="color: var(--primary); font-weight: 600;">studioyhdevlopers@gmail.com</span>.<br>
+                • Protected Owner Email (`studioyhdevlopers@gmail.com`) from unauthorized registration.<br>
+                • Added Owner Admin Settings panel.<br>
                 • UI and stability enhancements.
             </p>
             <button onclick="closeUpdateModal()" class="submit-btn">Confirm</button>
@@ -524,6 +524,7 @@
                     <label>Password:</label>
                     <input type="password" id="loginPassword" placeholder="********" required>
                 </div>
+                <div id="loginErrorMsg" style="color: #ef4444; font-size: 0.78rem; display: none;"></div>
                 <div style="display: flex; gap: 10px; margin-top: 6px;">
                     <button type="button" onclick="closeLoginModal()" style="flex: 1; padding: 11px; background: var(--bg-input); border: 1px solid var(--border-color); color: #fff; font-weight: 600; border-radius: var(--radius-inner); cursor: pointer;">Cancel</button>
                     <button type="submit" class="submit-btn" style="flex: 1;">Login / Register</button>
@@ -1022,17 +1023,14 @@
             const savedEmail = localStorage.getItem('yh_user_email');
 
             if (savedEmail) {
-                // User is logged in: Show Search Box
                 container.innerHTML = `<input type="text" id="searchInput" onkeyup="searchScripts()" placeholder="Search for a model or code...">`;
                 
-                // Check if owner
                 if (savedEmail.toLowerCase() === 'studioyhdevlopers@gmail.com') {
                     if (adminSettingsBtn) adminSettingsBtn.classList.remove('hidden');
                 } else {
                     if (adminSettingsBtn) adminSettingsBtn.classList.add('hidden');
                 }
             } else {
-                // User is NOT logged in: Show Log in Button in search place
                 container.innerHTML = `<button onclick="openLoginModal()" class="login-placeholder-btn">👤 Log in / Sign up</button>`;
                 if (adminSettingsBtn) adminSettingsBtn.classList.add('hidden');
             }
@@ -1040,6 +1038,9 @@
 
         function openLoginModal() {
             document.getElementById('loginModal').classList.remove('hidden');
+            document.getElementById('loginErrorMsg').style.display = 'none';
+            document.getElementById('loginEmail').value = '';
+            document.getElementById('loginPassword').value = '';
         }
 
         function closeLoginModal() {
@@ -1048,7 +1049,16 @@
 
         function handleLogin(event) {
             event.preventDefault();
-            const email = document.getElementById('loginEmail').value.trim();
+            const email = document.getElementById('loginEmail').value.trim().toLowerCase();
+            const errorDiv = document.getElementById('loginErrorMsg');
+
+            // منع أي شخص عدا مالك الموقع من استخدام هذا الإيميل المحمي
+            if (email === 'studioyhdevlopers@gmail.com') {
+                errorDiv.textContent = "This email is reserved for the site owner. Please use another email.";
+                errorDiv.style.display = 'block';
+                return;
+            }
+
             if (email) {
                 localStorage.setItem('yh_user_email', email);
                 closeLoginModal();
@@ -1110,7 +1120,7 @@
                         if (mainContent) mainContent.style.opacity = '1';
                         
                         if (!localStorage.getItem('yh_update_v1.0.0.7')) {
-                            updateModal.classList.remove('hidden');
+                            updateModal.classList.add('hidden');
                         }
                     }, 300);
                 }
