@@ -12,7 +12,7 @@
         // Set to TRUE to lock the site and show maintenance box.
         // Set to FALSE to make the site work normally.
         // ==========================================
-        const MAINTENANCE_MODE = true; 
+        const MAINTENANCE_MODE = false; 
 
         if (MAINTENANCE_MODE) {
             window.addEventListener('DOMContentLoaded', () => {
@@ -88,17 +88,18 @@
         <p id="splashText" class="text-slate-400 text-sm tracking-wide font-medium mt-4">Loading YH Studio...</p>
     </div>
 
-    <!-- Update Popup Modal (v1.0.0.5 - Shows only once per user) -->
+    <!-- Update Popup Modal (v1.0.0.6 - Shows only once per user) -->
     <div id="updateModal" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-4 hidden">
         <div class="bg-slate-900 border border-slate-800 rounded-3xl p-6 md:p-8 max-w-md w-full shadow-2xl animate-scale-up relative">
             <div class="flex items-center justify-between mb-4">
-                <span class="text-xs font-bold text-indigo-400 bg-indigo-500/10 border border-indigo-500/20 px-3 py-1 rounded-full">Update v1.0.0.5</span>
+                <span class="text-xs font-bold text-indigo-400 bg-indigo-500/10 border border-indigo-500/20 px-3 py-1 rounded-full">Update v1.0.0.6</span>
                 <span class="text-xs text-slate-400">New Release</span>
             </div>
             <h3 class="text-xl font-extrabold text-white mb-2">What's New in YH Studio</h3>
             <p class="text-sm text-slate-300 mb-6 leading-relaxed">
-                • Added new model: <span class="text-indigo-300 font-semibold">Kick a Lucky Block</span> (V2).<br>
-                • Advanced Maintenance Mode System.<br>
+                • Added <span class="text-indigo-300 font-semibold">Admin Panel v2.8</span>.<br>
+                • Added <span class="text-indigo-300 font-semibold">Steal an Egg v5</span>.<br>
+                • Renamed scripts category to <span class="text-indigo-300 font-semibold">Steal an Egg</span> and updated iterations.<br>
                 • Performance & UI optimizations.
             </p>
             <button onclick="closeUpdateModal()" class="w-full py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold rounded-2xl transition shadow-lg shadow-indigo-500/20">
@@ -196,7 +197,7 @@
             <nav class="max-w-6xl mx-auto flex flex-wrap items-center justify-center md:justify-start gap-2 mt-6">
                 <button class="cat-btn active px-4 py-2 rounded-xl text-sm font-semibold bg-indigo-600 text-white transition hover:bg-indigo-700 shadow-sm" onclick="filterCategory('all')">All</button>
                 <button class="cat-btn px-4 py-2 rounded-xl text-sm font-semibold bg-slate-800/80 border border-slate-700/50 text-slate-300 transition hover:bg-slate-700 hover:text-white" onclick="filterCategory('admin')">Admin</button>
-                <button class="cat-btn px-4 py-2 rounded-xl text-sm font-semibold bg-slate-800/80 border border-slate-700/50 text-slate-300 transition hover:bg-slate-700 hover:text-white" onclick="filterCategory('Soon')">Soon</button>
+                <button class="cat-btn px-4 py-2 rounded-xl text-sm font-semibold bg-slate-800/80 border border-slate-700/50 text-slate-300 transition hover:bg-slate-700 hover:text-white" onclick="filterCategory('Steal an Egg')">Steal an Egg</button>
                 <button class="cat-btn px-4 py-2 rounded-xl text-sm font-semibold bg-slate-800/80 border border-slate-700/50 text-slate-300 transition hover:bg-slate-700 hover:text-white" onclick="filterCategory('maps')">Map</button>
                 <button class="cat-btn px-4 py-2 rounded-xl text-sm font-semibold bg-slate-800/80 border border-slate-700/50 text-cyan-400 transition hover:bg-slate-700 hover:text-cyan-300" onclick="openHelpModal()">❓ Help</button>
                 
@@ -216,12 +217,12 @@
             <div class="bg-gradient-to-r from-indigo-900/40 via-slate-900 to-slate-900 border border-indigo-500/30 rounded-2xl p-5 md:p-6 mb-8 flex flex-col md:flex-row items-center justify-between gap-6 shadow-2xl animate-fade-in">
                 <div class="flex items-center gap-4 text-center md:text-left flex-col md:flex-row">
                     <div class="flex -space-x-3 overflow-hidden p-1">
-                        <img class="inline-block h-14 w-14 rounded-2xl object-cover ring-2 ring-indigo-500/50 shadow-lg transform hover:scale-110 transition duration-300" src="https://i.ibb.co/MkJKyy6w/IMG-0093.jpg" alt="1 + Speed escape">
-                        <img class="inline-block h-14 w-14 rounded-2xl object-cover ring-2 ring-cyan-500/50 shadow-lg transform hover:scale-110 transition duration-300" src="https://i.ibb.co/NH0n8j4/IMG-0094.jpg" alt="Admin Panel x">
+                        <img class="inline-block h-14 w-14 rounded-2xl object-cover ring-2 ring-indigo-500/50 shadow-lg transform hover:scale-110 transition duration-300" src="https://i.ibb.co/pv0HPLQz/IMG-0114.jpg" alt="Admin Panel v2.8">
+                        <img class="inline-block h-14 w-14 rounded-2xl object-cover ring-2 ring-cyan-500/50 shadow-lg transform hover:scale-110 transition duration-300" src="https://i.ibb.co/Wvr2P6Yb/IMG-0113.jpg" alt="Steal an Egg v5">
                     </div>
                     <div>
                         <h2 class="text-xl font-bold text-white flex items-center justify-center md:justify-start gap-2">
-                            Welcome to YH Studio! <span class="text-xs bg-indigo-500 text-white px-2 py-0.5 rounded-full font-normal">Latest Library Updates</span>
+                            Welcome to YH Studio! <span class="text-xs bg-indigo-500 text-white px-2 py-0.5 rounded-full font-normal">v1.0.0.6 Update</span>
                         </h2>
                         <p class="text-sm text-slate-300 mt-1">Explore our wide collection of secure Roblox Studio models, maps, and admin scripts.</p>
                     </div>
@@ -247,9 +248,9 @@
                             <label class="text-sm font-medium text-slate-300">Category:</label>
                             <select name="modelCategory" required
                                 class="w-full px-4 py-2 bg-slate-800 border border-slate-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm">
-                                <option value="Admin">Admin</option>
-                                <option value="Scripts">Scripts</option>
-                                <option value="Maps">Map</option>
+                                <option value="admin">Admin</option>
+                                <option value="Steal an Egg">Steal an Egg</option>
+                                <option value="maps">Map</option>
                             </select>
                         </div>
                     </div>
@@ -283,12 +284,88 @@
             <!-- Models Grid -->
             <div id="modelsGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 
+                <!-- Admin Panel v2.8 -->
+                <div class="model-card bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden shadow-lg hover:border-slate-700 transition flex flex-col" data-category="admin">
+                    <img src="https://i.ibb.co/pv0HPLQz/IMG-0114.jpg" alt="Admin Panel v2.8" class="w-full h-48 object-cover">
+                    <div class="p-5 flex flex-col flex-grow justify-between gap-4">
+                        <div class="flex items-center justify-between">
+                            <h3 class="font-bold text-lg text-slate-100">Admin Panel v2.8</h3>
+                            <span class="text-xs bg-purple-500/10 text-purple-400 px-2.5 py-1 rounded-full border border-purple-500/20">Admin</span>
+                        </div>
+                        <div class="bg-slate-950 border border-slate-800 rounded-xl p-3 flex items-center justify-between gap-2">
+                            <pre class="text-indigo-300 font-mono text-sm overflow-x-auto"><code id="codeAdminPanel28">76495740255468</code></pre>
+                            <button class="px-3 py-1.5 bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-semibold rounded-lg transition shrink-0" onclick="copyCode('codeAdminPanel28', this)">Copy</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Steal an Egg v2 -->
+                <div class="model-card bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden shadow-lg hover:border-slate-700 transition flex flex-col" data-category="Steal an Egg">
+                    <img src="https://i.ibb.co/chBgVfDB/IMG-0110.jpg" alt="Steal an Egg v2" class="w-full h-48 object-cover">
+                    <div class="p-5 flex flex-col flex-grow justify-between gap-4">
+                        <div class="flex items-center justify-between">
+                            <h3 class="font-bold text-lg text-slate-100">Steal an Egg v2</h3>
+                            <span class="text-xs bg-amber-500/10 text-amber-400 px-2.5 py-1 rounded-full border border-amber-500/20">Steal an Egg</span>
+                        </div>
+                        <div class="bg-slate-950 border border-slate-800 rounded-xl p-3 flex items-center justify-between gap-2">
+                            <pre class="text-indigo-300 font-mono text-sm overflow-x-auto"><code id="codeStealEggV2">78345888080009</code></pre>
+                            <button class="px-3 py-1.5 bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-semibold rounded-lg transition shrink-0" onclick="copyCode('codeStealEggV2', this)">Copy</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Steal an Egg v3 -->
+                <div class="model-card bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden shadow-lg hover:border-slate-700 transition flex flex-col" data-category="Steal an Egg">
+                    <img src="https://i.ibb.co/tTKfJf7T/IMG-0111.jpg" alt="Steal an Egg v3" class="w-full h-48 object-cover">
+                    <div class="p-5 flex flex-col flex-grow justify-between gap-4">
+                        <div class="flex items-center justify-between">
+                            <h3 class="font-bold text-lg text-slate-100">Steal an Egg v3</h3>
+                            <span class="text-xs bg-amber-500/10 text-amber-400 px-2.5 py-1 rounded-full border border-amber-500/20">Steal an Egg</span>
+                        </div>
+                        <div class="bg-slate-950 border border-slate-800 rounded-xl p-3 flex items-center justify-between gap-2">
+                            <pre class="text-indigo-300 font-mono text-sm overflow-x-auto"><code id="codeStealEggV3">98209375181842</code></pre>
+                            <button class="px-3 py-1.5 bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-semibold rounded-lg transition shrink-0" onclick="copyCode('codeStealEggV3', this)">Copy</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Steal an Egg v4 -->
+                <div class="model-card bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden shadow-lg hover:border-slate-700 transition flex flex-col" data-category="Steal an Egg">
+                    <img src="https://i.ibb.co/xKn4kz7S/IMG-0112.jpg" alt="Steal an Egg v4" class="w-full h-48 object-cover">
+                    <div class="p-5 flex flex-col flex-grow justify-between gap-4">
+                        <div class="flex items-center justify-between">
+                            <h3 class="font-bold text-lg text-slate-100">Steal an Egg v4</h3>
+                            <span class="text-xs bg-amber-500/10 text-amber-400 px-2.5 py-1 rounded-full border border-amber-500/20">Steal an Egg</span>
+                        </div>
+                        <div class="bg-slate-950 border border-slate-800 rounded-xl p-3 flex items-center justify-between gap-2">
+                            <pre class="text-indigo-300 font-mono text-sm overflow-x-auto"><code id="codeStealEggV4">127823029091052</code></pre>
+                            <button class="px-3 py-1.5 bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-semibold rounded-lg transition shrink-0" onclick="copyCode('codeStealEggV4', this)">Copy</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Steal an Egg v5 -->
+                <div class="model-card bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden shadow-lg hover:border-slate-700 transition flex flex-col" data-category="Steal an Egg">
+                    <img src="https://i.ibb.co/Wvr2P6Yb/IMG-0113.jpg" alt="Steal an Egg v5" class="w-full h-48 object-cover">
+                    <div class="p-5 flex flex-col flex-grow justify-between gap-4">
+                        <div class="flex items-center justify-between">
+                            <h3 class="font-bold text-lg text-slate-100">Steal an Egg v5</h3>
+                            <span class="text-xs bg-amber-500/10 text-amber-400 px-2.5 py-1 rounded-full border border-amber-500/20">Steal an Egg</span>
+                        </div>
+                        <div class="bg-slate-950 border border-slate-800 rounded-xl p-3 flex items-center justify-between gap-2">
+                            <pre class="text-indigo-300 font-mono text-sm overflow-x-auto"><code id="codeStealEggV5">127997313953229</code></pre>
+                            <button class="px-3 py-1.5 bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-semibold rounded-lg transition shrink-0" onclick="copyCode('codeStealEggV5', this)">Copy</button>
+                        </div>
+                    </div>
+                </div>
+
                 <!-- Kick a Lucky Block -->
                 <div class="model-card bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden shadow-lg hover:border-slate-700 transition flex flex-col" data-category="maps">
                     <img src="https://i.ibb.co/8nNd7tSB/IMG-0098.jpg" alt="Kick a Lucky Block" class="w-full h-48 object-cover">
                     <div class="p-5 flex flex-col flex-grow justify-between gap-4">
                         <div class="flex items-center justify-between">
                             <h3 class="font-bold text-lg text-slate-100">Kick a Lucky Block</h3>
+                            <span class="text-xs bg-cyan-500/10 text-cyan-400 px-2.5 py-1 rounded-full border border-cyan-500/20">Map</span>
                         </div>
                         <div class="bg-slate-950 border border-slate-800 rounded-xl p-3 flex items-center justify-between gap-2">
                             <pre class="text-indigo-300 font-mono text-sm overflow-x-auto"><code id="codeKickLuckyBlock">72008602442039</code></pre>
@@ -462,21 +539,6 @@
                     </div>
                 </div>
 
-                <!-- Steal an egg Card -->
-                <div class="model-card bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden shadow-lg hover:border-slate-700 transition flex flex-col" data-category="maps">
-                    <img src="https://images.unsplash.com/photo-1579373903781-fd5c0c30c4cd?q=80&w=600&auto=format&fit=crop" alt="Steal an egg" class="w-full h-48 object-cover">
-                    <div class="p-5 flex flex-col flex-grow justify-between gap-4">
-                        <div class="flex items-center justify-between">
-                            <h3 class="font-bold text-lg text-slate-100">Steal an egg</h3>
-                            <span class="text-xs bg-cyan-500/10 text-cyan-400 px-2.5 py-1 rounded-full border border-cyan-500/20">Map</span>
-                        </div>
-                        <div class="bg-slate-950 border border-slate-800 rounded-xl p-3 flex items-center justify-between gap-2">
-                            <pre class="text-indigo-300 font-mono text-sm overflow-x-auto"><code id="code3">106206596734864</code></pre>
-                            <button class="px-3 py-1.5 bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-semibold rounded-lg transition shrink-0" onclick="copyCode('code3', this)">Copy</button>
-                        </div>
-                    </div>
-                </div>
-
             </div>
 
         </main>
@@ -511,7 +573,7 @@
                         splashScreen.style.display = 'none';
                         if (mainContent) mainContent.style.opacity = '1';
                         
-                        if (!localStorage.getItem('yh_update_v1.0.0.5')) {
+                        if (!localStorage.getItem('yh_update_v1.0.0.6')) {
                             updateModal.classList.remove('hidden');
                         }
                     }, 300);
@@ -520,7 +582,7 @@
         });
 
         function closeUpdateModal() {
-            localStorage.setItem('yh_update_v1.0.0.5', 'true');
+            localStorage.setItem('yh_update_v1.0.0.6', 'true');
             document.getElementById('updateModal').classList.add('hidden');
         }
 
@@ -611,12 +673,3 @@
     </script>
 </body>
 </html>
-
-
-<!-- Model: Admin Panel v2.7 -->
-<div class="model-item" data-category="Admin">
-    <h3>Admin Panel v2.7</h3>
-    <p>Status: Testing</p>
-    <img src="https://upload.wikimedia.org/wikipedia/commons/4/49/A_black_image.jpg" alt="Model Image">
-    <a href="79746456290868">View Model</a>
-</div>
