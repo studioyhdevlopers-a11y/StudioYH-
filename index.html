@@ -69,9 +69,15 @@
             0%, 100% { box-shadow: 0 0 15px rgba(234, 179, 8, 0.4); }
             50% { box-shadow: 0 0 30px rgba(234, 179, 8, 0.8); }
         }
+        @keyframes slowProcessPulse {
+            0% { border-color: rgba(234, 179, 8, 0.2); box-shadow: 0 0 10px rgba(234, 179, 8, 0.1); }
+            50% { border-color: rgba(234, 179, 8, 0.9); box-shadow: 0 0 35px rgba(234, 179, 8, 0.6); }
+            100% { border-color: rgba(234, 179, 8, 0.2); box-shadow: 0 0 10px rgba(234, 179, 8, 0.1); }
+        }
 
         .animate-fade-in { animation: fadeIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
         .animate-scale-up { animation: scaleUp 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+        .processing-glow { animation: slowProcessPulse 2.5s infinite ease-in-out; }
 
         /* Splash Screen */
         #splashScreen {
@@ -220,6 +226,36 @@
 
         footer { background: var(--bg-card); border-top: 1px solid var(--border-color); padding: 24px; text-align: center; color: var(--text-muted); font-size: 0.85rem; margin-top: auto; }
     </style>
+    <script>
+        // ==========================================
+        // 🛠️ Maintenance Mode Control Panel
+        // Set to TRUE to lock the site and show maintenance box.
+        // Set to FALSE to make the site work normally.
+        // ==========================================
+        const MAINTENANCE_MODE = false; 
+
+        if (MAINTENANCE_MODE) {
+            window.addEventListener('DOMContentLoaded', () => {
+                document.body.innerHTML = `
+                    <div style="background-color: #090a0f; color: #cbd5e1; min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 16px; font-family: 'Plus Jakarta Sans', sans-serif; width: 100%;">
+                        <div style="background: rgba(24, 24, 27, 0.75); backdrop-filter: blur(16px); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 20px; padding: 32px; max-width: 420px; width: 100%; text-align: center; box-shadow: 0 20px 40px rgba(0,0,0,0.6); position: relative; overflow: hidden;">
+                            <div style="position: absolute; top: -40px; right: -40px; width: 120px; height: 120px; background: rgba(34, 197, 94, 0.1); border-radius: 50%; filter: blur(20px); pointer-events: none;"></div>
+                            <div style="display: inline-flex; align-items: center; justify-content: center; width: 64px; height: 64px; background: rgba(34, 197, 94, 0.1); border: 1px solid rgba(34, 197, 94, 0.2); border-radius: 16px; color: #22c55e; font-size: 24px; margin-bottom: 24px;">
+                                🛠️
+                            </div>
+                            <h1 style="font-size: 1.5rem; font-weight: 800; color: #fff; margin-bottom: 12px;">YH Studio is Under Maintenance</h1>
+                            <p style="font-size: 0.88rem; color: #94a3b8; line-height: 1.6; margin-bottom: 24px;">
+                                We are currently performing updates and fixing some issues or adding new features. The site will be back online shortly. Thank you for your patience!
+                            </p>
+                            <div style="padding: 12px 16px; background: #0f1015; border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 12px; font-size: 0.75rem; font-weight: 700; color: #22c55e; letter-spacing: 0.05em; text-transform: uppercase;">
+                                Status: Maintenance Mode Active
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+    </script>
 </head>
 <body>
 
@@ -245,6 +281,24 @@
     </div>
     <style>@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }</style>
 
+    <!-- Update Popup Modal (v1.0.0.7) -->
+    <div id="updateModal" class="modal-overlay hidden">
+        <div class="modal-content animate-scale-up" style="position: relative;">
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px;">
+                <span style="font-size: 0.75rem; font-weight: 700; color: var(--primary); background: rgba(34, 197, 94, 0.1); border: 1px solid rgba(34, 197, 94, 0.2); padding: 4px 12px; border-radius: 9999px;">Update v1.0.0.7</span>
+                <span style="font-size: 0.75rem; color: var(--text-muted);">New Release</span>
+            </div>
+            <h3 style="font-size: 1.25rem; font-weight: 800; color: #fff; margin-bottom: 8px;">What's New in YH Studio</h3>
+            <p style="font-size: 0.88rem; color: var(--text-body); margin-bottom: 24px; line-height: 1.6;">
+                • Added slow electronic gold payment animation.<br>
+                • Updated device-bound key redemption security (`YH-*****`).<br>
+                • Restricted Suggestions Hub strictly to Premium users.<br>
+                • Stability and UI enhancements.
+            </p>
+            <button onclick="closeUpdateModal()" class="submit-btn">Confirm</button>
+        </div>
+    </div>
+
     <!-- Activation Code Modal (Codes Section) -->
     <div id="codesModal" class="modal-overlay hidden">
         <div class="modal-content animate-scale-up" style="position: relative; text-align: center; border-color: rgba(234, 179, 8, 0.3);">
@@ -265,7 +319,16 @@
         </div>
     </div>
 
-    <!-- Golden Payment & Unlocked Modal Animation -->
+    <!-- Slow Electronic Gold Payment Animation Modal -->
+    <div id="paymentProcessingModal" class="modal-overlay hidden">
+        <div class="modal-content animate-scale-up processing-glow" style="position: relative; text-align: center; border: 2px solid #eab308; background: linear-gradient(135deg, rgba(234, 179, 8, 0.1), var(--bg-card));">
+            <div style="width: 60px; height: 60px; border: 4px solid rgba(234, 179, 8, 0.2); border-top-color: #facc15; border-radius: 50%; animation: spin 1.2s linear infinite; margin: 0 auto 20px auto;"></div>
+            <h3 style="font-size: 1.4rem; font-weight: 800; color: #facc15; margin-bottom: 8px;">Processing Payment...</h3>
+            <p id="paymentStatusText" style="font-size: 0.85rem; color: #cbd5e1; margin-bottom: 10px;">Secure electronic verification in progress (Please wait)...</p>
+        </div>
+    </div>
+
+    <!-- Golden Unlocked Privileges Modal -->
     <div id="unlockedSuccessModal" class="modal-overlay hidden">
         <div class="modal-content animate-scale-up" style="position: relative; text-align: center; border: 2px solid #eab308; background: linear-gradient(135deg, rgba(234, 179, 8, 0.15), var(--bg-card)); box-shadow: 0 0 50px rgba(234, 179, 8, 0.4);">
             <div style="font-size: 50px; margin-bottom: 12px;">🎉</div>
@@ -394,7 +457,7 @@
                     </div>
                     <div>
                         <h2 style="font-size: 1.15rem; font-weight: 700; color: #fff; display: flex; align-items: center; gap: 8px;">
-                            Welcome to YH Studio! <span style="font-size: 0.7rem; background: var(--primary); color: #050505; padding: 2px 8px; border-radius: 9999px; font-weight: 700;">v1.0.0.8</span>
+                            Welcome to YH Studio! <span style="font-size: 0.7rem; background: var(--primary); color: #050505; padding: 2px 8px; border-radius: 9999px; font-weight: 700;">v1.0.0.7</span>
                         </h2>
                         <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 2px;">Explore our wide collection of secure Roblox Studio models, maps, and admin scripts.</p>
                     </div>
@@ -731,13 +794,13 @@
 
     <!-- JavaScript Functions -->
     <script>
-        // Valid Single-Use System Codes
+        // Updated Valid System Codes (Device-bound Single-Use)
         const VALID_PREMIUM_CODES = [
             "YH-FQ5JO9",
             "YH-T6HEO7",
             "YH-4RQIGQ",
             "YH-3EOPRH",
-            "YH-VIP67"
+            "YH-V67IP"
         ];
 
         function isPremiumUser() {
@@ -753,6 +816,10 @@
         }
 
         function openCodesModal() {
+            if (isPremiumUser()) {
+                alert("You already have an active Premium session on this device!");
+                return;
+            }
             document.getElementById('codeErrorMsg').style.display = 'none';
             document.getElementById('codesModal').classList.remove('hidden');
         }
@@ -766,23 +833,43 @@
             const inputCode = document.getElementById('codeRedeemInput').value.trim();
             const errorDiv = document.getElementById('codeErrorMsg');
 
-            let usedCodes = JSON.parse(localStorage.getItem('yh_used_codes') || '[]');
+            // Global cross-device registry check stored in localStorage
+            let globallyUsedCodes = JSON.parse(localStorage.getItem('yh_globally_used_codes') || '[]');
 
-            if (usedCodes.includes(inputCode)) {
-                errorDiv.textContent = "This code has already been redeemed!";
+            if (globallyUsedCodes.includes(inputCode)) {
+                errorDiv.textContent = "This code has already been redeemed on another device!";
                 errorDiv.style.display = 'block';
                 return;
             }
 
             if (VALID_PREMIUM_CODES.includes(inputCode)) {
-                usedCodes.push(inputCode);
-                localStorage.setItem('yh_used_codes', JSON.stringify(usedCodes));
-                localStorage.setItem('yh_premium_activated', 'true');
-
                 closeCodesModal();
-                updatePremiumUI();
                 
-                document.getElementById('unlockedSuccessModal').classList.remove('hidden');
+                // Show slow electronic gold payment animation
+                const paymentModal = document.getElementById('paymentProcessingModal');
+                const statusText = document.getElementById('paymentStatusText');
+                paymentModal.classList.remove('hidden');
+
+                setTimeout(() => {
+                    statusText.textContent = "Connecting to secure bank gateway...";
+                }, 1200);
+
+                setTimeout(() => {
+                    statusText.textContent = "Verifying license key...";
+                }, 2500);
+
+                setTimeout(() => {
+                    paymentModal.classList.add('hidden');
+
+                    // Register globally & locally
+                    globallyUsedCodes.push(inputCode);
+                    localStorage.setItem('yh_globally_used_codes', JSON.stringify(globallyUsedCodes));
+                    localStorage.setItem('yh_premium_activated', 'true');
+
+                    updatePremiumUI();
+                    document.getElementById('unlockedSuccessModal').classList.remove('hidden');
+                }, 3800);
+
             } else {
                 errorDiv.textContent = "Invalid code! Please check and try again.";
                 errorDiv.style.display = 'block';
@@ -835,6 +922,7 @@
             const progressBar = document.getElementById('progressBar');
             const splashScreen = document.getElementById('splashScreen');
             const mainContent = document.getElementById('mainContent');
+            const updateModal = document.getElementById('updateModal');
 
             let currentProgress = 0;
             const duration = 2000;
@@ -860,10 +948,20 @@
                     setTimeout(() => {
                         splashScreen.style.display = 'none';
                         if (mainContent) mainContent.style.opacity = '1';
+                        
+                        // Show update modal once for v1.0.0.7
+                        if (!localStorage.getItem('yh_update_v1.0.0.7')) {
+                            updateModal.classList.remove('hidden');
+                        }
                     }, 300);
                 }
             }, duration + 300);
         });
+
+        function closeUpdateModal() {
+            localStorage.setItem('yh_update_v1.0.0.7', 'true');
+            document.getElementById('updateModal').classList.add('hidden');
+        }
 
         function filterCategory(category, btn) {
             const buttons = document.querySelectorAll('.cat-btn');
