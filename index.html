@@ -18,6 +18,9 @@
             --primary: #22c55e;
             --primary-hover: #16a34a;
             --primary-glow: rgba(34, 197, 94, 0.25);
+
+            --gold-primary: #eab308;
+            --gold-glow: rgba(234, 179, 8, 0.35);
             
             --text-heading: #ffffff;
             --text-body: #cbd5e1;
@@ -34,14 +37,10 @@
             --transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
 
         body {
-            font-family: 'Plus Jakarta Sans', 'Segoe UI', system-ui, sans-serif;
+            font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
             background-color: var(--bg-main);
             background-image: 
                 radial-gradient(at 10% 10%, rgba(34, 197, 94, 0.08) 0px, transparent 50%),
@@ -66,49 +65,35 @@
             0% { transform: scale(0.8); opacity: 0; }
             100% { transform: scale(1); opacity: 1; }
         }
-        .animate-fade-in {
-            animation: fadeIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        @keyframes goldGlowPulse {
+            0%, 100% { box-shadow: 0 0 15px rgba(234, 179, 8, 0.4); }
+            50% { box-shadow: 0 0 30px rgba(234, 179, 8, 0.8); }
         }
-        .animate-scale-up {
-            animation: scaleUp 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-        }
+
+        .animate-fade-in { animation: fadeIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+        .animate-scale-up { animation: scaleUp 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
 
         /* Splash Screen */
         #splashScreen {
-            position: fixed;
-            inset: 0;
-            z-index: 50;
-            background-color: var(--bg-main);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
+            position: fixed; inset: 0; z-index: 50; background-color: var(--bg-main);
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
             transition: opacity 0.3s ease;
         }
 
         /* Modals & Overlays */
         .modal-overlay {
-            position: fixed;
-            inset: 0;
-            z-index: 50;
+            position: fixed; inset: 0; z-index: 50;
             background-color: rgba(9, 10, 15, 0.85);
             backdrop-filter: blur(12px);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 16px;
+            display: flex; align-items: center; justify-content: center; padding: 16px;
         }
-        .modal-overlay.hidden {
-            display: none;
-        }
+        .modal-overlay.hidden { display: none; }
         .modal-content {
             background: var(--bg-card);
             backdrop-filter: var(--glass-backdrop);
             border: 1px solid var(--border-color);
             border-radius: var(--radius-card);
-            padding: 28px;
-            max-width: 480px;
-            width: 100%;
+            padding: 28px; max-width: 480px; width: 100%;
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
         }
 
@@ -117,300 +102,128 @@
             background: var(--bg-card);
             backdrop-filter: var(--glass-backdrop);
             border-bottom: 1px solid var(--border-color);
-            position: sticky;
-            top: 0;
-            z-index: 40;
-            padding: 20px 16px;
+            position: sticky; top: 0; z-index: 40; padding: 20px 16px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.3);
         }
         .header-inner {
-            max-width: 1100px;
-            margin: 0 auto;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: space-between;
-            gap: 16px;
+            max-width: 1100px; margin: 0 auto; display: flex;
+            flex-direction: column; align-items: center; justify-content: space-between; gap: 16px;
         }
-        @media(min-width: 768px) {
-            .header-inner { flex-direction: row; }
-        }
+        @media(min-width: 768px) { .header-inner { flex-direction: row; } }
 
-        /* Gradient title */
+        .logo-area { display: flex; align-items: center; gap: 12px; }
+
         header h1 {
             background: linear-gradient(135deg, #15803d 0%, #22c55e 50%, #4ade80 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            font-size: 2rem;
-            font-weight: 800;
-            letter-spacing: -0.025em;
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            font-size: 2rem; font-weight: 800; letter-spacing: -0.025em;
             filter: drop-shadow(0 0 15px rgba(34, 197, 94, 0.3));
         }
-        header p {
-            color: var(--text-muted);
-            font-size: 0.88rem;
-            margin-top: 4px;
+
+        /* Gold Plus Badge for Header */
+        .gold-premium-badge {
+            background: linear-gradient(135deg, rgba(234, 179, 8, 0.2), rgba(202, 138, 4, 0.4));
+            border: 2px solid var(--gold-primary);
+            color: #facc15; font-size: 0.75rem; font-weight: 800;
+            padding: 3px 12px; border-radius: var(--radius-pill);
+            animation: goldGlowPulse 2s infinite ease-in-out;
+            letter-spacing: 0.05em; text-transform: uppercase;
         }
 
-        /* Search Box */
-        .search-container {
-            width: 100%;
-            max-width: 320px;
-        }
+        header p { color: var(--text-muted); font-size: 0.88rem; margin-top: 4px; }
+
+        .search-container { width: 100%; max-width: 320px; }
         .search-container input {
-            width: 100%;
-            padding: 12px 18px;
-            background-color: var(--bg-input);
-            border: 1px solid var(--border-color);
-            color: var(--text-heading);
-            border-radius: var(--radius-pill);
-            outline: none;
-            font-size: 0.9rem;
-            transition: var(--transition);
+            width: 100%; padding: 12px 18px; background-color: var(--bg-input);
+            border: 1px solid var(--border-color); color: var(--text-heading);
+            border-radius: var(--radius-pill); outline: none; font-size: 0.9rem; transition: var(--transition);
         }
-        .search-container input:focus {
-            border-color: var(--primary);
-            box-shadow: 0 0 0 3px var(--primary-glow);
-        }
+        .search-container input:focus { border-color: var(--primary); box-shadow: 0 0 0 3px var(--primary-glow); }
 
         /* Navigation & Categories */
         .nav-menu {
-            max-width: 1100px;
-            margin: 16px auto 0 auto;
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            gap: 8px;
+            max-width: 1100px; margin: 16px auto 0 auto;
+            display: flex; flex-wrap: wrap; align-items: center; gap: 8px;
         }
         .cat-btn {
-            background-color: var(--bg-input);
-            color: var(--text-muted);
-            border: 1px solid var(--border-color);
-            padding: 8px 16px;
-            font-weight: 600;
-            font-size: 0.85rem;
-            border-radius: var(--radius-pill);
-            cursor: pointer;
-            transition: var(--transition);
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
+            background-color: var(--bg-input); color: var(--text-muted);
+            border: 1px solid var(--border-color); padding: 8px 16px;
+            font-weight: 600; font-size: 0.85rem; border-radius: var(--radius-pill);
+            cursor: pointer; transition: var(--transition); text-decoration: none;
+            display: inline-flex; align-items: center; gap: 6px;
         }
         .cat-btn.active, .cat-btn:hover {
-            background-color: var(--primary);
-            color: #050505;
-            border-color: var(--primary);
-            box-shadow: 0 4px 15px var(--primary-glow);
+            background-color: var(--primary); color: #050505;
+            border-color: var(--primary); box-shadow: 0 4px 15px var(--primary-glow);
             transform: translateY(-1px);
         }
 
-        /* Main Content Layout */
-        main {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 24px 16px;
-            flex-grow: 1;
-            width: 100%;
-        }
+        main { max-width: 1100px; margin: 0 auto; padding: 24px 16px; flex-grow: 1; width: 100%; }
 
-        /* Welcome Banner */
         .welcome-banner {
             background: linear-gradient(135deg, rgba(34, 197, 94, 0.1), rgba(24, 24, 27, 0.8));
-            border: 1px solid rgba(34, 197, 94, 0.2);
-            border-radius: var(--radius-card);
-            padding: 24px;
-            margin-bottom: 32px;
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
+            border: 1px solid rgba(34, 197, 94, 0.2); border-radius: var(--radius-card);
+            padding: 24px; margin-bottom: 32px; display: flex; flex-direction: column; gap: 16px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.4);
         }
-        @media(min-width: 768px) {
-            .welcome-banner { flex-direction: row; justify-content: space-between; align-items: center; }
-        }
+        @media(min-width: 768px) { .welcome-banner { flex-direction: row; justify-content: space-between; align-items: center; } }
 
         /* Form Section */
         .form-section {
-            background: var(--bg-card);
-            backdrop-filter: var(--glass-backdrop);
-            border: 1px solid var(--border-color);
-            border-radius: var(--radius-card);
-            padding: 28px;
-            margin-bottom: 32px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+            background: var(--bg-card); backdrop-filter: var(--glass-backdrop);
+            border: 1px solid var(--border-color); border-radius: var(--radius-card);
+            padding: 28px; margin-bottom: 32px; box-shadow: 0 10px 30px rgba(0,0,0,0.4);
         }
-        .form-section h2 {
-            color: var(--primary);
-            font-size: 1.25rem;
-            margin-bottom: 20px;
-        }
-        .form-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 16px;
-        }
-        @media(min-width: 768px) {
-            .form-grid { grid-template-columns: 1fr 1fr; }
-        }
-        .form-group {
-            margin-bottom: 16px;
-        }
-        .form-group label {
-            display: block;
-            margin-bottom: 6px;
-            color: var(--text-body);
-            font-size: 0.85rem;
-            font-weight: 600;
-        }
+        .form-section h2 { color: var(--primary); font-size: 1.25rem; margin-bottom: 20px; }
+        .form-grid { display: grid; grid-template-columns: 1fr; gap: 16px; }
+        @media(min-width: 768px) { .form-grid { grid-template-columns: 1fr 1fr; } }
+        .form-group { margin-bottom: 16px; }
+        .form-group label { display: block; margin-bottom: 6px; color: var(--text-body); font-size: 0.85rem; font-weight: 600; }
         .form-group input, .form-group select {
-            width: 100%;
-            padding: 11px 14px;
-            background-color: var(--bg-input);
-            border: 1px solid var(--border-color);
-            color: var(--text-heading);
-            border-radius: var(--radius-inner);
-            outline: none;
-            font-size: 0.9rem;
-            transition: var(--transition);
+            width: 100%; padding: 11px 14px; background-color: var(--bg-input);
+            border: 1px solid var(--border-color); color: var(--text-heading);
+            border-radius: var(--radius-inner); outline: none; font-size: 0.9rem; transition: var(--transition);
         }
         .form-group input:focus, .form-group select:focus {
-            border-color: var(--primary);
-            box-shadow: 0 0 0 3px var(--primary-glow);
+            border-color: var(--primary); box-shadow: 0 0 0 3px var(--primary-glow);
         }
         .submit-btn {
-            width: 100%;
-            padding: 12px;
-            background-color: var(--primary);
-            color: #050505;
-            border: none;
-            font-weight: 700;
-            border-radius: var(--radius-inner);
-            cursor: pointer;
-            transition: var(--transition);
+            width: 100%; padding: 12px; background-color: var(--primary); color: #050505;
+            border: none; font-weight: 700; border-radius: var(--radius-inner); cursor: pointer; transition: var(--transition);
             box-shadow: 0 4px 15px var(--primary-glow);
         }
-        .submit-btn:hover {
-            background-color: var(--primary-hover);
-            transform: translateY(-2px);
-        }
+        .submit-btn:hover { background-color: var(--primary-hover); transform: translateY(-2px); }
 
-        /* Models Grid & Cards */
-        .models-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 20px;
-        }
+        .models-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
         .model-card {
-            background: var(--bg-card);
-            backdrop-filter: var(--glass-backdrop);
-            border: 1px solid var(--border-color);
-            border-radius: var(--radius-card);
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            transition: var(--transition);
+            background: var(--bg-card); backdrop-filter: var(--glass-backdrop);
+            border: 1px solid var(--border-color); border-radius: var(--radius-card);
+            overflow: hidden; display: flex; flex-direction: column; transition: var(--transition);
             box-shadow: 0 8px 24px rgba(0,0,0,0.3);
         }
         .model-card:hover {
-            border-color: var(--border-hover);
-            transform: translateY(-4px);
+            border-color: var(--border-hover); transform: translateY(-4px);
             box-shadow: 0 12px 30px rgba(0,0,0,0.5), 0 0 20px rgba(34, 197, 94, 0.15);
         }
-        .model-card img {
-            width: 100%;
-            height: 180px;
-            object-fit: cover;
-            transition: var(--transition);
-        }
-        .model-card:hover img {
-            transform: scale(1.02);
-        }
-        .card-body {
-            padding: 18px;
-            display: flex;
-            flex-direction: column;
-            flex-grow: 1;
-            justify-content: space-between;
-            gap: 14px;
-        }
+        .model-card img { width: 100%; height: 180px; object-fit: cover; transition: var(--transition); }
+        .card-body { padding: 18px; display: flex; flex-direction: column; flex-grow: 1; justify-content: space-between; gap: 14px; }
         .code-box {
-            background-color: var(--bg-input);
-            border: 1px solid var(--border-color);
-            border-radius: var(--radius-inner);
-            padding: 10px 14px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 8px;
+            background-color: var(--bg-input); border: 1px solid var(--border-color);
+            border-radius: var(--radius-inner); padding: 10px 14px;
+            display: flex; align-items: center; justify-content: space-between; gap: 8px;
         }
-        pre {
-            color: var(--primary);
-            font-family: Consolas, Monaco, monospace;
-            font-size: 0.88rem;
-            font-weight: 600;
-            overflow-x: auto;
-        }
+        pre { color: var(--primary); font-family: Consolas, Monaco, monospace; font-size: 0.88rem; font-weight: 600; overflow-x: auto; }
         .copy-btn {
-            background-color: var(--primary);
-            color: #050505;
-            border: none;
-            padding: 6px 14px;
-            font-weight: 700;
-            font-size: 0.8rem;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: var(--transition);
-        }
-        .copy-btn:hover {
-            background-color: var(--primary-hover);
+            background-color: var(--primary); color: #050505; border: none;
+            padding: 6px 14px; font-weight: 700; font-size: 0.8rem; border-radius: 8px; cursor: pointer; transition: var(--transition);
         }
 
-        /* Footer */
-        footer {
-            background: var(--bg-card);
-            border-top: 1px solid var(--border-color);
-            padding: 24px;
-            text-align: center;
-            color: var(--text-muted);
-            font-size: 0.85rem;
-            margin-top: auto;
-        }
+        footer { background: var(--bg-card); border-top: 1px solid var(--border-color); padding: 24px; text-align: center; color: var(--text-muted); font-size: 0.85rem; margin-top: auto; }
     </style>
-    <script>
-        // ==========================================
-        // 🛠️ Maintenance Mode Control Panel
-        // Set to TRUE to lock the site and show maintenance box.
-        // Set to FALSE to make the site work normally.
-        // ==========================================
-        const MAINTENANCE_MODE = false; 
-
-        if (MAINTENANCE_MODE) {
-            window.addEventListener('DOMContentLoaded', () => {
-                document.body.innerHTML = `
-                    <div style="background-color: #090a0f; color: #cbd5e1; min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 16px; font-family: 'Plus Jakarta Sans', sans-serif; width: 100%;">
-                        <div style="background: rgba(24, 24, 27, 0.75); backdrop-filter: blur(16px); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 20px; padding: 32px; max-width: 420px; width: 100%; text-align: center; box-shadow: 0 20px 40px rgba(0,0,0,0.6); position: relative; overflow: hidden;">
-                            <div style="position: absolute; top: -40px; right: -40px; width: 120px; height: 120px; background: rgba(34, 197, 94, 0.1); border-radius: 50%; filter: blur(20px); pointer-events: none;"></div>
-                            <div style="display: inline-flex; align-items: center; justify-content: center; width: 64px; height: 64px; background: rgba(34, 197, 94, 0.1); border: 1px solid rgba(34, 197, 94, 0.2); border-radius: 16px; color: #22c55e; font-size: 24px; margin-bottom: 24px;">
-                                🛠️
-                            </div>
-                            <h1 style="font-size: 1.5rem; font-weight: 800; color: #fff; margin-bottom: 12px;">YH Studio is Under Maintenance</h1>
-                            <p style="font-size: 0.88rem; color: #94a3b8; line-height: 1.6; margin-bottom: 24px;">
-                                We are currently performing updates and fixing some issues or adding new features. The site will be back online shortly. Thank you for your patience!
-                            </p>
-                            <div style="padding: 12px 16px; background: #0f1015; border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 12px; font-size: 0.75rem; font-weight: 700; color: #22c55e; letter-spacing: 0.05em; text-transform: uppercase;">
-                                Status: Maintenance Mode Active
-                            </div>
-                        </div>
-                    </div>
-                `;
-            });
-        }
-    </script>
 </head>
 <body>
 
-    <!-- Splash Screen with Progress Bar -->
+    <!-- Splash Screen -->
     <div id="splashScreen">
         <div style="width: 280px; display: flex; flex-direction: column; align-items: center;">
             <div style="position: relative; width: 64px; height: 64px; display: flex; align-items: center; justify-content: center; margin-bottom: 24px;">
@@ -432,19 +245,58 @@
     </div>
     <style>@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }</style>
 
-    <!-- Update Popup Modal (v1.0.0.7) -->
-    <div id="updateModal" class="modal-overlay hidden">
-        <div class="modal-content animate-scale-up" style="position: relative;">
-            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px;">
-                <span style="font-size: 0.75rem; font-weight: 700; color: var(--primary); background: rgba(34, 197, 94, 0.1); border: 1px solid rgba(34, 197, 94, 0.2); padding: 4px 12px; border-radius: 9999px;">Update v1.0.0.7</span>
-                <span style="font-size: 0.75rem; color: var(--text-muted);">New Release</span>
+    <!-- Activation Code Modal (Codes Section) -->
+    <div id="codesModal" class="modal-overlay hidden">
+        <div class="modal-content animate-scale-up" style="position: relative; text-align: center; border-color: rgba(234, 179, 8, 0.3);">
+            <div style="display: inline-flex; align-items: center; justify-content: center; width: 64px; height: 64px; background: rgba(234, 179, 8, 0.15); border: 1px solid rgba(234, 179, 8, 0.3); border-radius: 16px; color: #eab308; font-size: 24px; margin-bottom: 20px;">
+                🔑
             </div>
-            <h3 style="font-size: 1.25rem; font-weight: 800; color: #fff; margin-bottom: 8px;">What's New in YH Studio</h3>
-            <p style="font-size: 0.88rem; color: var(--text-body); margin-bottom: 24px; line-height: 1.6;">
-                • Renamed scripts category to <span style="color: var(--primary); font-weight: 600;">Premium</span> and updated iterations.<br>
-                • Performance & UI optimizations.
+            <h3 style="font-size: 1.35rem; font-weight: 800; color: #fff; margin-bottom: 8px;">Redeem Premium Code</h3>
+            <p style="font-size: 0.82rem; color: #94a3b8; margin-bottom: 20px;">Enter your unique code to unlock Premium features & Early Access models.</p>
+            
+            <form onsubmit="handleRedeemCode(event)" style="display: flex; flex-direction: column; gap: 14px;">
+                <input type="text" id="codeRedeemInput" placeholder="e.g. YH-XXXXXX" required style="width: 100%; padding: 12px 16px; background-color: var(--bg-input); border: 1px solid var(--border-color); color: #fff; border-radius: var(--radius-inner); outline: none; font-size: 0.95rem; text-align: center; font-family: monospace; letter-spacing: 2px;">
+                <div id="codeErrorMsg" style="color: #ef4444; font-size: 0.8rem; display: none;"></div>
+                <div style="display: flex; gap: 10px;">
+                    <button type="button" onclick="closeCodesModal()" style="flex: 1; padding: 11px; background: var(--bg-input); border: 1px solid var(--border-color); color: #fff; font-weight: 600; border-radius: var(--radius-inner); cursor: pointer;">Cancel</button>
+                    <button type="submit" style="flex: 1; padding: 11px; background: linear-gradient(135deg, #ca8a04 0%, #eab308 100%); color: #050505; font-weight: 700; border: none; border-radius: var(--radius-inner); cursor: pointer; box-shadow: 0 4px 15px rgba(234, 179, 8, 0.3);">Activate</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Golden Payment & Unlocked Modal Animation -->
+    <div id="unlockedSuccessModal" class="modal-overlay hidden">
+        <div class="modal-content animate-scale-up" style="position: relative; text-align: center; border: 2px solid #eab308; background: linear-gradient(135deg, rgba(234, 179, 8, 0.15), var(--bg-card)); box-shadow: 0 0 50px rgba(234, 179, 8, 0.4);">
+            <div style="font-size: 50px; margin-bottom: 12px;">🎉</div>
+            <h3 style="font-size: 1.6rem; font-weight: 900; color: #facc15; margin-bottom: 8px;">Premium Unlocked!</h3>
+            <p style="font-size: 0.85rem; color: #e2e8f0; margin-bottom: 20px;">Congratulations! Your Premium Membership is now active.</p>
+            
+            <div style="background: rgba(15, 16, 21, 0.8); border: 1px solid rgba(234, 179, 8, 0.3); border-radius: 12px; padding: 16px; text-align: left; margin-bottom: 20px; font-size: 0.82rem; color: #cbd5e1; display: flex; flex-direction: column; gap: 8px;">
+                <div style="color: #facc15; font-weight: 700; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 6px;">✨ Unlocked Privileges:</div>
+                <div>✔ <b>Golden Header Badge:</b> ( Plus ) / ( Premium )</div>
+                <div>✔ <b>Exclusive Early Access Models & Maps</b></div>
+                <div>✔ <b>VIP Direct Feedback & Suggestions Hub</b></div>
+            </div>
+
+            <button onclick="closeUnlockedSuccessModal()" style="width: 100%; padding: 12px; background: linear-gradient(135deg, #ca8a04 0%, #eab308 100%); color: #050505; font-weight: 800; border: none; border-radius: var(--radius-inner); cursor: pointer; box-shadow: 0 4px 20px rgba(234, 179, 8, 0.4);">Enjoy Premium 🚀</button>
+        </div>
+    </div>
+
+    <!-- Premium Restricted Notice Modal -->
+    <div id="premiumRestrictedModal" class="modal-overlay hidden">
+        <div class="modal-content animate-scale-up" style="position: relative; text-align: center; border-color: rgba(239, 68, 68, 0.3);">
+            <div style="display: inline-flex; align-items: center; justify-content: center; width: 64px; height: 64px; background: rgba(239, 68, 68, 0.15); border: 1px solid rgba(239, 68, 68, 0.3); border-radius: 16px; color: #ef4444; font-size: 24px; margin-bottom: 20px;">
+                🔒
+            </div>
+            <h3 style="font-size: 1.4rem; font-weight: 800; color: #fff; margin-bottom: 10px;">Access Denied</h3>
+            <p style="font-size: 0.9rem; color: #fca5a5; line-height: 1.5; margin-bottom: 24px;">
+                You must purchase Premium to unlock this section!
             </p>
-            <button onclick="closeUpdateModal()" class="submit-btn">Confirm</button>
+            <div style="display: flex; gap: 10px;">
+                <button onclick="closePremiumRestrictedModal()" style="flex: 1; padding: 11px; background: var(--bg-input); border: 1px solid var(--border-color); color: #fff; font-weight: 600; border-radius: var(--radius-inner); cursor: pointer;">Close</button>
+                <button onclick="switchToCodesFromRestricted()" style="flex: 1; padding: 11px; background: linear-gradient(135deg, #ca8a04 0%, #eab308 100%); color: #050505; font-weight: 700; border: none; border-radius: var(--radius-inner); cursor: pointer;">Enter Code</button>
+            </div>
         </div>
     </div>
 
@@ -458,7 +310,6 @@
             <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 20px;">Click on any question below to view the answer or submit a support request.</p>
 
             <div style="display: flex; flex-direction: column; gap: 12px;">
-                <!-- FAQ 1 -->
                 <div style="background: var(--bg-input); border: 1px solid var(--border-color); border-radius: var(--radius-inner); padding: 14px;">
                     <button onclick="toggleFaq('faq1')" style="width: 100%; background: none; border: none; color: #fff; text-align: left; font-weight: 600; font-size: 0.88rem; display: flex; justify-content: space-between; align-items: center; cursor: pointer;">
                         <span>What should I do if my model is pending?</span>
@@ -476,7 +327,6 @@
                     </div>
                 </div>
 
-                <!-- FAQ 2 -->
                 <div style="background: var(--bg-input); border: 1px solid var(--border-color); border-radius: var(--radius-inner); padding: 14px;">
                     <button onclick="toggleFaq('faq2')" style="width: 100%; background: none; border: none; color: #fff; text-align: left; font-weight: 600; font-size: 0.88rem; display: flex; justify-content: space-between; align-items: center; cursor: pointer;">
                         <span>Are all models safe?</span>
@@ -486,44 +336,9 @@
                         <p>Yes, absolutely! All models are safe and virus-free.</p>
                     </div>
                 </div>
-
-                <!-- FAQ 3 -->
-                <div style="background: var(--bg-input); border: 1px solid var(--border-color); border-radius: var(--radius-inner); padding: 14px;">
-                    <button onclick="toggleFaq('faq3')" style="width: 100%; background: none; border: none; color: #fff; text-align: left; font-weight: 600; font-size: 0.88rem; display: flex; justify-content: space-between; align-items: center; cursor: pointer;">
-                        <span>The model is not working?</span>
-                        <span style="color: var(--primary); font-size: 1.2rem;">+</span>
-                    </button>
-                    <div id="faq3" class="hidden" style="margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--border-color); font-size: 0.8rem; color: var(--text-body);">
-                        <p style="margin-bottom: 12px;">Oh, if the model is not working for you, another button will appear in my message. Click it and type the model name to be checked.</p>
-                        <form action="https://formspree.io/f/mjygqarv" method="POST" style="display: flex; flex-direction: column; gap: 8px;">
-                            <input type="hidden" name="supportType" value="Broken Model Report">
-                            <input type="text" name="modelName" placeholder="Model Name" required style="padding: 8px 12px; background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 8px; color: #fff; font-size: 0.8rem;">
-                            <input type="text" name="modelId" placeholder="Model ID / Code" required style="padding: 8px 12px; background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 8px; color: #fff; font-size: 0.8rem;">
-                            <input type="email" name="userEmail" placeholder="Your Email" required style="padding: 8px 12px; background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 8px; color: #fff; font-size: 0.8rem;">
-                            <button type="submit" class="submit-btn" style="padding: 8px; font-size: 0.8rem;">Submit for Review 🔍</button>
-                        </form>
-                    </div>
-                </div>
             </div>
 
             <button onclick="closeHelpModal()" style="width: 100%; margin-top: 20px; padding: 10px; background: var(--bg-input); border: 1px solid var(--border-color); color: #fff; font-weight: 600; border-radius: var(--radius-inner); cursor: pointer;">Close</button>
-        </div>
-    </div>
-
-    <!-- Premium Coming Soon Modal (Gold Theme - English Only / Suggestions Preview) -->
-    <div id="premiumModal" class="modal-overlay hidden">
-        <div class="modal-content animate-scale-up" style="position: relative; text-align: center; border-color: rgba(234, 179, 8, 0.3);">
-            <div style="position: absolute; top: -40px; right: -40px; width: 120px; height: 120px; background: rgba(234, 179, 8, 0.15); border-radius: 50%; filter: blur(20px); pointer-events: none;"></div>
-            <div style="display: inline-flex; align-items: center; justify-content: center; width: 64px; height: 64px; background: rgba(234, 179, 8, 0.15); border: 1px solid rgba(234, 179, 8, 0.3); border-radius: 16px; color: #eab308; font-size: 24px; margin-bottom: 24px; box-shadow: 0 0 15px rgba(234, 179, 8, 0.2);">
-                ⭐
-            </div>
-            <h3 style="font-size: 1.5rem; font-weight: 800; color: #fff; margin-bottom: 12px;">Premium Suggestions Coming Soon</h3>
-            <p style="font-size: 0.88rem; color: #cbd5e1; line-height: 1.6; margin-bottom: 24px;">
-                We are currently building exclusive features and suggestion tools. They will be coming very soon. Stay tuned!
-            </p>
-            <button onclick="closePremiumModal()" style="width: 100%; padding: 12px; background: linear-gradient(135deg, #ca8a04 0%, #eab308 100%); color: #050505; font-weight: 700; border: none; border-radius: var(--radius-inner); cursor: pointer; transition: var(--transition); box-shadow: 0 4px 15px rgba(234, 179, 8, 0.3);">
-                Got it
-            </button>
         </div>
     </div>
 
@@ -533,9 +348,12 @@
         <!-- Header Section -->
         <header>
             <div class="header-inner">
-                <div>
-                    <h1>YH Studio</h1>
-                    <p>The ultimate library for secure Roblox Studio models & scripts</p>
+                <div class="logo-area">
+                    <div>
+                        <h1>YH Studio</h1>
+                        <p>The ultimate library for secure Roblox Studio models & scripts</p>
+                    </div>
+                    <div id="headerGoldBadge" class="hidden gold-premium-badge">( Plus )</div>
                 </div>
                 <div class="search-container">
                     <input type="text" id="searchInput" onkeyup="searchScripts()" placeholder="Search for a model or code...">
@@ -549,13 +367,16 @@
                 <button class="cat-btn" onclick="filterCategory('Steal an Egg', this)">Steal an Egg</button>
                 <button class="cat-btn" onclick="filterCategory('maps', this)">Map</button>
                 
-                <!-- Premium Yellow & Gold Button -->
-                <button class="cat-btn" onclick="openPremiumModal()" style="background: linear-gradient(135deg, rgba(202, 138, 4, 0.15), rgba(234, 179, 8, 0.25)); color: #facc15; border-color: rgba(234, 179, 8, 0.4); box-shadow: 0 0 15px rgba(234, 179, 8, 0.15);">
+                <!-- Premium Gold Button -->
+                <button id="navPremiumBtn" class="cat-btn" onclick="handlePremiumClick(this)" style="background: linear-gradient(135deg, rgba(202, 138, 4, 0.15), rgba(234, 179, 8, 0.25)); color: #facc15; border-color: rgba(234, 179, 8, 0.4); box-shadow: 0 0 15px rgba(234, 179, 8, 0.15);">
                     ⭐ Premium
                 </button>
 
                 <button class="cat-btn" onclick="openHelpModal()" style="color: #38bdf8;">❓ Help</button>
                 
+                <!-- Codes Section Button -->
+                <button class="cat-btn" onclick="openCodesModal()" style="color: #facc15; border-color: rgba(234, 179, 8, 0.3);">🔑 Codes</button>
+
                 <a href="https://discord.gg/z8WXEQzv4" target="_blank" class="cat-btn" style="color: #a5b4fc;">💬 Discord</a>
 
                 <button class="cat-btn" onclick="filterCategory('add-model', this)" style="background-color: var(--primary); color: #050505; margin-left: auto;">➕ Post Your Model</button>
@@ -573,7 +394,7 @@
                     </div>
                     <div>
                         <h2 style="font-size: 1.15rem; font-weight: 700; color: #fff; display: flex; align-items: center; gap: 8px;">
-                            Welcome to YH Studio! <span style="font-size: 0.7rem; background: var(--primary); color: #050505; padding: 2px 8px; border-radius: 9999px; font-weight: 700;">v1.0.0.6</span>
+                            Welcome to YH Studio! <span style="font-size: 0.7rem; background: var(--primary); color: #050505; padding: 2px 8px; border-radius: 9999px; font-weight: 700;">v1.0.0.8</span>
                         </h2>
                         <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 2px;">Explore our wide collection of secure Roblox Studio models, maps, and admin scripts.</p>
                     </div>
@@ -625,6 +446,24 @@
             <!-- Models Grid -->
             <div id="modelsGrid" class="models-grid">
                 
+                <!-- Premium Exclusive Suggestions Hub (Visible ONLY when Premium Active) -->
+                <div class="model-card premium-only-item hidden" data-category="premium" style="border: 2px solid #eab308; background: linear-gradient(135deg, rgba(234, 179, 8, 0.08), var(--bg-card));">
+                    <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=600&auto=format&fit=crop" alt="Premium VIP Hub">
+                    <div class="card-body">
+                        <div style="display: flex; align-items: center; justify-content: space-between;">
+                            <h3 style="font-size: 1rem; font-weight: 700; color: #facc15;">⭐ VIP Early Access Hub</h3>
+                            <span style="font-size: 0.72rem; background: rgba(234, 179, 8, 0.15); color: #facc15; border: 1px solid rgba(234, 179, 8, 0.3); padding: 2px 10px; border-radius: 9999px;">Early Access</span>
+                        </div>
+                        <p style="font-size: 0.8rem; color: var(--text-body);">Send suggestions directly to studioyh!</p>
+                        <form action="https://formspree.io/f/mjygqarv" method="POST" style="display: flex; flex-direction: column; gap: 8px;">
+                            <input type="hidden" name="vipFeedback" value="Premium User Direct Suggestion">
+                            <input type="text" name="userName" placeholder="Your Roblox Name" required style="padding: 8px; background: var(--bg-input); border: 1px solid var(--border-color); border-radius: 8px; color: #fff; font-size: 0.8rem;">
+                            <textarea name="suggestion" placeholder="Write your suggestion..." required rows="2" style="padding: 8px; background: var(--bg-input); border: 1px solid var(--border-color); border-radius: 8px; color: #fff; font-size: 0.8rem; resize: none;"></textarea>
+                            <button type="submit" style="padding: 8px; background: linear-gradient(135deg, #ca8a04, #eab308); color: #050505; font-weight: 700; border: none; border-radius: 8px; cursor: pointer;">Send VIP Suggestion 🚀</button>
+                        </form>
+                    </div>
+                </div>
+
                 <!-- Admin Panel v2.8 -->
                 <div class="model-card" data-category="admin">
                     <img src="https://i.ibb.co/pv0HPLQz/IMG-0114.jpg" alt="Admin Panel v2.8">
@@ -892,54 +731,83 @@
 
     <!-- JavaScript Functions -->
     <script>
-        window.addEventListener('load', () => {
-            const loaderContainer = document.getElementById('loaderContainer');
-            const successCheck = document.getElementById('successCheck');
-            const splashText = document.getElementById('splashText');
-            const progressPercentage = document.getElementById('progressPercentage');
-            const progressBar = document.getElementById('progressBar');
-            const splashScreen = document.getElementById('splashScreen');
-            const mainContent = document.getElementById('mainContent');
-            const updateModal = document.getElementById('updateModal');
+        // Valid Single-Use System Codes
+        const VALID_PREMIUM_CODES = [
+            "YH-FQ5JO9",
+            "YH-T6HEO7",
+            "YH-4RQIGQ",
+            "YH-3EOPRH",
+            "YH-VIP67"
+        ];
 
-            let currentProgress = 0;
-            const duration = 2500;
-            const intervalTime = 25; 
-            const increment = 100 / (duration / intervalTime);
+        function isPremiumUser() {
+            return localStorage.getItem('yh_premium_activated') === 'true';
+        }
 
-            const loadingInterval = setInterval(() => {
-                currentProgress += increment;
-                if (currentProgress >= 100) {
-                    currentProgress = 100;
-                    clearInterval(loadingInterval);
+        function updatePremiumUI() {
+            if (isPremiumUser()) {
+                document.getElementById('headerGoldBadge').classList.remove('hidden');
+            } else {
+                document.getElementById('headerGoldBadge').classList.add('hidden');
+            }
+        }
 
-                    if (loaderContainer) loaderContainer.style.display = 'none';
-                    if (successCheck) successCheck.classList.remove('hidden');
-                    if (splashText) splashText.textContent = "Loaded Successfully";
-                }
+        function openCodesModal() {
+            document.getElementById('codeErrorMsg').style.display = 'none';
+            document.getElementById('codesModal').classList.remove('hidden');
+        }
+
+        function closeCodesModal() {
+            document.getElementById('codesModal').classList.add('hidden');
+        }
+
+        function handleRedeemCode(event) {
+            event.preventDefault();
+            const inputCode = document.getElementById('codeRedeemInput').value.trim();
+            const errorDiv = document.getElementById('codeErrorMsg');
+
+            let usedCodes = JSON.parse(localStorage.getItem('yh_used_codes') || '[]');
+
+            if (usedCodes.includes(inputCode)) {
+                errorDiv.textContent = "This code has already been redeemed!";
+                errorDiv.style.display = 'block';
+                return;
+            }
+
+            if (VALID_PREMIUM_CODES.includes(inputCode)) {
+                usedCodes.push(inputCode);
+                localStorage.setItem('yh_used_codes', JSON.stringify(usedCodes));
+                localStorage.setItem('yh_premium_activated', 'true');
+
+                closeCodesModal();
+                updatePremiumUI();
                 
-                if (progressPercentage) progressPercentage.textContent = Math.floor(currentProgress) + '%';
-                if (progressBar) progressBar.style.width = currentProgress + '%';
-            }, intervalTime);
+                document.getElementById('unlockedSuccessModal').classList.remove('hidden');
+            } else {
+                errorDiv.textContent = "Invalid code! Please check and try again.";
+                errorDiv.style.display = 'block';
+            }
+        }
 
-            setTimeout(() => {
-                if (splashScreen) {
-                    splashScreen.style.opacity = '0';
-                    setTimeout(() => {
-                        splashScreen.style.display = 'none';
-                        if (mainContent) mainContent.style.opacity = '1';
-                        
-                        if (!localStorage.getItem('yh_update_v1.0.0.6')) {
-                            updateModal.classList.add('hidden');
-                        }
-                    }, 300);
-                }
-            }, duration + 400);
-        });
+        function closeUnlockedSuccessModal() {
+            document.getElementById('unlockedSuccessModal').classList.add('hidden');
+        }
 
-        function closeUpdateModal() {
-            localStorage.setItem('yh_update_v1.0.0.6', 'true');
-            document.getElementById('updateModal').classList.add('hidden');
+        function handlePremiumClick(btn) {
+            if (isPremiumUser()) {
+                filterCategory('premium', btn);
+            } else {
+                document.getElementById('premiumRestrictedModal').classList.remove('hidden');
+            }
+        }
+
+        function closePremiumRestrictedModal() {
+            document.getElementById('premiumRestrictedModal').classList.add('hidden');
+        }
+
+        function switchToCodesFromRestricted() {
+            closePremiumRestrictedModal();
+            openCodesModal();
         }
 
         function openHelpModal() {
@@ -950,14 +818,6 @@
             document.getElementById('helpModal').classList.add('hidden');
         }
 
-        function openPremiumModal() {
-            document.getElementById('premiumModal').classList.remove('hidden');
-        }
-
-        function closePremiumModal() {
-            document.getElementById('premiumModal').classList.add('hidden');
-        }
-
         function toggleFaq(id) {
             const element = document.getElementById(id);
             if (element) {
@@ -965,21 +825,45 @@
             }
         }
 
-        function copyCode(elementId, btn) {
-            const codeElement = document.getElementById(elementId);
-            if (!codeElement) return;
-            
-            const codeText = codeElement.innerText;
-            navigator.clipboard.writeText(codeText).then(() => {
-                const originalText = btn.innerText;
-                btn.innerText = 'Copied!';
-                btn.style.backgroundColor = '#16a34a';
-                setTimeout(() => {
-                    btn.innerText = originalText;
-                    btn.style.backgroundColor = '';
-                }, 2000);
-            });
-        }
+        window.addEventListener('load', () => {
+            updatePremiumUI();
+
+            const loaderContainer = document.getElementById('loaderContainer');
+            const successCheck = document.getElementById('successCheck');
+            const splashText = document.getElementById('splashText');
+            const progressPercentage = document.getElementById('progressPercentage');
+            const progressBar = document.getElementById('progressBar');
+            const splashScreen = document.getElementById('splashScreen');
+            const mainContent = document.getElementById('mainContent');
+
+            let currentProgress = 0;
+            const duration = 2000;
+            const intervalTime = 25; 
+            const increment = 100 / (duration / intervalTime);
+
+            const loadingInterval = setInterval(() => {
+                currentProgress += increment;
+                if (currentProgress >= 100) {
+                    currentProgress = 100;
+                    clearInterval(loadingInterval);
+                    if (loaderContainer) loaderContainer.style.display = 'none';
+                    if (successCheck) successCheck.classList.remove('hidden');
+                    if (splashText) splashText.textContent = "Loaded Successfully";
+                }
+                if (progressPercentage) progressPercentage.textContent = Math.floor(currentProgress) + '%';
+                if (progressBar) progressBar.style.width = currentProgress + '%';
+            }, intervalTime);
+
+            setTimeout(() => {
+                if (splashScreen) {
+                    splashScreen.style.opacity = '0';
+                    setTimeout(() => {
+                        splashScreen.style.display = 'none';
+                        if (mainContent) mainContent.style.opacity = '1';
+                    }, 300);
+                }
+            }, duration + 300);
+        });
 
         function filterCategory(category, btn) {
             const buttons = document.querySelectorAll('.cat-btn');
@@ -1003,18 +887,48 @@
 
             const cards = document.querySelectorAll('.model-card');
             cards.forEach(card => {
-                if (category === 'all' || card.getAttribute('data-category') === category) {
-                    card.style.display = 'flex';
+                const cardCat = card.getAttribute('data-category');
+                
+                if (category === 'premium') {
+                    if (cardCat === 'premium') {
+                        card.style.display = 'flex';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                } else if (category === 'all') {
+                    if (cardCat === 'premium') {
+                        card.style.display = isPremiumUser() ? 'flex' : 'none';
+                    } else {
+                        card.style.display = 'flex';
+                    }
                 } else {
-                    card.style.display = 'none';
+                    if (cardCat === category) {
+                        card.style.display = 'flex';
+                    } else {
+                        card.style.display = 'none';
+                    }
                 }
+            });
+        }
+
+        function copyCode(elementId, btn) {
+            const codeElement = document.getElementById(elementId);
+            if (!codeElement) return;
+            
+            navigator.clipboard.writeText(codeElement.innerText).then(() => {
+                const originalText = btn.innerText;
+                btn.innerText = 'Copied!';
+                btn.style.backgroundColor = '#16a34a';
+                setTimeout(() => {
+                    btn.innerText = originalText;
+                    btn.style.backgroundColor = '';
+                }, 2000);
             });
         }
 
         function searchScripts() {
             const searchInput = document.getElementById('searchInput');
             if (!searchInput) return;
-            
             const input = searchInput.value.toLowerCase();
             const cards = document.querySelectorAll('.model-card');
             
