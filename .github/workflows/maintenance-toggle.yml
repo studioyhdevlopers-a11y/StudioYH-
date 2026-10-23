@@ -1,0 +1,42 @@
+name: Toggle Maintenance Mode
+
+on:
+  workflow_dispatch:
+    inputs:
+      status:
+        description: 'Set Maintenance Mode (true or false)'
+        required: true
+        default: 'false'
+        type: choice
+        options:
+          - true
+          - false
+
+jobs:
+  update-maintenance:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Update index.html
+        run: |
+          # Use Python to safely update the MAINTENANCE_MODE variable in index.html
+          python3 -c '
+          with open("index.html", "r", encoding="utf-8") as f:
+              content = f.read()
+          
+          import re
+          new_content = re.sub(r"const\s+MAINTENANCE_MODE\s*=\s*(true|false);", f"const MAINTENANCE_MODE = ${{ github.event.inputs.status }};", content)
+          
+          with open("index.html", "w", encoding="utf-8") as f:
+              f.write(new_content)
+          '
+
+      - name: Commit and push changes
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: "Workflow: Set maintenance mode to ${{ github.event.inputs.status }}"
+          branch: main
