@@ -1,0 +1,62 @@
+name: Add New Model
+
+on:
+  workflow_dispatch:
+    inputs:
+      model_name:
+        description: 'Model Name'
+        required: true
+        type: string
+      model_link:
+        description: 'Model Link'
+        required: true
+        type: string
+      model_status:
+        description: 'Model Status'
+        required: true
+        type: string
+      image_link:
+        description: 'Image URL'
+        required: true
+        type: string
+
+jobs:
+  add-model:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Add model to index.html
+        run: |
+          # Use Python to safely append the new model to the designated place in index.html
+          python3 -c '
+          with open("index.html", "r", encoding="utf-8") as f:
+              content = f.read()
+          
+          new_model_html = f"""
+          <!-- Model: ${{ github.event.inputs.model_name }} -->
+          <div class=\"model-item\">
+              <h3>${{ github.event.inputs.model_name }}</h3>
+              <p>Status: ${{ github.event.inputs.model_status }}</p>
+              <img src=\"${{ github.event.inputs.image_link }}\" alt=\"Model Image\">
+              <a href=\"${{ github.event.inputs.model_link }}\">View Model</a>
+          </div>
+          """
+          
+          if "<!-- MODELS_CONTAINER -->" in content:
+              new_content = content.replace("<!-- MODELS_CONTAINER -->", f"<!-- MODELS_CONTAINER -->\n{new_model_html}")
+          else:
+              new_content = content + "\n" + new_model_html
+              
+          with open("index.html", "w", encoding="utf-8") as f:
+              f.write(new_content)
+          '
+
+      - name: Commit and push changes
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: "Add new model: ${{ github.event.inputs.model_name }}"
+          branch: main
