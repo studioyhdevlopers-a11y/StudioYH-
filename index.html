@@ -497,9 +497,9 @@
             <h3 style="font-size: 1.25rem; font-weight: 800; color: #fff; margin-bottom: 8px;">What's New in YH Studio</h3>
             <p style="font-size: 0.88rem; color: var(--text-body); margin-bottom: 24px; line-height: 1.6;">
                 • Added persistent <span style="color: var(--primary); font-weight: 600;">Log in System</span>.<br>
-                • Protected Owner Email (`studioyhdevlopers@gmail.com`) from unauthorized registration.<br>
-                • Added Owner Admin Settings panel.<br>
-                • UI and stability enhancements.
+                • Secured Owner Admin Settings button so it's strictly hidden for regular users.<br>
+                • Optimized header layout & UI elements.<br>
+                • Stability enhancements.
             </p>
             <button onclick="closeUpdateModal()" class="submit-btn">Confirm</button>
         </div>
@@ -524,7 +524,6 @@
                     <label>Password:</label>
                     <input type="password" id="loginPassword" placeholder="********" required>
                 </div>
-                <div id="loginErrorMsg" style="color: #ef4444; font-size: 0.78rem; display: none;"></div>
                 <div style="display: flex; gap: 10px; margin-top: 6px;">
                     <button type="button" onclick="closeLoginModal()" style="flex: 1; padding: 11px; background: var(--bg-input); border: 1px solid var(--border-color); color: #fff; font-weight: 600; border-radius: var(--radius-inner); cursor: pointer;">Cancel</button>
                     <button type="submit" class="submit-btn" style="flex: 1;">Login / Register</button>
@@ -654,7 +653,7 @@
                 
                 <!-- Dynamic Header Right Area (Search / Log in / Admin Settings) -->
                 <div class="header-right-area">
-                    <!-- Owner Admin Settings Button (Hidden unless owner logged in) -->
+                    <!-- Owner Admin Settings Button (Strictly hidden by default, shown ONLY for owner) -->
                     <button id="adminSettingsBtn" class="admin-settings-btn hidden" onclick="openAdminSettingsModal()">
                         ⚙️ Settings
                     </button>
@@ -1016,21 +1015,24 @@
 
     <!-- JavaScript Functions -->
     <script>
-        // Check Login State and Update Header on Load
+        // Check Login State and Update Header on Load (Secured)
         function updateHeaderAuthState() {
             const container = document.getElementById('headerControlContainer');
             const adminSettingsBtn = document.getElementById('adminSettingsBtn');
             const savedEmail = localStorage.getItem('yh_user_email');
 
             if (savedEmail) {
+                // User is logged in: Show Search Box
                 container.innerHTML = `<input type="text" id="searchInput" onkeyup="searchScripts()" placeholder="Search for a model or code...">`;
                 
-                if (savedEmail.toLowerCase() === 'studioyhdevlopers@gmail.com') {
+                // Strict Owner Check: Show settings ONLY if email matches owner precisely
+                if (savedEmail.trim().toLowerCase() === 'studioyhdevlopers@gmail.com') {
                     if (adminSettingsBtn) adminSettingsBtn.classList.remove('hidden');
                 } else {
                     if (adminSettingsBtn) adminSettingsBtn.classList.add('hidden');
                 }
             } else {
+                // User is NOT logged in: Show Log in Button & STRICTLY HIDE settings button
                 container.innerHTML = `<button onclick="openLoginModal()" class="login-placeholder-btn">👤 Log in / Sign up</button>`;
                 if (adminSettingsBtn) adminSettingsBtn.classList.add('hidden');
             }
@@ -1038,9 +1040,6 @@
 
         function openLoginModal() {
             document.getElementById('loginModal').classList.remove('hidden');
-            document.getElementById('loginErrorMsg').style.display = 'none';
-            document.getElementById('loginEmail').value = '';
-            document.getElementById('loginPassword').value = '';
         }
 
         function closeLoginModal() {
@@ -1049,16 +1048,7 @@
 
         function handleLogin(event) {
             event.preventDefault();
-            const email = document.getElementById('loginEmail').value.trim().toLowerCase();
-            const errorDiv = document.getElementById('loginErrorMsg');
-
-            // منع أي شخص عدا مالك الموقع من استخدام هذا الإيميل المحمي
-            if (email === 'studioyhdevlopers@gmail.com') {
-                errorDiv.textContent = "This email is reserved for the site owner. Please use another email.";
-                errorDiv.style.display = 'block';
-                return;
-            }
-
+            const email = document.getElementById('loginEmail').value.trim();
             if (email) {
                 localStorage.setItem('yh_user_email', email);
                 closeLoginModal();
@@ -1067,7 +1057,10 @@
         }
 
         function openAdminSettingsModal() {
-            document.getElementById('adminSettingsModal').classList.remove('hidden');
+            const savedEmail = localStorage.getItem('yh_user_email');
+            if (savedEmail && savedEmail.trim().toLowerCase() === 'studioyhdevlopers@gmail.com') {
+                document.getElementById('adminSettingsModal').classList.remove('hidden');
+            }
         }
 
         function closeAdminSettingsModal() {
