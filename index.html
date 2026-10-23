@@ -7,82 +7,410 @@
     <!-- Plus Jakarta Sans Modern Font -->
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
+        /* ==========================================
+           YH Studio - Modern Dark Glassmorphism CSS Theme
+           ========================================== */
         :root {
             --bg-main: #090a0f;
             --bg-card: rgba(24, 24, 27, 0.75);
             --bg-input: #0f1015;
+            
             --primary: #22c55e;
             --primary-hover: #16a34a;
             --primary-glow: rgba(34, 197, 94, 0.25);
-            --gold-primary: #eab308;
-            --gold-glow: rgba(234, 179, 8, 0.35);
+            
             --text-heading: #ffffff;
             --text-body: #cbd5e1;
             --text-muted: #71717a;
+            
             --border-color: rgba(255, 255, 255, 0.08);
             --border-hover: rgba(34, 197, 94, 0.4);
             --glass-backdrop: blur(16px);
+            
             --radius-pill: 9999px;
             --radius-card: 20px;
             --radius-inner: 12px;
+            
             --transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
         }
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        body {
-            font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
-            background-color: var(--bg-main);
-            background-image: radial-gradient(at 10% 10%, rgba(34, 197, 94, 0.08) 0px, transparent 50%), radial-gradient(at 90% 90%, rgba(99, 102, 241, 0.05) 0px, transparent 50%);
-            background-attachment: fixed; color: var(--text-body); min-height: 100vh;
-            display: flex; flex-direction: column; direction: ltr; text-align: left;
-            -webkit-font-smoothing: antialiased; overflow-x: hidden;
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
         }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-        @keyframes scaleUp { 0% { transform: scale(0.8); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
-        .animate-fade-in { animation: fadeIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
-        .animate-scale-up { animation: scaleUp 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
-        #splashScreen { position: fixed; inset: 0; z-index: 50; background-color: var(--bg-main); display: flex; flex-direction: column; align-items: center; justify-content: center; transition: opacity 0.3s ease; }
-        .modal-overlay { position: fixed; inset: 0; z-index: 50; background-color: rgba(9, 10, 15, 0.85); backdrop-filter: blur(12px); display: flex; align-items: center; justify-content: center; padding: 16px; }
-        .modal-overlay.hidden { display: none; }
-        .modal-content { background: var(--bg-card); backdrop-filter: var(--glass-backdrop); border: 1px solid var(--border-color); border-radius: var(--radius-card); padding: 28px; max-width: 480px; width: 100%; box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6); }
-        header { background: var(--bg-card); backdrop-filter: var(--glass-backdrop); border-bottom: 1px solid var(--border-color); position: sticky; top: 0; z-index: 40; padding: 20px 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
-        .header-inner { max-width: 1100px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; justify-content: space-between; gap: 16px; }
-        @media(min-width: 768px) { .header-inner { flex-direction: row; } }
-        .logo-area { display: flex; align-items: center; gap: 12px; }
-        header h1 { background: linear-gradient(135deg, #15803d 0%, #22c55e 50%, #4ade80 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-size: 2rem; font-weight: 800; letter-spacing: -0.025em; }
-        header p { color: var(--text-muted); font-size: 0.88rem; margin-top: 4px; }
-        .search-container { width: 100%; max-width: 320px; }
-        .search-container input { width: 100%; padding: 12px 18px; background-color: var(--bg-input); border: 1px solid var(--border-color); color: var(--text-heading); border-radius: var(--radius-pill); outline: none; font-size: 0.9rem; transition: var(--transition); }
-        .search-container input:focus { border-color: var(--primary); box-shadow: 0 0 0 3px var(--primary-glow); }
-        .nav-menu { max-width: 1100px; margin: 16px auto 0 auto; display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
-        .cat-btn { background-color: var(--bg-input); color: var(--text-muted); border: 1px solid var(--border-color); padding: 8px 16px; font-weight: 600; font-size: 0.85rem; border-radius: var(--radius-pill); cursor: pointer; transition: var(--transition); text-decoration: none; display: inline-flex; align-items: center; gap: 6px; }
-        .cat-btn.active, .cat-btn:hover { background-color: var(--primary); color: #050505; border-color: var(--primary); box-shadow: 0 4px 15px var(--primary-glow); transform: translateY(-1px); }
-        main { max-width: 1100px; margin: 0 auto; padding: 24px 16px; flex-grow: 1; width: 100%; }
-        .welcome-banner { background: linear-gradient(135deg, rgba(34, 197, 94, 0.1), rgba(24, 24, 27, 0.8)); border: 1px solid rgba(34, 197, 94, 0.2); border-radius: var(--radius-card); padding: 24px; margin-bottom: 32px; display: flex; flex-direction: column; gap: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.4); }
-        @media(min-width: 768px) { .welcome-banner { flex-direction: row; justify-content: space-between; align-items: center; } }
-        .form-section { background: var(--bg-card); backdrop-filter: var(--glass-backdrop); border: 1px solid var(--border-color); border-radius: var(--radius-card); padding: 28px; margin-bottom: 32px; box-shadow: 0 10px 30px rgba(0,0,0,0.4); }
-        .form-section h2 { color: var(--primary); font-size: 1.25rem; margin-bottom: 20px; }
-        .form-grid { display: grid; grid-template-columns: 1fr; gap: 16px; }
-        @media(min-width: 768px) { .form-grid { grid-template-columns: 1fr 1fr; } }
-        .form-group { margin-bottom: 16px; }
-        .form-group label { display: block; margin-bottom: 6px; color: var(--text-body); font-size: 0.85rem; font-weight: 600; }
-        .form-group input, .form-group select { width: 100%; padding: 11px 14px; background-color: var(--bg-input); border: 1px solid var(--border-color); color: var(--text-heading); border-radius: var(--radius-inner); outline: none; font-size: 0.9rem; transition: var(--transition); }
-        .form-group input:focus, .form-group select:focus { border-color: var(--primary); box-shadow: 0 0 0 3px var(--primary-glow); }
-        .submit-btn { width: 100%; padding: 12px; background-color: var(--primary); color: #050505; border: none; font-weight: 700; border-radius: var(--radius-inner); cursor: pointer; transition: var(--transition); box-shadow: 0 4px 15px var(--primary-glow); }
-        .submit-btn:hover { background-color: var(--primary-hover); transform: translateY(-2px); }
-        .models-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
-        .model-card { background: var(--bg-card); backdrop-filter: var(--glass-backdrop); border: 1px solid var(--border-color); border-radius: var(--radius-card); overflow: hidden; display: flex; flex-direction: column; transition: var(--transition); box-shadow: 0 8px 24px rgba(0,0,0,0.3); }
-        .model-card:hover { border-color: var(--border-hover); transform: translateY(-4px); box-shadow: 0 12px 30px rgba(0,0,0,0.5), 0 0 20px rgba(34, 197, 94, 0.15); }
-        .model-card img { width: 100%; height: 180px; object-fit: cover; transition: var(--transition); }
-        .card-body { padding: 18px; display: flex; flex-direction: column; flex-grow: 1; justify-content: space-between; gap: 14px; }
-        .code-box { background-color: var(--bg-input); border: 1px solid var(--border-color); border-radius: var(--radius-inner); padding: 10px 14px; display: flex; align-items: center; justify-content: space-between; gap: 8px; }
-        pre { color: var(--primary); font-family: Consolas, Monaco, monospace; font-size: 0.88rem; font-weight: 600; overflow-x: auto; }
-        .copy-btn { background-color: var(--primary); color: #050505; border: none; padding: 6px 14px; font-weight: 700; font-size: 0.8rem; border-radius: 8px; cursor: pointer; transition: var(--transition); }
-        footer { background: var(--bg-card); border-top: 1px solid var(--border-color); padding: 24px; text-align: center; color: var(--text-muted); font-size: 0.85rem; margin-top: auto; }
+
+        body {
+            font-family: 'Plus Jakarta Sans', 'Segoe UI', system-ui, sans-serif;
+            background-color: var(--bg-main);
+            background-image: 
+                radial-gradient(at 10% 10%, rgba(34, 197, 94, 0.08) 0px, transparent 50%),
+                radial-gradient(at 90% 90%, rgba(99, 102, 241, 0.05) 0px, transparent 50%);
+            background-attachment: fixed;
+            color: var(--text-body);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            direction: ltr;
+            text-align: left;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes scaleUp {
+            0% { transform: scale(0.8); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        .animate-fade-in {
+            animation: fadeIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+        .animate-scale-up {
+            animation: scaleUp 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        /* Splash Screen */
+        #splashScreen {
+            position: fixed;
+            inset: 0;
+            z-index: 50;
+            background-color: var(--bg-main);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.3s ease;
+        }
+
+        /* Modals & Overlays */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 50;
+            background-color: rgba(9, 10, 15, 0.85);
+            backdrop-filter: blur(12px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+        }
+        .modal-overlay.hidden {
+            display: none;
+        }
+        .modal-content {
+            background: var(--bg-card);
+            backdrop-filter: var(--glass-backdrop);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-card);
+            padding: 28px;
+            max-width: 480px;
+            width: 100%;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+        }
+
+        /* Header Section */
+        header {
+            background: var(--bg-card);
+            backdrop-filter: var(--glass-backdrop);
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            z-index: 40;
+            padding: 20px 16px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        .header-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+        }
+        @media(min-width: 768px) {
+            .header-inner { flex-direction: row; }
+        }
+
+        /* Gradient title */
+        header h1 {
+            background: linear-gradient(135deg, #15803d 0%, #22c55e 50%, #4ade80 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-size: 2rem;
+            font-weight: 800;
+            letter-spacing: -0.025em;
+            filter: drop-shadow(0 0 15px rgba(34, 197, 94, 0.3));
+        }
+        header p {
+            color: var(--text-muted);
+            font-size: 0.88rem;
+            margin-top: 4px;
+        }
+
+        /* Search Box */
+        .search-container {
+            width: 100%;
+            max-width: 320px;
+        }
+        .search-container input {
+            width: 100%;
+            padding: 12px 18px;
+            background-color: var(--bg-input);
+            border: 1px solid var(--border-color);
+            color: var(--text-heading);
+            border-radius: var(--radius-pill);
+            outline: none;
+            font-size: 0.9rem;
+            transition: var(--transition);
+        }
+        .search-container input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px var(--primary-glow);
+        }
+
+        /* Navigation & Categories */
+        .nav-menu {
+            max-width: 1100px;
+            margin: 16px auto 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 8px;
+        }
+        .cat-btn {
+            background-color: var(--bg-input);
+            color: var(--text-muted);
+            border: 1px solid var(--border-color);
+            padding: 8px 16px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            border-radius: var(--radius-pill);
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .cat-btn.active, .cat-btn:hover {
+            background-color: var(--primary);
+            color: #050505;
+            border-color: var(--primary);
+            box-shadow: 0 4px 15px var(--primary-glow);
+            transform: translateY(-1px);
+        }
+
+        /* Main Content Layout */
+        main {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 24px 16px;
+            flex-grow: 1;
+            width: 100%;
+        }
+
+        /* Welcome Banner */
+        .welcome-banner {
+            background: linear-gradient(135deg, rgba(34, 197, 94, 0.1), rgba(24, 24, 27, 0.8));
+            border: 1px solid rgba(34, 197, 94, 0.2);
+            border-radius: var(--radius-card);
+            padding: 24px;
+            margin-bottom: 32px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+        }
+        @media(min-width: 768px) {
+            .welcome-banner { flex-direction: row; justify-content: space-between; align-items: center; }
+        }
+
+        /* Form Section */
+        .form-section {
+            background: var(--bg-card);
+            backdrop-filter: var(--glass-backdrop);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-card);
+            padding: 28px;
+            margin-bottom: 32px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+        }
+        .form-section h2 {
+            color: var(--primary);
+            font-size: 1.25rem;
+            margin-bottom: 20px;
+        }
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 16px;
+        }
+        @media(min-width: 768px) {
+            .form-grid { grid-template-columns: 1fr 1fr; }
+        }
+        .form-group {
+            margin-bottom: 16px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 6px;
+            color: var(--text-body);
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 11px 14px;
+            background-color: var(--bg-input);
+            border: 1px solid var(--border-color);
+            color: var(--text-heading);
+            border-radius: var(--radius-inner);
+            outline: none;
+            font-size: 0.9rem;
+            transition: var(--transition);
+        }
+        .form-group input:focus, .form-group select:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px var(--primary-glow);
+        }
+        .submit-btn {
+            width: 100%;
+            padding: 12px;
+            background-color: var(--primary);
+            color: #050505;
+            border: none;
+            font-weight: 700;
+            border-radius: var(--radius-inner);
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: 0 4px 15px var(--primary-glow);
+        }
+        .submit-btn:hover {
+            background-color: var(--primary-hover);
+            transform: translateY(-2px);
+        }
+
+        /* Models Grid & Cards */
+        .models-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+        }
+        .model-card {
+            background: var(--bg-card);
+            backdrop-filter: var(--glass-backdrop);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-card);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transition: var(--transition);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+        }
+        .model-card:hover {
+            border-color: var(--border-hover);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.5), 0 0 20px rgba(34, 197, 94, 0.15);
+        }
+        .model-card img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+        .model-card:hover img {
+            transform: scale(1.02);
+        }
+        .card-body {
+            padding: 18px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+            justify-content: space-between;
+            gap: 14px;
+        }
+        .code-box {
+            background-color: var(--bg-input);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-inner);
+            padding: 10px 14px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 8px;
+        }
+        pre {
+            color: var(--primary);
+            font-family: Consolas, Monaco, monospace;
+            font-size: 0.88rem;
+            font-weight: 600;
+            overflow-x: auto;
+        }
+        .copy-btn {
+            background-color: var(--primary);
+            color: #050505;
+            border: none;
+            padding: 6px 14px;
+            font-weight: 700;
+            font-size: 0.8rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        .copy-btn:hover {
+            background-color: var(--primary-hover);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--bg-card);
+            border-top: 1px solid var(--border-color);
+            padding: 24px;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            margin-top: auto;
+        }
     </style>
+    <script>
+        // ==========================================
+        // 🛠️ Maintenance Mode Control Panel
+        // Set to TRUE to lock the site and show maintenance box.
+        // Set to FALSE to make the site work normally.
+        // ==========================================
+        const MAINTENANCE_MODE = true; 
+
+        if (MAINTENANCE_MODE) {
+            window.addEventListener('DOMContentLoaded', () => {
+                document.body.innerHTML = `
+                    <div style="background-color: #090a0f; color: #cbd5e1; min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 16px; font-family: 'Plus Jakarta Sans', sans-serif; width: 100%;">
+                        <div style="background: rgba(24, 24, 27, 0.75); backdrop-filter: blur(16px); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 20px; padding: 32px; max-width: 420px; width: 100%; text-align: center; box-shadow: 0 20px 40px rgba(0,0,0,0.6); position: relative; overflow: hidden;">
+                            <div style="position: absolute; -top: 40px; -right: 40px; width: 120px; height: 120px; background: rgba(34, 197, 94, 0.1); border-radius: 50%; filter: blur(20px); pointer-events: none;"></div>
+                            <div style="display: inline-flex; align-items: center; justify-content: center; width: 64px; height: 64px; background: rgba(34, 197, 94, 0.1); border: 1px solid rgba(34, 197, 94, 0.2); border-radius: 16px; color: #22c55e; font-size: 24px; margin-bottom: 24px;">
+                                🛠️
+                            </div>
+                            <h1 style="font-size: 1.5rem; font-weight: 800; color: #fff; margin-bottom: 12px;">YH Studio is Under Maintenance</h1>
+                            <p style="font-size: 0.88rem; color: #94a3b8; line-height: 1.6; margin-bottom: 24px;">
+                                We are currently performing updates and fixing some issues or adding new features. The site will be back online shortly. Thank you for your patience!
+                            </p>
+                            <div style="padding: 12px 16px; background: #0f1015; border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 12px; font-size: 0.75rem; font-weight: 700; color: #22c55e; letter-spacing: 0.05em; text-transform: uppercase;">
+                                Status: Maintenance Mode Active
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+    </script>
 </head>
 <body>
 
-    <!-- Splash Screen -->
+    <!-- Splash Screen with Progress Bar -->
     <div id="splashScreen">
         <div style="width: 280px; display: flex; flex-direction: column; align-items: center;">
             <div style="position: relative; width: 64px; height: 64px; display: flex; align-items: center; justify-content: center; margin-bottom: 24px;">
@@ -104,108 +432,141 @@
     </div>
     <style>@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }</style>
 
-    <!-- Activation Code Modal -->
-    <div id="codesModal" class="modal-overlay hidden">
-        <div class="modal-content animate-scale-up" style="position: relative; text-align: center; border-color: rgba(234, 179, 8, 0.3);">
-            <div style="display: inline-flex; align-items: center; justify-content: center; width: 64px; height: 64px; background: rgba(234, 179, 8, 0.15); border: 1px solid rgba(234, 179, 8, 0.3); border-radius: 16px; color: #eab308; font-size: 24px; margin-bottom: 20px;">🔑</div>
-            <h3 style="font-size: 1.35rem; font-weight: 800; color: #fff; margin-bottom: 8px;">Enter Promo / Test Code</h3>
-            <p style="font-size: 0.82rem; color: #94a3b8; margin-bottom: 20px;">Type <code style="color: #facc15;">YH-TEST</code> for spinning wheel or <code style="color: #facc15;">YH-Random</code> for exclusive reward.</p>
-            <form onsubmit="handleRedeemCode(event)" style="display: flex; flex-direction: column; gap: 14px;">
-                <input type="text" id="codeRedeemInput" placeholder="e.g. YH-TEST" required style="width: 100%; padding: 12px 16px; background-color: var(--bg-input); border: 1px solid var(--border-color); color: #fff; border-radius: var(--radius-inner); outline: none; font-size: 0.95rem; text-align: center; font-family: monospace; letter-spacing: 2px;">
-                <div id="codeErrorMsg" style="color: #ef4444; font-size: 0.8rem; display: none;"></div>
-                <div style="display: flex; gap: 10px;">
-                    <button type="button" onclick="closeCodesModal()" style="flex: 1; padding: 11px; background: var(--bg-input); border: 1px solid var(--border-color); color: #fff; font-weight: 600; border-radius: var(--radius-inner); cursor: pointer;">Cancel</button>
-                    <button type="submit" style="flex: 1; padding: 11px; background: linear-gradient(135deg, #ca8a04 0%, #eab308 100%); color: #050505; font-weight: 700; border: none; border-radius: var(--radius-inner); cursor: pointer; box-shadow: 0 4px 15px rgba(234, 179, 8, 0.3);">Submit</button>
-                </div>
-            </form>
-        </div>
-    </div>
-
-    <!-- Spinning Wheel Modal (For YH-TEST) -->
-    <div id="wheelModal" class="modal-overlay hidden">
-        <div class="modal-content animate-scale-up" style="text-align: center; position: relative;">
-            <h3 style="font-size: 1.4rem; font-weight: 800; color: #facc15; margin-bottom: 6px;">🎡 Lucky Wheel Simulator</h3>
-            <p style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 20px;">Spin to test your luck! Try to win Robux or an account.</p>
-            
-            <div style="position: relative; width: 220px; height: 220px; margin: 0 auto 20px auto; border-radius: 50%; border: 4px solid #eab308; display: flex; align-items: center; justify-content: center; background: radial-gradient(circle, #18181b, #090a0f); overflow: hidden; box-shadow: 0 0 30px rgba(234, 179, 8, 0.3);">
-                <div id="wheelElement" style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 1.1rem; color: #fff; transition: transform 4s cubic-bezier(0.15, 0.9, 0.2, 1); text-align: center; padding: 10px;">
-                    SPIN ME!
-                </div>
-                <div style="position: absolute; top: 0; width: 6px; height: 20px; background: #ef4444; border-radius: 2px;"></div>
+    <!-- Update Popup Modal (v1.0.0.6) -->
+    <div id="updateModal" class="modal-overlay hidden">
+        <div class="modal-content animate-scale-up" style="position: relative;">
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px;">
+                <span style="font-size: 0.75rem; font-weight: 700; color: var(--primary); background: rgba(34, 197, 94, 0.1); border: 1px solid rgba(34, 197, 94, 0.2); padding: 4px 12px; border-radius: 9999px;">Update v1.0.0.6</span>
+                <span style="font-size: 0.75rem; color: var(--text-muted);">New Release</span>
             </div>
+            <h3 style="font-size: 1.25rem; font-weight: 800; color: #fff; margin-bottom: 8px;">What's New in YH Studio</h3>
+            <p style="font-size: 0.88rem; color: var(--text-body); margin-bottom: 24px; line-height: 1.6;">
+                • Added <span style="color: var(--primary); font-weight: 600;">Admin Panel v2.8</span>.<br>
+                • Added <span style="color: var(--primary); font-weight: 600;">Steal an Egg v5</span>.<br>
+                • Renamed scripts category to <span style="color: var(--primary); font-weight: 600;">Steal an Egg</span> and updated iterations.<br>
+                • Performance & UI optimizations.
+            </p>
+            <button onclick="closeUpdateModal()" class="submit-btn">Confirm</button>
+        </div>
+    </div>
 
-            <div id="wheelResultMsg" style="font-size: 0.95rem; font-weight: 700; margin-bottom: 16px; min-height: 24px;"></div>
-
-            <div style="display: flex; gap: 10px;">
-                <button type="button" onclick="closeWheelModal()" style="flex: 1; padding: 11px; background: var(--bg-input); border: 1px solid var(--border-color); color: #fff; font-weight: 600; border-radius: var(--radius-inner); cursor: pointer;">Close</button>
-                <button type="button" id="spinBtn" onclick="spinTheWheel()" style="flex: 1; padding: 11px; background: linear-gradient(135deg, #ca8a04 0%, #eab308 100%); color: #050505; font-weight: 800; border: none; border-radius: var(--radius-inner); cursor: pointer;">Spin Wheel 🎰</button>
+    <!-- Help Section Modal -->
+    <div id="helpModal" class="modal-overlay hidden">
+        <div class="modal-content animate-scale-up" style="max-height: 90vh; overflow-y: auto;">
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px;">
+                <h3 style="font-size: 1.35rem; font-weight: 900; color: var(--primary);">Help & Support</h3>
+                <button onclick="closeHelpModal()" style="background: none; border: none; color: var(--text-muted); font-size: 1.2rem; cursor: pointer;">✕</button>
             </div>
-        </div>
-    </div>
+            <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 20px;">Click on any question below to view the answer or submit a support request.</p>
 
-    <!-- Electronic Payment Simulator Modal (For YH-Random) -->
-    <div id="paymentSimulatorModal" class="modal-overlay hidden">
-        <div class="modal-content animate-scale-up" style="text-align: center;">
-            <div style="width: 60px; height: 60px; border: 4px solid var(--border-color); border-top-color: #eab308; border-radius: 50%; animation: spin 0.8s linear infinite; margin: 0 auto 20px auto;"></div>
-            <h3 style="font-size: 1.3rem; font-weight: 800; color: #fff; margin-bottom: 8px;">Processing Electronic Payment...</h3>
-            <p style="font-size: 0.85rem; color: var(--text-muted);">Please wait while we verify your exclusive <code style="color: #facc15;">YH-Random</code> authorization.</p>
-        </div>
-    </div>
-
-    <!-- Account Reward Success Modal (For YH-Random) -->
-    <div id="accountRewardModal" class="modal-overlay hidden">
-        <div class="modal-content animate-scale-up" style="text-align: center; border: 2px solid #eab308; background: linear-gradient(135deg, rgba(234, 179, 8, 0.15), var(--bg-card)); box-shadow: 0 0 50px rgba(234, 179, 8, 0.4);">
-            <div style="font-size: 45px; margin-bottom: 10px;">🎉</div>
-            <h3 style="font-size: 1.5rem; font-weight: 900; color: #facc15; margin-bottom: 6px;">Congratulations!</h3>
-            <p style="font-size: 0.85rem; color: #e2e8f0; margin-bottom: 18px;">You successfully claimed your exclusive Random Roblox Account!</p>
-            
-            <div style="display: flex; flex-direction: column; gap: 12px; margin-bottom: 20px; text-align: left;">
-                <div>
-                    <label style="font-size: 0.78rem; color: var(--text-muted); display: block; margin-bottom: 4px;">Username:</label>
-                    <div class="code-box">
-                        <pre><code id="randUser">5xixeil</code></pre>
-                        <button class="copy-btn" onclick="copyCode('randUser', this)">Copy</button>
+            <div style="display: flex; flex-direction: column; gap: 12px;">
+                <!-- FAQ 1 -->
+                <div style="background: var(--bg-input); border: 1px solid var(--border-color); border-radius: var(--radius-inner); padding: 14px;">
+                    <button onclick="toggleFaq('faq1')" style="width: 100%; background: none; border: none; color: #fff; text-align: left; font-weight: 600; font-size: 0.88rem; display: flex; justify-content: space-between; align-items: center; cursor: pointer;">
+                        <span>What should I do if my model is pending?</span>
+                        <span style="color: var(--primary); font-size: 1.2rem;">+</span>
+                    </button>
+                    <div id="faq1" class="hidden" style="margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--border-color); font-size: 0.8rem; color: var(--text-body);">
+                        <p style="margin-bottom: 12px;">First, please wait 3-5 hours. If it's still pending after that time, you can send a message to the YH Studio support team using the form below.</p>
+                        <form action="https://formspree.io/f/mjygqarv" method="POST" style="display: flex; flex-direction: column; gap: 8px;">
+                            <input type="hidden" name="supportType" value="Model Status Inquiry">
+                            <input type="text" name="modelName" placeholder="Model Name" required style="padding: 8px 12px; background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 8px; color: #fff; font-size: 0.8rem;">
+                            <input type="text" name="modelLink" placeholder="Model Link" required style="padding: 8px 12px; background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 8px; color: #fff; font-size: 0.8rem;">
+                            <input type="email" name="userEmail" placeholder="Your Email" required style="padding: 8px 12px; background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 8px; color: #fff; font-size: 0.8rem;">
+                            <button type="submit" class="submit-btn" style="padding: 8px; font-size: 0.8rem;">Send to Support 🚀</button>
+                        </form>
                     </div>
                 </div>
-                <div>
-                    <label style="font-size: 0.78rem; color: var(--text-muted); display: block; margin-bottom: 4px;">Password:</label>
-                    <div class="code-box">
-                        <pre><code id="randPass">YH_Studio</code></pre>
-                        <button class="copy-btn" onclick="copyCode('randPass', this)">Copy</button>
+
+                <!-- FAQ 2 -->
+                <div style="background: var(--bg-input); border: 1px solid var(--border-color); border-radius: var(--radius-inner); padding: 14px;">
+                    <button onclick="toggleFaq('faq2')" style="width: 100%; background: none; border: none; color: #fff; text-align: left; font-weight: 600; font-size: 0.88rem; display: flex; justify-content: space-between; align-items: center; cursor: pointer;">
+                        <span>Are all models safe?</span>
+                        <span style="color: var(--primary); font-size: 1.2rem;">+</span>
+                    </button>
+                    <div id="faq2" class="hidden" style="margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--border-color); font-size: 0.8rem; color: var(--text-body);">
+                        <p>Yes, absolutely! All models are safe and virus-free.</p>
+                    </div>
+                </div>
+
+                <!-- FAQ 3 -->
+                <div style="background: var(--bg-input); border: 1px solid var(--border-color); border-radius: var(--radius-inner); padding: 14px;">
+                    <button onclick="toggleFaq('faq3')" style="width: 100%; background: none; border: none; color: #fff; text-align: left; font-weight: 600; font-size: 0.88rem; display: flex; justify-content: space-between; align-items: center; cursor: pointer;">
+                        <span>The model is not working?</span>
+                        <span style="color: var(--primary); font-size: 1.2rem;">+</span>
+                    </button>
+                    <div id="faq3" class="hidden" style="margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--border-color); font-size: 0.8rem; color: var(--text-body);">
+                        <p style="margin-bottom: 12px;">Oh, if the model is not working for you, another button will appear in my message. Click it and type the model name to be checked.</p>
+                        <form action="https://formspree.io/f/mjygqarv" method="POST" style="display: flex; flex-direction: column; gap: 8px;">
+                            <input type="hidden" name="supportType" value="Broken Model Report">
+                            <input type="text" name="modelName" placeholder="Model Name" required style="padding: 8px 12px; background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 8px; color: #fff; font-size: 0.8rem;">
+                            <input type="text" name="modelId" placeholder="Model ID / Code" required style="padding: 8px 12px; background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 8px; color: #fff; font-size: 0.8rem;">
+                            <input type="email" name="userEmail" placeholder="Your Email" required style="padding: 8px 12px; background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 8px; color: #fff; font-size: 0.8rem;">
+                            <button type="submit" class="submit-btn" style="padding: 8px; font-size: 0.8rem;">Submit for Review 🔍</button>
+                        </form>
                     </div>
                 </div>
             </div>
 
-            <button onclick="closeAccountRewardModal()" style="width: 100%; padding: 11px; background: linear-gradient(135deg, #ca8a04 0%, #eab308 100%); color: #050505; font-weight: 800; border: none; border-radius: var(--radius-inner); cursor: pointer;">Awesome 🚀</button>
+            <button onclick="closeHelpModal()" style="width: 100%; margin-top: 20px; padding: 10px; background: var(--bg-input); border: 1px solid var(--border-color); color: #fff; font-weight: 600; border-radius: var(--radius-inner); cursor: pointer;">Close</button>
+        </div>
+    </div>
+
+    <!-- Premium Coming Soon Modal -->
+    <div id="premiumModal" class="modal-overlay hidden">
+        <div class="modal-content animate-scale-up" style="position: relative; text-align: center;">
+            <div style="position: absolute; -top: 40px; -right: 40px; width: 120px; height: 120px; background: rgba(234, 179, 8, 0.1); border-radius: 50%; filter: blur(20px); pointer-events: none;"></div>
+            <div style="display: inline-flex; align-items: center; justify-content: center; width: 64px; height: 64px; background: rgba(234, 179, 8, 0.1); border: 1px solid rgba(234, 179, 8, 0.2); border-radius: 16px; color: #eab308; font-size: 24px; margin-bottom: 24px;">
+                ⭐
+            </div>
+            <h3 style="font-size: 1.5rem; font-weight: 800; color: #fff; margin-bottom: 12px;">Premium Coming Soon</h3>
+            <p style="font-size: 0.88rem; color: #94a3b8; line-height: 1.6; margin-bottom: 24px;">
+                We are working hard to bring you exclusive premium features, advanced models, and special tools very soon. Stay tuned!
+            </p>
+            <button onclick="closePremiumModal()" style="width: 100%; padding: 12px; background: linear-gradient(135deg, #ca8a04 0%, #eab308 100%); color: #050505; font-weight: 700; border: none; border-radius: var(--radius-inner); cursor: pointer; transition: var(--transition); box-shadow: 0 4px 15px rgba(234, 179, 8, 0.3);">
+                Got it
+            </button>
         </div>
     </div>
 
     <!-- Main Site Wrapper -->
     <div id="mainContent" style="opacity: 0; transition: opacity 0.5s ease; display: flex; flex-direction: column; min-height: 100vh;">
+
+        <!-- Header Section -->
         <header>
             <div class="header-inner">
-                <div class="logo-area">
-                    <div>
-                        <h1>YH Studio</h1>
-                        <p>The ultimate library for secure Roblox Studio models & scripts</p>
-                    </div>
+                <div>
+                    <h1>YH Studio</h1>
+                    <p>The ultimate library for secure Roblox Studio models & scripts</p>
                 </div>
                 <div class="search-container">
                     <input type="text" id="searchInput" onkeyup="searchScripts()" placeholder="Search for a model or code...">
                 </div>
             </div>
+
+            <!-- Navigation Bar -->
             <nav class="nav-menu">
                 <button class="cat-btn active" onclick="filterCategory('all', this)">All</button>
                 <button class="cat-btn" onclick="filterCategory('admin', this)">Admin</button>
                 <button class="cat-btn" onclick="filterCategory('Steal an Egg', this)">Steal an Egg</button>
                 <button class="cat-btn" onclick="filterCategory('maps', this)">Map</button>
-                <button class="cat-btn" onclick="openCodesModal()" style="color: #facc15; border-color: rgba(234, 179, 8, 0.3);">🔑 Codes</button>
+                
+                <!-- Premium Button (Yellow & Gold Gradient Theme) -->
+                <button class="cat-btn" onclick="openPremiumModal()" style="background: linear-gradient(135deg, rgba(202, 138, 4, 0.15), rgba(234, 179, 8, 0.25)); color: #facc15; border-color: rgba(234, 179, 8, 0.4); box-shadow: 0 0 15px rgba(234, 179, 8, 0.15);">
+                    ⭐ Premium
+                </button>
+
+                <button class="cat-btn" onclick="openHelpModal()" style="color: #38bdf8;">❓ Help</button>
+                
                 <a href="https://discord.gg/z8WXEQzv4" target="_blank" class="cat-btn" style="color: #a5b4fc;">💬 Discord</a>
+
                 <button class="cat-btn" onclick="filterCategory('add-model', this)" style="background-color: var(--primary); color: #050505; margin-left: auto;">➕ Post Your Model</button>
             </nav>
         </header>
 
+        <!-- Main Body -->
         <main>
+            <!-- Welcome Banner -->
             <div class="welcome-banner animate-fade-in">
                 <div style="display: flex; align-items: center; gap: 16px;">
                     <div style="display: flex; gap: -12px;">
@@ -214,10 +575,13 @@
                     </div>
                     <div>
                         <h2 style="font-size: 1.15rem; font-weight: 700; color: #fff; display: flex; align-items: center; gap: 8px;">
-                            Welcome to YH Studio! <span style="font-size: 0.7rem; background: var(--primary); color: #050505; padding: 2px 8px; border-radius: 9999px; font-weight: 700;">v1.0.0.9</span>
+                            Welcome to YH Studio! <span style="font-size: 0.7rem; background: var(--primary); color: #050505; padding: 2px 8px; border-radius: 9999px; font-weight: 700;">v1.0.0.6</span>
                         </h2>
                         <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 2px;">Explore our wide collection of secure Roblox Studio models, maps, and admin scripts.</p>
                     </div>
+                </div>
+                <div style="font-size: 0.78rem; color: var(--text-muted); background: var(--bg-input); padding: 8px 14px; border-radius: var(--radius-inner); border: 1px solid var(--border-color);">
+                    ✨ Secure & Verified
                 </div>
             </div>
 
@@ -226,20 +590,43 @@
                 <h2>➕ Post a New Model</h2>
                 <form action="https://formspree.io/f/mjygqarv" method="POST">
                     <div class="form-grid">
-                        <div class="form-group"><label>Model Name:</label><input type="text" name="modelName" placeholder="e.g. Modern House" required></div>
-                        <div class="form-group"><label>Category:</label><select name="modelCategory" required><option value="admin">Admin</option><option value="Steal an Egg">Steal an Egg</option><option value="maps">Map</option></select></div>
+                        <div class="form-group">
+                            <label>Model Name:</label>
+                            <input type="text" name="modelName" placeholder="e.g. Modern House" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Category:</label>
+                            <select name="modelCategory" required>
+                                <option value="admin">Admin</option>
+                                <option value="Steal an Egg">Steal an Egg</option>
+                                <option value="maps">Map</option>
+                            </select>
+                        </div>
                     </div>
+
                     <div class="form-grid">
-                        <div class="form-group"><label>Your Email:</label><input type="email" name="userEmail" placeholder="example@gmail.com" required></div>
-                        <div class="form-group"><label>Image URL:</label><input type="url" name="modelImage" placeholder="Paste image link here..." required></div>
+                        <div class="form-group">
+                            <label>Your Email (to notify you when approved):</label>
+                            <input type="email" name="userEmail" placeholder="example@gmail.com" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Image URL:</label>
+                            <input type="url" name="modelImage" placeholder="Paste image link here..." required>
+                        </div>
                     </div>
-                    <div class="form-group"><label>Asset ID / Code:</label><input type="text" name="modelCode" placeholder="e.g. 17383957280" required></div>
+
+                    <div class="form-group">
+                        <label>Asset ID / Code:</label>
+                        <input type="text" name="modelCode" placeholder="e.g. 17383957280" required>
+                    </div>
+
                     <button type="submit" class="submit-btn" style="margin-top: 8px;">Send Request to Admin 🚀</button>
                 </form>
             </section>
 
             <!-- Models Grid -->
             <div id="modelsGrid" class="models-grid">
+                
                 <!-- Admin Panel v2.8 -->
                 <div class="model-card" data-category="admin">
                     <img src="https://i.ibb.co/pv0HPLQz/IMG-0114.jpg" alt="Admin Panel v2.8">
@@ -465,7 +852,7 @@
                     </div>
                 </div>
 
-                <!-- AdminPanel + -->
+                <!-- Admin Panel Card -->
                 <div class="model-card" data-category="admin">
                     <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=600&auto=format&fit=crop" alt="AdminPanel +">
                     <div class="card-body">
@@ -480,7 +867,7 @@
                     </div>
                 </div>
 
-                <!-- Studs -->
+                <!-- Studs Card -->
                 <div class="model-card" data-category="maps">
                     <img src="https://upload.wikimedia.org/wikipedia/commons/4/49/A_black_image.jpg" alt="Studs">
                     <div class="card-body">
@@ -494,114 +881,19 @@
                         </div>
                     </div>
                 </div>
+
             </div>
         </main>
 
+        <!-- Footer -->
         <footer>
             <p>© 2026 <strong>YH Studio</strong>. All rights reserved | Contact: <span style="color: var(--primary);">studioyhdevlopers@gmail.com</span></p>
         </footer>
+
     </div>
 
-    <!-- JavaScript Logic -->
+    <!-- JavaScript Functions -->
     <script>
-        function openCodesModal() {
-            document.getElementById('codeErrorMsg').style.display = 'none';
-            document.getElementById('codeRedeemInput').value = '';
-            document.getElementById('codesModal').classList.remove('hidden');
-        }
-
-        function closeCodesModal() {
-            document.getElementById('codesModal').classList.add('hidden');
-        }
-
-        function handleRedeemCode(event) {
-            event.preventDefault();
-            const inputCode = document.getElementById('codeRedeemInput').value.trim();
-            const errorDiv = document.getElementById('codeErrorMsg');
-
-            closeCodesModal();
-
-            if (inputCode === "YH-TEST") {
-                // Open Wheel Simulator
-                document.getElementById('wheelResultMsg').textContent = "";
-                document.getElementById('wheelElement').style.transform = "rotate(0deg)";
-                document.getElementById('wheelElement').textContent = "SPIN ME!";
-                document.getElementById('spinBtn').disabled = false;
-                document.getElementById('wheelModal').classList.remove('hidden');
-            } 
-            else if (inputCode === "YH-Random") {
-                // Check if YH-Random was already used
-                if (localStorage.getItem('yh_random_used') === 'true') {
-                    openCodesModal();
-                    errorDiv.textContent = "This exclusive code has already been redeemed!";
-                    errorDiv.style.display = 'block';
-                    return;
-                }
-
-                // Mark as used
-                localStorage.setItem('yh_random_used', 'true');
-
-                // Show payment simulator (slow process)
-                document.getElementById('paymentSimulatorModal').classList.remove('hidden');
-                setTimeout(() => {
-                    document.getElementById('paymentSimulatorModal').classList.add('hidden');
-                    document.getElementById('accountRewardModal').classList.remove('hidden');
-                }, 2500);
-            } 
-            else {
-                openCodesModal();
-                errorDiv.textContent = "Invalid code! Try YH-TEST or YH-Random.";
-                errorDiv.style.display = 'block';
-            }
-        }
-
-        // Wheel Spinning Logic
-        function spinTheWheel() {
-            const spinBtn = document.getElementById('spinBtn');
-            const resultMsg = document.getElementById('wheelResultMsg');
-            const wheel = document.getElementById('wheelElement');
-            
-            spinBtn.disabled = true;
-            resultMsg.textContent = "Spinning...";
-            resultMsg.style.color = "#facc15";
-
-            // Random rotation degrees (multiple full spins + random offset)
-            const randomDegree = 1800 + Math.floor(Math.random() * 360);
-            wheel.style.transform = `rotate(${randomDegree}deg)`;
-
-            setTimeout(() => {
-                // Determine outcome based on exact probabilities requested:
-                // Nothing: 75%, Random Account: 35%, 500 Robux: 0.005%
-                const rand = Math.random() * 100;
-                let outcome = "";
-
-                if (rand < 0.005) {
-                    outcome = "500 Robux";
-                    resultMsg.textContent = "🎉 JACKPOT! You won 500 Robux!";
-                    resultMsg.style.color = "#22c55e";
-                } else if (rand < 35.005) {
-                    outcome = "Random Roblox account";
-                    resultMsg.textContent = "🎁 You won a Random Roblox Account!";
-                    resultMsg.style.color = "#38bdf8";
-                } else {
-                    outcome = "Nothing";
-                    resultMsg.textContent = "Try again after 30 seconds";
-                    resultMsg.style.color = "#ef4444";
-                }
-
-                wheel.textContent = outcome;
-                spinBtn.disabled = false;
-            }, 4000);
-        }
-
-        function closeWheelModal() {
-            document.getElementById('wheelModal').classList.add('hidden');
-        }
-
-        function closeAccountRewardModal() {
-            document.getElementById('accountRewardModal').classList.add('hidden');
-        }
-
         window.addEventListener('load', () => {
             const loaderContainer = document.getElementById('loaderContainer');
             const successCheck = document.getElementById('successCheck');
@@ -610,9 +902,10 @@
             const progressBar = document.getElementById('progressBar');
             const splashScreen = document.getElementById('splashScreen');
             const mainContent = document.getElementById('mainContent');
+            const updateModal = document.getElementById('updateModal');
 
             let currentProgress = 0;
-            const duration = 2000;
+            const duration = 2500;
             const intervalTime = 25; 
             const increment = 100 / (duration / intervalTime);
 
@@ -621,10 +914,12 @@
                 if (currentProgress >= 100) {
                     currentProgress = 100;
                     clearInterval(loadingInterval);
+
                     if (loaderContainer) loaderContainer.style.display = 'none';
                     if (successCheck) successCheck.classList.remove('hidden');
                     if (splashText) splashText.textContent = "Loaded Successfully";
                 }
+                
                 if (progressPercentage) progressPercentage.textContent = Math.floor(currentProgress) + '%';
                 if (progressBar) progressBar.style.width = currentProgress + '%';
             }, intervalTime);
@@ -635,15 +930,65 @@
                     setTimeout(() => {
                         splashScreen.style.display = 'none';
                         if (mainContent) mainContent.style.opacity = '1';
+                        
+                        if (!localStorage.getItem('yh_update_v1.0.0.6')) {
+                            updateModal.classList.remove('hidden');
+                        }
                     }, 300);
                 }
-            }, duration + 300);
+            }, duration + 400);
         });
+
+        function closeUpdateModal() {
+            localStorage.setItem('yh_update_v1.0.0.6', 'true');
+            document.getElementById('updateModal').classList.add('hidden');
+        }
+
+        function openHelpModal() {
+            document.getElementById('helpModal').classList.remove('hidden');
+        }
+
+        function closeHelpModal() {
+            document.getElementById('helpModal').classList.add('hidden');
+        }
+
+        function openPremiumModal() {
+            document.getElementById('premiumModal').classList.remove('hidden');
+        }
+
+        function closePremiumModal() {
+            document.getElementById('premiumModal').classList.add('hidden');
+        }
+
+        function toggleFaq(id) {
+            const element = document.getElementById(id);
+            if (element) {
+                element.classList.toggle('hidden');
+            }
+        }
+
+        function copyCode(elementId, btn) {
+            const codeElement = document.getElementById(elementId);
+            if (!codeElement) return;
+            
+            const codeText = codeElement.innerText;
+            navigator.clipboard.writeText(codeText).then(() => {
+                const originalText = btn.innerText;
+                btn.innerText = 'Copied!';
+                btn.style.backgroundColor = '#16a34a';
+                setTimeout(() => {
+                    btn.innerText = originalText;
+                    btn.style.backgroundColor = '';
+                }, 2000);
+            });
+        }
 
         function filterCategory(category, btn) {
             const buttons = document.querySelectorAll('.cat-btn');
             buttons.forEach(b => b.classList.remove('active'));
-            if (btn && !btn.getAttribute('href')) btn.classList.add('active');
+            if (btn && !btn.getAttribute('href')) {
+                btn.classList.add('active');
+            }
 
             const addModelSection = document.getElementById('add-model-section');
             const modelsGrid = document.getElementById('modelsGrid');
@@ -660,33 +1005,28 @@
 
             const cards = document.querySelectorAll('.model-card');
             cards.forEach(card => {
-                const cardCat = card.getAttribute('data-category');
-                card.style.display = (cardCat === category || category === 'all') ? 'flex' : 'none';
-            });
-        }
-
-        function copyCode(elementId, btn) {
-            const codeElement = document.getElementById(elementId);
-            if (!codeElement) return;
-            navigator.clipboard.writeText(codeElement.innerText).then(() => {
-                const originalText = btn.innerText;
-                btn.innerText = 'Copied!';
-                btn.style.backgroundColor = '#16a34a';
-                setTimeout(() => {
-                    btn.innerText = originalText;
-                    btn.style.backgroundColor = '';
-                }, 2000);
+                if (category === 'all' || card.getAttribute('data-category') === category) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
             });
         }
 
         function searchScripts() {
             const searchInput = document.getElementById('searchInput');
-            if (!searchInput) return;
+            if (!searchInput, !searchInput) return;
+            
             const input = searchInput.value.toLowerCase();
             const cards = document.querySelectorAll('.model-card');
+            
             cards.forEach(card => {
                 const text = card.innerText.toLowerCase();
-                card.style.display = text.includes(input) ? 'flex' : 'none';
+                if (text.includes(input)) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
             });
         }
     </script>
