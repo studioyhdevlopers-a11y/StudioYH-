@@ -152,10 +152,19 @@
             margin-top: 4px;
         }
 
+        /* Header Right Action Area (Search & Auth) */
+        .header-right-area {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            width: 100%;
+            max-width: 380px;
+            justify-content: flex-end;
+        }
+
         /* Search Box */
         .search-container {
             width: 100%;
-            max-width: 320px;
         }
         .search-container input {
             width: 100%;
@@ -171,6 +180,52 @@
         .search-container input:focus {
             border-color: var(--primary);
             box-shadow: 0 0 0 3px var(--primary-glow);
+        }
+
+        /* Log in Button in Search Place */
+        .login-placeholder-btn {
+            width: 100%;
+            padding: 12px 18px;
+            background: linear-gradient(135deg, rgba(34, 197, 94, 0.15), rgba(34, 197, 94, 0.25));
+            border: 1px solid rgba(34, 197, 94, 0.4);
+            color: var(--primary);
+            font-weight: 700;
+            font-size: 0.9rem;
+            border-radius: var(--radius-pill);
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            box-shadow: 0 4px 15px var(--primary-glow);
+        }
+        .login-placeholder-btn:hover {
+            background-color: var(--primary);
+            color: #050505;
+            transform: translateY(-1px);
+        }
+
+        /* Admin Settings Button */
+        .admin-settings-btn {
+            background: rgba(168, 85, 247, 0.15);
+            border: 1px solid rgba(168, 85, 247, 0.4);
+            color: #c084fc;
+            padding: 10px 16px;
+            font-weight: 700;
+            font-size: 0.85rem;
+            border-radius: var(--radius-pill);
+            cursor: pointer;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            box-shadow: 0 0 15px rgba(168, 85, 247, 0.2);
+            white-space: nowrap;
+        }
+        .admin-settings-btn:hover {
+            background: #a855f7;
+            color: #050505;
         }
 
         /* Navigation & Categories */
@@ -432,21 +487,77 @@
     </div>
     <style>@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }</style>
 
-    <!-- Update Popup Modal (v1.0.0.6) -->
+    <!-- Update Popup Modal (v1.0.0.7) -->
     <div id="updateModal" class="modal-overlay hidden">
         <div class="modal-content animate-scale-up" style="position: relative;">
             <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px;">
-                <span style="font-size: 0.75rem; font-weight: 700; color: var(--primary); background: rgba(34, 197, 94, 0.1); border: 1px solid rgba(34, 197, 94, 0.2); padding: 4px 12px; border-radius: 9999px;">Update v1.0.0.6</span>
+                <span style="font-size: 0.75rem; font-weight: 700; color: var(--primary); background: rgba(34, 197, 94, 0.1); border: 1px solid rgba(34, 197, 94, 0.2); padding: 4px 12px; border-radius: 9999px;">Update v1.0.0.7</span>
                 <span style="font-size: 0.75rem; color: var(--text-muted);">New Release</span>
             </div>
             <h3 style="font-size: 1.25rem; font-weight: 800; color: #fff; margin-bottom: 8px;">What's New in YH Studio</h3>
             <p style="font-size: 0.88rem; color: var(--text-body); margin-bottom: 24px; line-height: 1.6;">
-                • Added <span style="color: var(--primary); font-weight: 600;">Admin Panel v2.8</span>.<br>
-                • Added <span style="color: var(--primary); font-weight: 600;">Steal an Egg v5</span>.<br>
-                • Renamed scripts category to <span style="color: var(--primary); font-weight: 600;">Steal an Egg</span> and updated iterations.<br>
-                • Performance & UI optimizations.
+                • Added persistent <span style="color: var(--primary); font-weight: 600;">Log in System</span>.<br>
+                • Optimized search & header layout with custom rounded buttons.<br>
+                • Added Owner Admin Panel features for <span style="color: var(--primary); font-weight: 600;">studioyhdevlopers@gmail.com</span>.<br>
+                • UI and stability enhancements.
             </p>
             <button onclick="closeUpdateModal()" class="submit-btn">Confirm</button>
+        </div>
+    </div>
+
+    <!-- Log in Modal -->
+    <div id="loginModal" class="modal-overlay hidden">
+        <div class="modal-content animate-scale-up" style="position: relative; text-align: center;">
+            <div style="position: absolute; top: -40px; right: -40px; width: 120px; height: 120px; background: rgba(34, 197, 94, 0.1); border-radius: 50%; filter: blur(20px); pointer-events: none;"></div>
+            <div style="display: inline-flex; align-items: center; justify-content: center; width: 64px; height: 64px; background: rgba(34, 197, 94, 0.1); border: 1px solid rgba(34, 197, 94, 0.2); border-radius: 16px; color: var(--primary); font-size: 24px; margin-bottom: 20px;">
+                👤
+            </div>
+            <h3 style="font-size: 1.35rem; font-weight: 800; color: #fff; margin-bottom: 8px;">Log in to YH Studio</h3>
+            <p style="font-size: 0.82rem; color: #94a3b8; margin-bottom: 20px;">Enter your email and password to create/access your account.</p>
+            
+            <form onsubmit="handleLogin(event)" style="display: flex; flex-direction: column; gap: 14px; text-align: left;">
+                <div class="form-group" style="margin-bottom: 0;">
+                    <label>Email Address:</label>
+                    <input type="email" id="loginEmail" placeholder="example@gmail.com" required>
+                </div>
+                <div class="form-group" style="margin-bottom: 0;">
+                    <label>Password:</label>
+                    <input type="password" id="loginPassword" placeholder="********" required>
+                </div>
+                <div style="display: flex; gap: 10px; margin-top: 6px;">
+                    <button type="button" onclick="closeLoginModal()" style="flex: 1; padding: 11px; background: var(--bg-input); border: 1px solid var(--border-color); color: #fff; font-weight: 600; border-radius: var(--radius-inner); cursor: pointer;">Cancel</button>
+                    <button type="submit" class="submit-btn" style="flex: 1;">Login / Register</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Admin Settings Modal (Owner Only) -->
+    <div id="adminSettingsModal" class="modal-overlay hidden">
+        <div class="modal-content animate-scale-up" style="position: relative;">
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px;">
+                <h3 style="font-size: 1.35rem; font-weight: 900; color: #c084fc;">⚙️ Owner Admin Settings</h3>
+                <button onclick="closeAdminSettingsModal()" style="background: none; border: none; color: var(--text-muted); font-size: 1.2rem; cursor: pointer;">✕</button>
+            </div>
+            <p style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 20px;">Welcome back, Owner! Manage your studio controls and special features below.</p>
+            
+            <div style="display: flex; flex-direction: column; gap: 12px;">
+                <div style="background: var(--bg-input); border: 1px solid var(--border-color); padding: 14px; border-radius: var(--radius-inner); display: flex; justify-content: space-between; align-items: center;">
+                    <div>
+                        <h4 style="font-size: 0.9rem; color: #fff;">Account Status</h4>
+                        <p style="font-size: 0.75rem; color: var(--primary);">Verified Owner (studioyhdevlopers@gmail.com)</p>
+                    </div>
+                    <button onclick="logoutOwner()" style="background: rgba(239, 68, 68, 0.15); border: 1px solid rgba(239, 68, 68, 0.3); color: #ef4444; padding: 6px 12px; font-size: 0.78rem; font-weight: 700; border-radius: 8px; cursor: pointer;">Log out</button>
+                </div>
+                <div style="background: var(--bg-input); border: 1px solid var(--border-color); padding: 14px; border-radius: var(--radius-inner);">
+                    <h4 style="font-size: 0.9rem; color: #fff; margin-bottom: 4px;">Quick Actions</h4>
+                    <p style="font-size: 0.75rem; color: var(--text-muted); margin-bottom: 10px;">More custom owner tools will be added here soon!</p>
+                    <div style="font-size: 0.75rem; color: var(--primary); font-weight: 700; background: rgba(34, 197, 94, 0.1); padding: 8px; border-radius: 8px; text-align: center;">
+                        Status: Fully Operational v1.0.0.7
+                    </div>
+                </div>
+            </div>
+            <button onclick="closeAdminSettingsModal()" style="width: 100%; margin-top: 20px; padding: 10px; background: var(--bg-input); border: 1px solid var(--border-color); color: #fff; font-weight: 600; border-radius: var(--radius-inner); cursor: pointer;">Close</button>
         </div>
     </div>
 
@@ -512,14 +623,14 @@
         </div>
     </div>
 
-    <!-- Premium Coming Soon Modal (Gold Theme - English Only / Suggestions Preview) -->
+    <!-- Premium Coming Soon Modal (Gold Theme - English Only) -->
     <div id="premiumModal" class="modal-overlay hidden">
         <div class="modal-content animate-scale-up" style="position: relative; text-align: center; border-color: rgba(234, 179, 8, 0.3);">
             <div style="position: absolute; top: -40px; right: -40px; width: 120px; height: 120px; background: rgba(234, 179, 8, 0.15); border-radius: 50%; filter: blur(20px); pointer-events: none;"></div>
             <div style="display: inline-flex; align-items: center; justify-content: center; width: 64px; height: 64px; background: rgba(234, 179, 8, 0.15); border: 1px solid rgba(234, 179, 8, 0.3); border-radius: 16px; color: #eab308; font-size: 24px; margin-bottom: 24px; box-shadow: 0 0 15px rgba(234, 179, 8, 0.2);">
                 ⭐
             </div>
-            <h3 style="font-size: 1.5rem; font-weight: 800; color: #fff; margin-bottom: 12px;">Premium Suggestions Coming Soon</h3>
+            <h3 style="font-size: 1.5rem; font-weight: 800; color: #fff; margin-bottom: 12px;">Premium Coming Soon</h3>
             <p style="font-size: 0.88rem; color: #cbd5e1; line-height: 1.6; margin-bottom: 24px;">
                 We are currently building exclusive features and suggestion tools. They will be coming very soon. Stay tuned!
             </p>
@@ -539,8 +650,18 @@
                     <h1>YH Studio</h1>
                     <p>The ultimate library for secure Roblox Studio models & scripts</p>
                 </div>
-                <div class="search-container">
-                    <input type="text" id="searchInput" onkeyup="searchScripts()" placeholder="Search for a model or code...">
+                
+                <!-- Dynamic Header Right Area (Search / Log in / Admin Settings) -->
+                <div class="header-right-area">
+                    <!-- Owner Admin Settings Button (Hidden unless owner logged in) -->
+                    <button id="adminSettingsBtn" class="admin-settings-btn hidden" onclick="openAdminSettingsModal()">
+                        ⚙️ Settings
+                    </button>
+
+                    <!-- Search / Log in Container -->
+                    <div id="headerControlContainer" class="search-container">
+                        <!-- Will be dynamically populated via JS -->
+                    </div>
                 </div>
             </div>
 
@@ -575,7 +696,7 @@
                     </div>
                     <div>
                         <h2 style="font-size: 1.15rem; font-weight: 700; color: #fff; display: flex; align-items: center; gap: 8px;">
-                            Welcome to YH Studio! <span style="font-size: 0.7rem; background: var(--primary); color: #050505; padding: 2px 8px; border-radius: 9999px; font-weight: 700;">v1.0.0.6</span>
+                            Welcome to YH Studio! <span style="font-size: 0.7rem; background: var(--primary); color: #050505; padding: 2px 8px; border-radius: 9999px; font-weight: 700;">v1.0.0.7</span>
                         </h2>
                         <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 2px;">Explore our wide collection of secure Roblox Studio models, maps, and admin scripts.</p>
                     </div>
@@ -894,7 +1015,64 @@
 
     <!-- JavaScript Functions -->
     <script>
+        // Check Login State and Update Header on Load
+        function updateHeaderAuthState() {
+            const container = document.getElementById('headerControlContainer');
+            const adminSettingsBtn = document.getElementById('adminSettingsBtn');
+            const savedEmail = localStorage.getItem('yh_user_email');
+
+            if (savedEmail) {
+                // User is logged in: Show Search Box
+                container.innerHTML = `<input type="text" id="searchInput" onkeyup="searchScripts()" placeholder="Search for a model or code...">`;
+                
+                // Check if owner
+                if (savedEmail.toLowerCase() === 'studioyhdevlopers@gmail.com') {
+                    if (adminSettingsBtn) adminSettingsBtn.classList.remove('hidden');
+                } else {
+                    if (adminSettingsBtn) adminSettingsBtn.classList.add('hidden');
+                }
+            } else {
+                // User is NOT logged in: Show Log in Button in search place
+                container.innerHTML = `<button onclick="openLoginModal()" class="login-placeholder-btn">👤 Log in / Sign up</button>`;
+                if (adminSettingsBtn) adminSettingsBtn.classList.add('hidden');
+            }
+        }
+
+        function openLoginModal() {
+            document.getElementById('loginModal').classList.remove('hidden');
+        }
+
+        function closeLoginModal() {
+            document.getElementById('loginModal').classList.add('hidden');
+        }
+
+        function handleLogin(event) {
+            event.preventDefault();
+            const email = document.getElementById('loginEmail').value.trim();
+            if (email) {
+                localStorage.setItem('yh_user_email', email);
+                closeLoginModal();
+                updateHeaderAuthState();
+            }
+        }
+
+        function openAdminSettingsModal() {
+            document.getElementById('adminSettingsModal').classList.remove('hidden');
+        }
+
+        function closeAdminSettingsModal() {
+            document.getElementById('adminSettingsModal').classList.add('hidden');
+        }
+
+        function logoutOwner() {
+            localStorage.removeItem('yh_user_email');
+            closeAdminSettingsModal();
+            updateHeaderAuthState();
+        }
+
         window.addEventListener('load', () => {
+            updateHeaderAuthState();
+
             const loaderContainer = document.getElementById('loaderContainer');
             const successCheck = document.getElementById('successCheck');
             const splashText = document.getElementById('splashText');
@@ -931,8 +1109,8 @@
                         splashScreen.style.display = 'none';
                         if (mainContent) mainContent.style.opacity = '1';
                         
-                        if (!localStorage.getItem('yh_update_v1.0.0.6')) {
-                            updateModal.classList.add('hidden');
+                        if (!localStorage.getItem('yh_update_v1.0.0.7')) {
+                            updateModal.classList.remove('hidden');
                         }
                     }, 300);
                 }
@@ -940,7 +1118,7 @@
         });
 
         function closeUpdateModal() {
-            localStorage.setItem('yh_update_v1.0.0.6', 'true');
+            localStorage.setItem('yh_update_v1.0.0.7', 'true');
             document.getElementById('updateModal').classList.add('hidden');
         }
 
