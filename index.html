@@ -12,7 +12,7 @@
         // Set to TRUE to lock the site and show maintenance box.
         // Set to FALSE to make the site work normally.
         // ==========================================
-        const MAINTENANCE_MODE = true; 
+        const MAINTENANCE_MODE = false; 
 
         if (MAINTENANCE_MODE) {
             window.addEventListener('DOMContentLoaded', () => {
@@ -69,23 +69,33 @@
 </head>
 <body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col font-sans selection:bg-indigo-500 selection:text-white overflow-x-hidden">
 
-    <!-- Splash Screen (Apple Style Fast Intro Animation) -->
+    <!-- Splash Screen (Apple Style Fast Intro Animation with Progress Bar) -->
     <div id="splashScreen" class="fixed inset-0 z-50 bg-slate-950 flex flex-col items-center justify-center transition-opacity duration-300">
-        <!-- Container for Loader and Checkmark to keep layout stable -->
-        <div class="relative w-20 h-20 flex items-center justify-center mb-6">
-            <!-- Loader Circle -->
-            <div id="loaderContainer" class="absolute inset-0 flex items-center justify-center">
-                <div class="w-16 h-16 border-4 border-slate-800 border-t-indigo-500 rounded-full animate-spin"></div>
+        <div class="w-80 max-w-xs flex flex-col items-center">
+            <!-- Icon/Success Checkmark Container -->
+            <div class="relative w-16 h-16 flex items-center justify-center mb-6">
+                <div id="loaderContainer" class="absolute inset-0 flex items-center justify-center text-indigo-400 font-bold text-xl">
+                    YH
+                </div>
+                <!-- Success Checkmark (Hidden Initially) -->
+                <div id="successCheck" class="hidden absolute inset-0 w-16 h-16 bg-emerald-500/20 border-2 border-emerald-500 rounded-full flex items-center justify-center animate-scale-up shadow-lg shadow-emerald-500/30">
+                    <svg class="w-8 h-8 text-emerald-400" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                </div>
             </div>
-            <!-- Success Checkmark (Hidden Initially) -->
-            <div id="successCheck" class="hidden absolute inset-0 w-20 h-20 bg-emerald-500/20 border-2 border-emerald-500 rounded-full flex items-center justify-center animate-scale-up shadow-lg shadow-emerald-500/30">
-                <svg class="w-10 h-10 text-emerald-400" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path>
-                </svg>
+
+            <!-- Labels row: Left (Website Loading) and Right (0% -> 100%) -->
+            <div class="w-full flex justify-between items-center text-xs font-medium text-slate-400 mb-2 tracking-wide">
+                <span id="splashText">Website Loading</span>
+                <span id="progressPercentage">0%</span>
+            </div>
+
+            <!-- Thin straight progress bar -->
+            <div class="w-full h-1 bg-slate-800 rounded-full overflow-hidden">
+                <div id="progressBar" class="h-full bg-indigo-500 w-0 transition-all duration-100 ease-out rounded-full shadow-sm shadow-indigo-500/50"></div>
             </div>
         </div>
-        <!-- Text placed cleanly below with proper spacing -->
-        <p id="splashText" class="text-slate-400 text-sm tracking-wide font-medium mt-4">Loading YH Studio...</p>
     </div>
 
     <!-- Update Popup Modal (v1.0.0.6 - Shows only once per user) -->
@@ -550,22 +560,40 @@
 
     </div>
 
-    <!-- Fast JavaScript Logic -->
+    <!-- Fast JavaScript Logic with Progress Bar Timer (Max 3 seconds) -->
     <script>
         window.addEventListener('load', () => {
             const loaderContainer = document.getElementById('loaderContainer');
             const successCheck = document.getElementById('successCheck');
             const splashText = document.getElementById('splashText');
+            const progressPercentage = document.getElementById('progressPercentage');
+            const progressBar = document.getElementById('progressBar');
             const splashScreen = document.getElementById('splashScreen');
             const mainContent = document.getElementById('mainContent');
             const updateModal = document.getElementById('updateModal');
 
-            setTimeout(() => {
-                if (loaderContainer) loaderContainer.style.display = 'none';
-                if (successCheck) successCheck.classList.remove('hidden');
-                if (splashText) splashText.textContent = "Welcome to YH Studio!";
-            }, 400);
+            let currentProgress = 0;
+            const duration = 2500; // 2.5 seconds total loading time (less than 3 seconds)
+            const intervalTime = 25; 
+            const increment = 100 / (duration / intervalTime);
 
+            const loadingInterval = setInterval(() => {
+                currentProgress += increment;
+                if (currentProgress >= 100) {
+                    currentProgress = 100;
+                    clearInterval(loadingInterval);
+
+                    // When complete: show checkmark & finish text
+                    if (loaderContainer) loaderContainer.style.display = 'none';
+                    if (successCheck) successCheck.classList.remove('hidden');
+                    if (splashText) splashText.textContent = "Loaded Successfully";
+                }
+                
+                if (progressPercentage) progressPercentage.textContent = Math.floor(currentProgress) + '%';
+                if (progressBar) progressBar.style.width = currentProgress + '%';
+            }, intervalTime);
+
+            // Hide splash screen after completion
             setTimeout(() => {
                 if (splashScreen) {
                     splashScreen.style.opacity = '0';
@@ -578,7 +606,7 @@
                         }
                     }, 300);
                 }
-            }, 900);
+            }, duration + 400);
         });
 
         function closeUpdateModal() {
